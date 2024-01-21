@@ -1,3 +1,122 @@
-body {
-  background-color: aliceblue;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* navbar */
+nav {
+  height: 38px;
+  color: #ecfdf8;
+  background-image: linear-gradient(to right, #34d3a2, #059669);
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.nav__container {
+  display: flex;
+  justify-content: space-between;
+  width: 288px;
+  font-size: 16px;
+}
+
+.nav__logo span {
+  font-weight: bold;
+}
+
+.menu-icon,
+.search li a {
+  text-decoration: none;
+  color: #ecfdf8;
+  font-size: 16px;
+}
+
+.search {
+  display: flex;
+  list-style-type: none;
+  gap: 16px;
+}
+
+/* create task form */
+.create-task {
+  height: 629px;
+  width: 288px;
+  display: flex;
+  margin: 0 auto;
+  position: absolute;
+  top: 56px;
+  left: 16px;
+}
+
+form,
+.repeat-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 288px;
+}
+
+form label {
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+input {
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #888888;
+}
+
+.error {
+  font-size: 12px;
+  color: #ef4444;
+}
+
+.block {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Toggle Priority Style */
+.toggle-priority {
+  position: relative;
+  width: 80px;
+  height: 40px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: red;
+  outline: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  box-shadow: inset 0 0 5px rgb(0 0 0 / 50%);
+}
+
+.toggle-priority::before {
+  content: "";
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: 0.5s;
+}
+
+.toggle-priority:checked::before {
+  transform: translateX(100%);
+  background: #fff;
+}
+
+.toggle-priority:checked {
+  background: #00ed64;
 }
