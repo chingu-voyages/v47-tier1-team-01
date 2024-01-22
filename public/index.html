@@ -36,6 +36,23 @@
       </div>
     </nav>
 
+    <div class="homepage">
+      <button onclick="openCreateTask()">Create task</button>
+    </div>
+    <div class="createTaskModal">
+      <span id="closeBtn" onclick="closeModal()">
+        <i class="fa-solid fa-times"></i>
+      </span>
+      <div class="create-task">
+        <form>
+          <label for="task-name"
+            >Task Name<input
+              type="text"
+              id="task-name"
+              placeholder="Enter Task Name..."
+            /><span class="error">Error Message</span>
+
+
     <!-- <div class="create-task">
       <form>
         <label for="task-name"
@@ -99,13 +116,81 @@
           </label>
           <label for="Thursday">
             <input type="checkbox" id="Thursday" />Thursday
+
           </label>
-          <label for="Friday">
-            <input type="checkbox" id="Friday" />Friday
+          <label for="description"
+            >Description
+            <input
+              id="description"
+              type="text"
+              placeholder="Enter Description..."
+            />
           </label>
-          <label for="Saturday">
-            <input type="checkbox" id="Saturday" />Saturday
+          <label for="category"
+            >Select category
+            <select id="category">
+              <option value="">dummy option</option>
+            </select></label
+          >
+          <label for="projects"
+            >Select Activity Type
+            <select id="projects">
+              <option value="">dummy option</option>
+            </select>
           </label>
+
+
+          <label class="block" for="due-date">
+            <input
+              onclick="showDiv('date')"
+              type="radio"
+              name="recurrency"
+              id="due-date"
+            />Due Date</label
+          >
+          <input class="hidden" type="date" id="date" />
+
+          <label class="block" for="repeat">
+            <input
+              onclick="showDiv('repeat-options')"
+              type="radio"
+              name="recurrency"
+              id="repeat"
+            />Repeat</label
+          >
+          <div class="hidden" id="repeat-options">
+            <label for="Sunday">
+              <input type="checkbox" id="Sunday" />Sunday
+            </label>
+            <label for="Monday">
+              <input type="checkbox" id="Monday" />Monday
+            </label>
+            <label for="Tuesday">
+              <input type="checkbox" id="Tuesday" />Tuesday
+            </label>
+            <label for="Wednesday">
+              <input type="checkbox" id="Wednesday" />Wednesday
+            </label>
+            <label for="Thursday">
+              <input type="checkbox" id="Thursday" />Thursday
+            </label>
+            <label for="Friday">
+              <input type="checkbox" id="Friday" />Friday
+            </label>
+            <label for="Saturday">
+              <input type="checkbox" id="Saturday" />Saturday
+            </label>
+          </div>
+          <div class="flex">
+            <label for="switch">Priority</label>
+            <input type="checkbox" id="switch" />
+            <label for="switch" id="toggle" class="block">Priority </label>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- <div class="overlay"></div> -->
+
         </div>
         <div class="flex">
           <label for="switch">Priority</label>
@@ -132,5 +217,6 @@
 
     <!-- Save button -->
     <button class="btn-save">Save</button>
+
   </body>
 </html>
