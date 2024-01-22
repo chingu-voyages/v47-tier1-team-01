@@ -7,6 +7,7 @@ function showDiv(divId) {
     document.getElementById(divId).style.display = 'block';
 }
 
+submit.addEventListener('click', saveTask)
 
 const taskName = document.querySelector('#task-name')
 const description = document.querySelector('#description')
@@ -19,10 +20,10 @@ const date = document.querySelector('#date')
 const repeat = document.querySelector('#repeat')
 const repeatOptions = document.querySelector('#repeat-options')
 const priority = document.querySelector('#switch')
-
-
+const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
 const submit = document.querySelector('button[type=submit]')
-submit.addEventListener('click', fun)
+
+
 
 function getRepeatDays() {
     let daysArray = [];
@@ -32,13 +33,11 @@ function getRepeatDays() {
     return daysArray
 }
 
-function fun(e) {
+function saveTask(e) {
     e.preventDefault()
-    // getRepeatDays()
-    // console.log(taskName.value, description.value, categoryText, activityText, date.value, getRepeatDays(), priority.checked)
-
 
     const object = {
+        id: new Date().getTime(),
         taskName: taskName.value,
         description: description.value,
         category: categoryText,
@@ -50,8 +49,13 @@ function fun(e) {
     } else if (repeat.checked) {
         object.deadline = getRepeatDays()
     }
-
-
+    existingTasks.push(object);
+    localStorage.setItem("tasks", JSON.stringify(existingTasks));
 }
 
+//retrieves a task and updates it. Not yet in use
+function getTaskById(taskId) {
+    const foundTask = existingTasks.find(task => task.id === taskId);
+    return foundTask;
+}
 
