@@ -17,13 +17,14 @@ nav {
   background-image: linear-gradient(to right, #34d3a2, #059669);
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 8px 16px;
 }
 
 .nav__container {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center; /* currently center because I commented out the icons */
   font-size: 16px;
 }
 
@@ -136,12 +137,12 @@ input {
 } */
 
 .homepage {
-  display: none;
+  display: block;
 }
 
 /* modal styles */
 .createTaskModal {
-  display: flex;
+  display: none;
   background-color: #ecfdf8;
   flex-direction: column;
   gap: 4px;

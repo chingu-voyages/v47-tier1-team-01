@@ -12,7 +12,7 @@ function showDiv(divId) {
 // modal functionalities
 function closeModal() {
   document.querySelector(".createTaskModal").style.display = "none";
-  document.querySelector(".homepage").style.display = "flex";
+  document.querySelector(".homepage").style.display = "block";
   //   document.querySelector(".overlay").style.display = "none";
 }
 
