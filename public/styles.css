@@ -22,8 +22,8 @@ nav {
 
 .nav__container {
   display: flex;
+  width: 100%;
   justify-content: space-between;
-  width: 288px;
   font-size: 16px;
 }
 
@@ -46,13 +46,8 @@ nav {
 
 /* create task form */
 .create-task {
-  height: 629px;
-  width: 288px;
   display: flex;
   margin: 0 auto;
-  position: absolute;
-  top: 56px;
-  left: 16px;
 }
 
 form,
@@ -138,4 +133,39 @@ input {
   justify-content: center;
   align-items: center;
   height: 100vh;
+} */
+
+.homepage {
+  display: none;
+}
+
+/* modal styles */
+.createTaskModal {
+  display: flex;
+  background-color: #ecfdf8;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  z-index: 2;
+}
+
+span#closeBtn {
+  width: fit-content;
+  margin-left: auto;
+}
+
+span#closeBtn:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+/* .overlay {
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(61, 61, 61, 0.8);
+  z-index: 1;
 } */
