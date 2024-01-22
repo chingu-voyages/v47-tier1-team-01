@@ -138,12 +138,12 @@ input {
   padding: 10px;
 }
 
-.summary-checkbox {
+.summary__checkbox {
   display: none;
 }
 
 /* custom checkbox */
-.summary-label::before {
+.summary__label::before {
   content: '';
   display: inline-block;
   width: 14px;
@@ -152,7 +152,7 @@ input {
   border: 2px solid #000;
 }
 
-.summary-label::after {
+.summary__label::after {
   content: '';
   display: none;
   width: 5px;
@@ -165,16 +165,16 @@ input {
   left: 5px;
 }
 
-.summary-checkbox:checked + .summary-label::after {
+.summary__checkbox:checked + .summary__label::after {
   display: inline-block;
 }
-.summary-label {
+.summary__label {
   position: relative;
   font-size: 16px;
   font-weight: 600;
 }
 
-.summary-detail {
+.summary__detail {
   font-size: 12px;
   font-weight: 400;
 }
