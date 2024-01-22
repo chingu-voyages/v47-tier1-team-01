@@ -1,14 +1,16 @@
+// Show the selected div
+// document.getElementById(divId).style.display = "block";
+
 function showDiv(divId) {
   // Hide all divs
   document.querySelector("#date").style.display = "none";
   document.querySelector("#repeat-options").style.display = "none";
 
 
-    // Show the selected div
-    document.getElementById(divId).style.display = 'block';
+  // Show the selected div
+  document.getElementById(divId).style.display = 'block';
 }
 
-submit.addEventListener('click', saveTask)
 
 const taskName = document.querySelector('#task-name')
 const description = document.querySelector('#description')
@@ -24,46 +26,45 @@ const priority = document.querySelector('#switch')
 const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
 const submit = document.querySelector('button[type=submit]')
 
-
+submit.addEventListener('click', saveTask)
+console.log(submit)
 
 function getRepeatDays() {
-    let daysArray = [];
-    [...repeatOptions.children].forEach(day => {
-        if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.value)
-    });
-    return daysArray
+  let daysArray = [];
+  [...repeatOptions.children].forEach(day => {
+    if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.value)
+  });
+  return daysArray
 }
 
 function saveTask(e) {
-    e.preventDefault()
-
-    const object = {
-        id: new Date().getTime(),
-        taskName: taskName.value,
-        description: description.value,
-        category: categoryText,
-        activity: activityText,
-        priority: priority.checked
-    }
-    if (dueDate.checked) {
-        object.deadline = date.value;
-    } else if (repeat.checked) {
-        object.deadline = getRepeatDays()
-    }
-    existingTasks.push(object);
-    localStorage.setItem("tasks", JSON.stringify(existingTasks));
+  e.preventDefault()
+  const object = {
+    id: new Date().getTime(),
+    taskName: taskName.value,
+    description: description.value,
+    category: categoryText,
+    activity: activityText,
+    priority: priority.checked
+  }
+  if (dueDate.checked) {
+    object.deadline = date.value;
+  } else if (repeat.checked) {
+    object.deadline = getRepeatDays()
+  }
+  existingTasks.push(object);
+  localStorage.setItem("tasks", JSON.stringify(existingTasks));
+  console.log(object)
 }
 
 //retrieves a task and updates it. Not yet in use
 function getTaskById(taskId) {
-    const foundTask = existingTasks.find(task => task.id === taskId);
-    return foundTask;
+  const foundTask = existingTasks.find(task => task.id === taskId);
+  return foundTask;
 }
 
 
-  // Show the selected div
-  document.getElementById(divId).style.display = "block";
-}
+
 
 // modal functionalities
 function closeModal() {
