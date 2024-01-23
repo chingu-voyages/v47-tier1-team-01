@@ -1,5 +1,3 @@
-console.log("hello world");
-
 function showDiv(divId) {
   // Hide all divs
   document.querySelector("#date").style.display = "none";
@@ -30,7 +28,7 @@ let jsonData;
 fetch(jsonFile)
   .then((res) => res.json())
   .then((data) => {
-    console.log(data);
+    // console.log(data);
     jsonData = data;
     addCategories();
   })
@@ -89,10 +87,11 @@ const repeat = document.querySelector('#repeat')
 const repeatOptions = document.querySelector('#repeat-options')
 const priority = document.querySelector('#switch')
 const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-const submit = document.querySelector('button[type=submit]')
+const submit = document.querySelector('#save-task')
 
 submit.addEventListener('click', saveTask)
 console.log(submit)
+console.log(localStorage.tasks)
 
 
 
