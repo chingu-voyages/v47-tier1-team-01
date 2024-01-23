@@ -262,3 +262,13 @@ span#closeBtn:hover {
 .activity--legend {
   background-color: #4d7c0f;
 }
+
+/* Homapage styles */
+.homepage {
+  flex-direction: column;
+}
+.results__container {
+  border: 1px solid black;
+  margin-inline: 10px;
+  padding: 5px;
+}
