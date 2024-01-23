@@ -9,11 +9,13 @@
 body {
   font-family: "Inter", sans-serif;
 }
+
 .flex {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
+
 /* navbar */
 nav {
   height: 38px;
@@ -206,7 +208,7 @@ input {
 } */
 
 .homepage {
-  display: block;
+  display: flex;
 }
 
 /* modal styles */
@@ -239,3 +241,24 @@ span#closeBtn:hover {
   background-color: rgba(61, 61, 61, 0.8);
   z-index: 1;
 } */
+
+.legend {
+  margin: 10px;
+}
+
+.category--legend,
+.activity--legend {
+  margin: 5px;
+  padding: 4px 8px 4px 8px;
+  border-radius: 4px;
+  color: #F6F6F6;
+  font-size: 12px;
+}
+
+.category--legend {
+  background-color: #B45309;
+}
+
+.activity--legend {
+  background-color: #4D7C0F;
+}
