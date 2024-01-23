@@ -121,6 +121,7 @@ function saveTask(e) {
   console.log(object)
   form.reset();
   closeModal();
+  populateTasks()
 }
 
 function getRepeatDays() {
@@ -137,3 +138,52 @@ function getTaskById(taskId) {
   return foundTask;
 }
 //Add new task END
+
+
+
+//dinamically display tasks START
+
+function getTasksFromLocalStorage() {
+  const tasksJson = localStorage.getItem('tasks');
+  return tasksJson ? JSON.parse(tasksJson) : [];
+}
+
+function createTaskElement(task) {
+  const div = document.createElement('div');
+  div.classList.add('results__container');
+
+  const para = document.createElement('p');
+  para.classList.add('results__result');
+  para.textContent = JSON.stringify(task);
+
+  div.appendChild(para);
+  return div;
+}
+
+
+function populateTasks() {
+  const tasks = getTasksFromLocalStorage();
+  const resultsContainer = document.querySelector('.results');
+
+  tasks.forEach(task => {
+    const taskElement = createTaskElement(task);
+    resultsContainer.appendChild(taskElement);
+  });
+
+  if (tasks.length === 0) {
+    const noTasksPara = document.createElement('p');
+    noTasksPara.textContent = 'No tasks at this time';
+    resultsContainer.appendChild(noTasksPara);
+  }
+}
+populateTasks()
+
+
+
+//check functionality...a bit faulty...
+//check with no tasks 
+
+
+console.log(getTasksFromLocalStorage());
+
+//dinamically display tasks END
