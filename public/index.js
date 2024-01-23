@@ -75,6 +75,8 @@ function updateActivitySelection() {
 
 
 //Add new task START
+
+const form = document.querySelector('form')
 const taskName = document.querySelector('#task-name')
 const description = document.querySelector('#description')
 const category = document.querySelector('#category')
@@ -113,12 +115,14 @@ function saveTask(e) {
   existingTasks.push(object);
   localStorage.setItem("tasks", JSON.stringify(existingTasks));
   console.log(object)
+  form.reset();
+  closeModal();
 }
 
 function getRepeatDays() {
   let daysArray = [];
   [...repeatOptions.children].forEach(day => {
-    if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.value)
+    if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id)
   });
   return daysArray
 }
