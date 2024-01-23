@@ -103,19 +103,26 @@ function saveTask(e) {
   //Task name and description validation START
   let formHasError = false
   const taskName = taskNameEl.value
+  const taskNameErrorEl = taskNameEl.nextElementSibling
+  taskNameErrorEl.style.visibility = 'hidden'
   const taskDescription = descriptionEl.value
+  const taskDescriptionErrorEl = descriptionEl.nextElementSibling
+  taskDescriptionErrorEl.style.visibility = 'hidden'
 
   if (taskName.trim() === '') {
-    const errorEl = taskNameEl.nextElementSibling
-    errorEl.innerHTML = 'Task Name cannot be empty'
-    errorEl.style.visibility = 'visible'
+    taskNameErrorEl.innerHTML = 'Task Name cannot be empty'
+    taskNameErrorEl.style.visibility = 'visible'
+    formHasError = true
+  } else if (taskName.trim().length > 40) {
+    taskNameErrorEl.innerHTML = 'Task Name must be under 40 characters'
+    taskNameErrorEl.style.visibility = 'visible'
     formHasError = true
   }
 
   if (taskDescription.trim().length > 100) {
-    const errorEl = descriptionEl.nextElementSibling
-    errorEl.innerHTML = 'Description must be under 100 characters'
-    errorEl.style.visibility = 'visible'
+    taskDescriptionErrorEl.innerHTML =
+      'Description must be under 100 characters'
+    taskDescriptionErrorEl.style.visibility = 'visible'
     formHasError = true
   }
 
@@ -135,11 +142,11 @@ function saveTask(e) {
   } else if (repeat.checked) {
     object.deadline = getRepeatDays()
   }
-  // existingTasks.push(object)
-  // localStorage.setItem('tasks', JSON.stringify(existingTasks))
+  existingTasks.push(object)
+  localStorage.setItem('tasks', JSON.stringify(existingTasks))
   console.log(object)
-  // form.reset()
-  // closeModal()
+  form.reset()
+  closeModal()
 }
 
 function getRepeatDays() {
