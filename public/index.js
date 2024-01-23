@@ -91,5 +91,29 @@ const priority = document.querySelector('#switch')
 const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
 const submit = document.querySelector('button[type=submit]')
 
+submit.addEventListener('click', saveTask)
+console.log(submit)
+
+
+
+function saveTask(e) {
+  e.preventDefault()
+  const object = {
+    id: new Date().getTime(),
+    taskName: taskName.value,
+    description: description.value,
+    category: categoryText,
+    activity: activityText,
+    priority: priority.checked
+  }
+  if (dueDate.checked) {
+    object.deadline = date.value;
+  } else if (repeat.checked) {
+    object.deadline = getRepeatDays()
+  }
+  existingTasks.push(object);
+  localStorage.setItem("tasks", JSON.stringify(existingTasks));
+  console.log(object)
+}
 
 //Add new task END
