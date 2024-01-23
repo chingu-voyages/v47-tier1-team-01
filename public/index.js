@@ -73,3 +73,23 @@ function updateActivitySelection() {
     activitySelection.append(option);
   });
 }
+
+
+
+//Add new task START
+const taskName = document.querySelector('#task-name')
+const description = document.querySelector('#description')
+const category = document.querySelector('#category')
+const categoryText = category.options[category.selectedIndex].text
+const activity = document.querySelector('#activity')
+const activityText = activity.options[activity.selectedIndex].text
+const dueDate = document.querySelector('#due-date')
+const date = document.querySelector('#date')
+const repeat = document.querySelector('#repeat')
+const repeatOptions = document.querySelector('#repeat-options')
+const priority = document.querySelector('#switch')
+const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+const submit = document.querySelector('button[type=submit]')
+
+
+//Add new task END
