@@ -99,6 +99,10 @@ console.log(localStorage.tasks)
 
 function saveTask(e) {
   e.preventDefault()
+  const category = document.querySelector('#category')
+  const categoryText = category.options[category.selectedIndex].text
+  const activity = document.querySelector('#activity')
+  const activityText = activity.options[activity.selectedIndex].text
   const object = {
     id: new Date().getTime(),
     taskName: taskName.value,
