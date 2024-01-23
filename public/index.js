@@ -76,7 +76,7 @@ function updateActivitySelection() {
 
 const form = document.querySelector('form')
 const taskNameEl = document.querySelector('#task-name')
-const description = document.querySelector('#description')
+const descriptionEl = document.querySelector('#description')
 const category = document.querySelector('#category')
 const categoryText = category.options[category.selectedIndex].text
 const activity = document.querySelector('#activity')
@@ -100,13 +100,32 @@ function saveTask(e) {
   const activity = document.querySelector('#activity')
   const activityText = activity.options[activity.selectedIndex].text
 
-  //Inputs validation
+  //Task name and description validation START
+  let formHasError = false
   const taskName = taskNameEl.value
+  const taskDescription = descriptionEl.value
+
+  if (taskName.trim() === '') {
+    const errorEl = taskNameEl.nextElementSibling
+    errorEl.innerHTML = 'Task Name cannot be empty'
+    errorEl.style.visibility = 'visible'
+    formHasError = true
+  }
+
+  if (taskDescription.trim().length > 100) {
+    const errorEl = descriptionEl.nextElementSibling
+    errorEl.innerHTML = 'Description must be under 100 characters'
+    errorEl.style.visibility = 'visible'
+    formHasError = true
+  }
+
+  if (formHasError) return
+  //Task name and description validation END
 
   const object = {
     id: new Date().getTime(),
     taskName,
-    description: description.value,
+    taskDescription,
     category: categoryText,
     activity: activityText,
     priority: priority.checked
@@ -116,11 +135,11 @@ function saveTask(e) {
   } else if (repeat.checked) {
     object.deadline = getRepeatDays()
   }
-  existingTasks.push(object)
-  localStorage.setItem('tasks', JSON.stringify(existingTasks))
+  // existingTasks.push(object)
+  // localStorage.setItem('tasks', JSON.stringify(existingTasks))
   console.log(object)
-  form.reset()
-  closeModal()
+  // form.reset()
+  // closeModal()
 }
 
 function getRepeatDays() {
