@@ -1,5 +1,3 @@
-console.log("hello world");
-
 function showDiv(divId) {
   // Hide all divs
   document.querySelector("#date").style.display = "none";
@@ -30,7 +28,7 @@ let jsonData;
 fetch(jsonFile)
   .then((res) => res.json())
   .then((data) => {
-    console.log(data);
+    // console.log(data);
     jsonData = data;
     addCategories();
   })
@@ -73,3 +71,69 @@ function updateActivitySelection() {
     activitySelection.append(option);
   });
 }
+
+
+
+//Add new task START
+
+const form = document.querySelector('form')
+const taskName = document.querySelector('#task-name')
+const description = document.querySelector('#description')
+const category = document.querySelector('#category')
+const categoryText = category.options[category.selectedIndex].text
+const activity = document.querySelector('#activity')
+const activityText = activity.options[activity.selectedIndex].text
+const dueDate = document.querySelector('#due-date')
+const date = document.querySelector('#date')
+const repeat = document.querySelector('#repeat')
+const repeatOptions = document.querySelector('#repeat-options')
+const priority = document.querySelector('#switch')
+const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+const submit = document.querySelector('#save-task')
+
+submit.addEventListener('click', saveTask)
+console.log(submit)
+console.log(localStorage.tasks)
+
+
+
+function saveTask(e) {
+  e.preventDefault()
+  const category = document.querySelector('#category')
+  const categoryText = category.options[category.selectedIndex].text
+  const activity = document.querySelector('#activity')
+  const activityText = activity.options[activity.selectedIndex].text
+  const object = {
+    id: new Date().getTime(),
+    taskName: taskName.value,
+    description: description.value,
+    category: categoryText,
+    activity: activityText,
+    priority: priority.checked
+  }
+  if (dueDate.checked) {
+    object.deadline = date.value.split('-').reverse().join('/');
+  } else if (repeat.checked) {
+    object.deadline = getRepeatDays()
+  }
+  existingTasks.push(object);
+  localStorage.setItem("tasks", JSON.stringify(existingTasks));
+  console.log(object)
+  form.reset();
+  closeModal();
+}
+
+function getRepeatDays() {
+  let daysArray = [];
+  [...repeatOptions.children].forEach(day => {
+    if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id)
+  });
+  return daysArray
+}
+
+//retrieves a task and updates it. Not yet in use
+function getTaskById(taskId) {
+  const foundTask = existingTasks.find(task => task.id === taskId);
+  return foundTask;
+}
+//Add new task END
