@@ -108,7 +108,7 @@ function saveTask(e) {
     priority: priority.checked
   }
   if (dueDate.checked) {
-    object.deadline = date.value;
+    object.deadline = date.value.split('-').reverse().join('/');
   } else if (repeat.checked) {
     object.deadline = getRepeatDays()
   }
