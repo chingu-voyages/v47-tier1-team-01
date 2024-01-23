@@ -7,13 +7,15 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
+
 .flex {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
+
 /* navbar */
 nav {
   height: 38px;
@@ -21,13 +23,14 @@ nav {
   background-image: linear-gradient(to right, #34d3a2, #059669);
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 8px 16px;
 }
 
 .nav__container {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center; /* currently center because I commented out the icons */
   font-size: 16px;
 }
 
@@ -108,7 +111,7 @@ input {
 }
 
 #toggle:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 5px;
   left: 5px;
@@ -151,7 +154,7 @@ input {
 
 /* custom checkbox */
 .summary__label::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -160,7 +163,7 @@ input {
 }
 
 .summary__label::after {
-  content: '';
+  content: "";
   display: none;
   width: 5px;
   height: 10px;
@@ -205,12 +208,12 @@ input {
 } */
 
 .homepage {
-  display: none;
+  display: flex;
 }
 
 /* modal styles */
 .createTaskModal {
-  display: flex;
+  display: none;
   background-color: #ecfdf8;
   flex-direction: column;
   gap: 4px;
