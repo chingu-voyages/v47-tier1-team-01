@@ -7,13 +7,15 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
+
 .flex {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
+
 /* navbar */
 nav {
   height: 38px;
@@ -21,13 +23,14 @@ nav {
   background-image: linear-gradient(to right, #34d3a2, #059669);
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 8px 16px;
 }
 
 .nav__container {
   display: flex;
-  justify-content: space-between;
-  width: 288px;
+  width: 100%;
+  justify-content: center; /* currently center because I commented out the icons */
   font-size: 16px;
 }
 
@@ -50,13 +53,8 @@ nav {
 
 /* create task form */
 .create-task {
-  height: 629px;
-  width: 288px;
   display: flex;
   margin: 0 auto;
-  position: absolute;
-  top: 56px;
-  left: 16px;
 }
 
 form,
@@ -113,7 +111,7 @@ input {
 }
 
 #toggle:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 5px;
   left: 5px;
@@ -156,7 +154,7 @@ input {
 
 /* custom checkbox */
 .summary__label::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -165,7 +163,7 @@ input {
 }
 
 .summary__label::after {
-  content: '';
+  content: "";
   display: none;
   width: 5px;
   height: 10px;
@@ -208,3 +206,59 @@ input {
   align-items: center;
   height: 100vh;
 } */
+
+.homepage {
+  display: flex;
+}
+
+/* modal styles */
+.createTaskModal {
+  display: none;
+  background-color: #ecfdf8;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  z-index: 2;
+}
+
+span#closeBtn {
+  width: fit-content;
+  margin-left: auto;
+}
+
+span#closeBtn:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+/* .overlay {
+  height: 100%;
+  width: 100%;
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(61, 61, 61, 0.8);
+  z-index: 1;
+} */
+
+.legend {
+  margin: 10px;
+}
+
+.category--legend,
+.activity--legend {
+  margin: 5px;
+  padding: 4px 8px 4px 8px;
+  border-radius: 4px;
+  color: #F6F6F6;
+  font-size: 12px;
+}
+
+.category--legend {
+  background-color: #B45309;
+}
+
+.activity--legend {
+  background-color: #4D7C0F;
+}
