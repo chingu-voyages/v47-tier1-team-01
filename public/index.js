@@ -116,4 +116,17 @@ function saveTask(e) {
   console.log(object)
 }
 
+function getRepeatDays() {
+  let daysArray = [];
+  [...repeatOptions.children].forEach(day => {
+    if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.value)
+  });
+  return daysArray
+}
+
+//retrieves a task and updates it. Not yet in use
+function getTaskById(taskId) {
+  const foundTask = existingTasks.find(task => task.id === taskId);
+  return foundTask;
+}
 //Add new task END
