@@ -77,13 +77,14 @@
 
           <label class="block" for="due-date">
             <input
+              checked
               onclick="showDiv('date')"
               type="radio"
               name="recurrency"
               id="due-date"
             />Due Date</label
           >
-          <input class="hidden" type="date" id="date" />
+          <input type="date" id="date" />
 
           <label class="block" for="repeat">
             <input
@@ -126,29 +127,27 @@
     </div>
     <!-- <div class="overlay"></div> -->
 
-    <!-- Summary Components --> 
-  <div class="summary-wrapper">
-    <div class="summary">
-      <input id="to-do-tasks" type="checkbox" class="summary__checkbox" />
-      <label for="to-do-tasks" class="summary__label">To do</label>
-      <p class="summary__detail">2 Tasks Remaining</p>
+    <!-- Summary Components -->
+    <div class="summary-wrapper">
+      <div class="summary">
+        <input id="to-do-tasks" type="checkbox" class="summary__checkbox" />
+        <label for="to-do-tasks" class="summary__label">To do</label>
+        <p class="summary__detail">2 Tasks Remaining</p>
+      </div>
+
+      <div class="summary">
+        <input id="done-tasks" type="checkbox" class="summary__checkbox" />
+        <label for="done-tasks" class="summary__label">Done</label>
+        <p class="summary__detail">1 Task Completed</p>
+      </div>
     </div>
 
-    <div class="summary">
-      <input id="done-tasks" type="checkbox" class="summary__checkbox" />
-      <label for="done-tasks" class="summary__label">Done</label>
-      <p class="summary__detail">1 Task Completed</p>
+    <div class="legend">
+      <span class="category--legend">Category</span>
+      <span class="activity--legend">Activity Type</span>
     </div>
-  </div>
 
-  <div class="legend">
-    <span class="category--legend">Category</span>
-    <span class="activity--legend">Activity Type</span>
-  </div>
-
-  <!-- Save button -->
-  <button class="btn-save">Save</button>
-
-</body>
-
+    <!-- Save button -->
+    <button id="save-task" class="btn-save">Save</button>
+  </body>
 </html>
