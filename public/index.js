@@ -100,39 +100,12 @@ function saveTask(e) {
   const activity = document.querySelector('#activity')
   const activityText = activity.options[activity.selectedIndex].text
 
-  //Task name and description validation START
-  let formHasError = false
-  const taskName = taskNameEl.value
-  const taskNameErrorEl = taskNameEl.nextElementSibling
-  taskNameErrorEl.style.visibility = 'hidden'
-  const taskDescription = descriptionEl.value
-  const taskDescriptionErrorEl = descriptionEl.nextElementSibling
-  taskDescriptionErrorEl.style.visibility = 'hidden'
-
-  if (taskName.trim() === '') {
-    taskNameErrorEl.innerHTML = 'Task Name cannot be empty'
-    taskNameErrorEl.style.visibility = 'visible'
-    formHasError = true
-  } else if (taskName.trim().length > 40) {
-    taskNameErrorEl.innerHTML = 'Task Name must be under 40 characters'
-    taskNameErrorEl.style.visibility = 'visible'
-    formHasError = true
-  }
-
-  if (taskDescription.trim().length > 100) {
-    taskDescriptionErrorEl.innerHTML =
-      'Description must be under 100 characters'
-    taskDescriptionErrorEl.style.visibility = 'visible'
-    formHasError = true
-  }
-
-  if (formHasError) return
-  //Task name and description validation END
+  if (!formValidation()) return
 
   const object = {
     id: new Date().getTime(),
-    taskName,
-    taskDescription,
+    taskName: taskNameEl.value,
+    taskDescription: taskDescriptionErrorEl.value,
     category: categoryText,
     activity: activityText,
     priority: priority.checked
@@ -163,3 +136,33 @@ function getTaskById(taskId) {
   return foundTask
 }
 //Add new task END
+
+//Task name and description validation
+function formValidation() {
+  let formHasError = false
+  const taskName = taskNameEl.value
+  const taskNameErrorEl = taskNameEl.nextElementSibling
+  taskNameErrorEl.style.visibility = 'hidden'
+  const taskDescription = descriptionEl.value
+  const taskDescriptionErrorEl = descriptionEl.nextElementSibling
+  taskDescriptionErrorEl.style.visibility = 'hidden'
+
+  if (taskName.trim() === '') {
+    taskNameErrorEl.textContent = 'Task Name cannot be empty'
+    taskNameErrorEl.style.visibility = 'visible'
+    formHasError = true
+  } else if (taskName.trim().length > 40) {
+    taskNameErrorEl.textContent = 'Task Name must be under 40 characters'
+    taskNameErrorEl.style.visibility = 'visible'
+    formHasError = true
+  }
+
+  if (taskDescription.trim().length > 100) {
+    taskDescriptionErrorEl.textContent =
+      'Description must be under 100 characters'
+    taskDescriptionErrorEl.style.visibility = 'visible'
+    formHasError = true
+  }
+
+  if (formHasError) return false
+}
