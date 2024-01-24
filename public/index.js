@@ -149,17 +149,20 @@ function getTasksFromLocalStorage() {
 }
 
 function createTaskElement(task) {
-  const div = document.createElement('div');
-  div.classList.add('task__container');
-
-  const para = document.createElement('p');
-  para.classList.add('task__result');
-  para.textContent = JSON.stringify(task);
-
-  div.appendChild(para);
+  const div = `
+  <div class="task__container">
+    <div class="taks__name">
+      <input type="checkbox" name="" id="mockID" />
+      <label for="mockID">${task.taskName}</label>
+    </div>
+    <div class="task__labels">
+      <span class="legend--category">${task.category}</span>
+      <span class="legend--activity">${task.activity}</span>
+    </div>
+  </div>
+  `
   return div;
 }
-
 
 function populateTasks() {
   const tasks = getTasksFromLocalStorage();
@@ -177,17 +180,11 @@ function populateTasks() {
   } else {
     tasks.forEach(task => {
       const taskElement = createTaskElement(task);
-      taskContainer.appendChild(taskElement);
+      taskContainer.innerHTML += taskElement;
     });
   }
 }
-// populateTasks()
-
-
-
-//check functionality...a bit faulty...
-//check with no tasks 
-
+populateTasks()
 
 console.log(getTasksFromLocalStorage());
 
