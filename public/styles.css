@@ -9,7 +9,7 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .flex {
@@ -85,6 +85,7 @@ input {
 .error {
   font-size: 12px;
   color: #ef4444;
+  visibility: hidden;
 }
 
 /* selection styles */
@@ -219,7 +220,7 @@ input {
 }
 
 #toggle:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 2px;
   left: 2px;
@@ -262,7 +263,7 @@ input {
 
 /* custom checkbox */
 .summary__label::before {
-  content: "";
+  content: '';
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -271,7 +272,7 @@ input {
 }
 
 .summary__label::after {
-  content: "";
+  content: '';
   display: none;
   width: 5px;
   height: 10px;
