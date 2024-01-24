@@ -118,36 +118,42 @@
             </label>
           </div>
           <div class="flex">
-            <label for="switch">Priority</label>
             <input type="checkbox" id="switch" />
             <label for="switch" id="toggle" class="block">Priority </label>
+            <label for="switch">Priority</label>
           </div>
+          <!-- Save button -->
+          <button id="save-task" class="btn-save">Save</button>
         </form>
       </div>
     </div>
     <!-- <div class="overlay"></div> -->
 
     <!-- Summary Components -->
-    <div class="summary-wrapper">
-      <div class="summary">
-        <input id="to-do-tasks" type="checkbox" class="summary__checkbox" />
-        <label for="to-do-tasks" class="summary__label">To do</label>
-        <p class="summary__detail">2 Tasks Remaining</p>
+    <div class="homepage flex">
+      <div class="summary-wrapper">
+        <div class="summary">
+          <input id="to-do-tasks" type="checkbox" class="summary__checkbox" />
+          <label for="to-do-tasks" class="summary__label">To do</label>
+          <p class="summary__detail">2 Tasks Remaining</p>
+        </div>
+
+        <div class="summary">
+          <input id="done-tasks" type="checkbox" class="summary__checkbox" />
+          <label for="done-tasks" class="summary__label">Done</label>
+          <p class="summary__detail">1 Task Completed</p>
+        </div>
       </div>
 
-      <div class="summary">
-        <input id="done-tasks" type="checkbox" class="summary__checkbox" />
-        <label for="done-tasks" class="summary__label">Done</label>
-        <p class="summary__detail">1 Task Completed</p>
+      <div class="legend">
+        <span class="category--legend">Category</span>
+        <span class="activity--legend">Activity Type</span>
+      </div>
+      <div class="results">
+        <div class="results__container">
+          <p class="results__result">test</p>
+        </div>
       </div>
     </div>
-
-    <div class="legend">
-      <span class="category--legend">Category</span>
-      <span class="activity--legend">Activity Type</span>
-    </div>
-
-    <!-- Save button -->
-    <button id="save-task" class="btn-save">Save</button>
   </body>
 </html>

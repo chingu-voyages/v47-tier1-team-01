@@ -120,6 +120,7 @@ function saveTask(e) {
   localStorage.setItem("tasks", JSON.stringify(existingTasks));
   console.log(object)
   form.reset();
+  populateTasks()
   closeModal();
 }
 
@@ -137,3 +138,57 @@ function getTaskById(taskId) {
   return foundTask;
 }
 //Add new task END
+
+
+
+//dinamically display tasks START
+
+function getTasksFromLocalStorage() {
+  const tasksJson = localStorage.getItem('tasks');
+  return tasksJson ? JSON.parse(tasksJson) : [];
+}
+
+function createTaskElement(task) {
+  const div = document.createElement('div');
+  div.classList.add('results__container');
+
+  const para = document.createElement('p');
+  para.classList.add('results__result');
+  para.textContent = JSON.stringify(task);
+
+  div.appendChild(para);
+  return div;
+}
+
+
+function populateTasks() {
+  const tasks = getTasksFromLocalStorage();
+  const resultsContainer = document.querySelector('.results');
+
+  //makes sure tasks are not duplicated since this function is called both on page load and when SAVE button is clicked
+  while (resultsContainer.firstChild) {
+    resultsContainer.removeChild(resultsContainer.firstChild);
+  }
+
+  if (tasks.length === 0) {
+    const noTasksPara = document.createElement('p');
+    noTasksPara.textContent = 'No tasks at this time';
+    resultsContainer.appendChild(noTasksPara);
+  } else {
+    tasks.forEach(task => {
+      const taskElement = createTaskElement(task);
+      resultsContainer.appendChild(taskElement);
+    });
+  }
+}
+populateTasks()
+
+
+
+//check functionality...a bit faulty...
+//check with no tasks 
+
+
+console.log(getTasksFromLocalStorage());
+
+//dinamically display tasks END
