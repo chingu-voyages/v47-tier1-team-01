@@ -13,7 +13,6 @@ body {
 .flex {
   display: flex;
   align-items: center;
-  gap: 1rem;
 }
 
 /* navbar */
@@ -102,21 +101,22 @@ input {
 #toggle {
   cursor: pointer;
   text-indent: -9999px;
-  width: 80px;
-  height: 40px;
+  width: 40px;
+  height: 19px;
   background: grey;
   display: block;
   border-radius: 100px;
   position: relative;
+  margin-right: 1rem;
 }
 
 #toggle:after {
   content: "";
   position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 30px;
-  height: 30px;
+  top: 2px;
+  left: 2px;
+  width: 15px;
+  height: 15px;
   background: #fff;
   border-radius: 90px;
   transition: 0.3s;
@@ -127,12 +127,12 @@ input {
 }
 
 #switch:checked + #toggle:after {
-  left: calc(100% - 5px);
+  left: calc(100% - 3px);
   transform: translateX(-100%);
 }
 
 #toggle:active:after {
-  width: 40px;
+  width: 18px;
 }
 
 /* Summary components */
@@ -251,14 +251,24 @@ span#closeBtn:hover {
   margin: 5px;
   padding: 4px 8px 4px 8px;
   border-radius: 4px;
-  color: #F6F6F6;
+  color: #f6f6f6;
   font-size: 12px;
 }
 
 .category--legend {
-  background-color: #B45309;
+  background-color: #b45309;
 }
 
 .activity--legend {
-  background-color: #4D7C0F;
+  background-color: #4d7c0f;
+}
+
+/* Homapage styles */
+.homepage {
+  flex-direction: column;
+}
+.results__container {
+  border: 1px solid black;
+  margin-inline: 10px;
+  padding: 5px;
 }
