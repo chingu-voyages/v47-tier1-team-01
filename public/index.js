@@ -120,8 +120,8 @@ function saveTask(e) {
   localStorage.setItem("tasks", JSON.stringify(existingTasks));
   console.log(object)
   form.reset();
-  closeModal();
   populateTasks()
+  closeModal();
 }
 
 function getRepeatDays() {
@@ -165,15 +165,20 @@ function populateTasks() {
   const tasks = getTasksFromLocalStorage();
   const resultsContainer = document.querySelector('.results');
 
-  tasks.forEach(task => {
-    const taskElement = createTaskElement(task);
-    resultsContainer.appendChild(taskElement);
-  });
+  //makes sure tasks are not duplicated since this function is called both on page load and when SAVE button is clicked
+  while (resultsContainer.firstChild) {
+    resultsContainer.removeChild(resultsContainer.firstChild);
+  }
 
   if (tasks.length === 0) {
     const noTasksPara = document.createElement('p');
     noTasksPara.textContent = 'No tasks at this time';
     resultsContainer.appendChild(noTasksPara);
+  } else {
+    tasks.forEach(task => {
+      const taskElement = createTaskElement(task);
+      resultsContainer.appendChild(taskElement);
+    });
   }
 }
 populateTasks()
