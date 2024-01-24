@@ -61,7 +61,7 @@ function updateActivitySelection() {
     (act) => act.activityName
   );
 
-  activitySelection.innerHTML = `<option value="">Select Activity</option>`;
+  activitySelection.innerHTML = `<option disabled selected>Select Activity</option>`;
 
   activities.forEach((activity) => {
     const option = document.createElement("option");
@@ -118,6 +118,7 @@ function saveTask(e) {
   form.reset();
   populateTasks();
   closeModal();
+  activity.innerHTML = `<option disabled selected>Select Activity</option>`;
 }
 
 function getRepeatDays() {
@@ -180,5 +181,3 @@ populateTasks();
 //check with no tasks
 
 console.log(getTasksFromLocalStorage());
-
-//dinamically display tasks END
