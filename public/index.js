@@ -122,6 +122,7 @@ function saveTask(e) {
   form.reset();
   populateTasks();
   closeModal();
+  activity.innerHTML = `<option disabled selected>Select Activity</option>`;
 }
 
 function getRepeatDays() {
