@@ -130,26 +130,41 @@
     <!-- <div class="overlay"></div> -->
 
     <!-- Summary Components -->
+
     <div class="homepage flex">
-      <div class="summary-wrapper">
-        <div class="summary">
+      <div class="homepage__calendar">
+        <h2>Month</h2>
+        <div class="calendar__carrousel">
+          <div class="calendar__date">
+            <p>placeholder</p>
+          </div>
+          <div class="calendar__date">
+            <p>placeholder</p>
+          </div>
+          <div class="calendar__date">
+            <p>placeholder</p>
+          </div>
+        </div>
+      </div>
+      <div class="summary">
+        <div class="summary__card">
           <input id="to-do-tasks" type="checkbox" class="summary__checkbox" />
           <label for="to-do-tasks" class="summary__label">To do</label>
           <p class="summary__detail">2 Tasks Remaining</p>
         </div>
 
-        <div class="summary">
+        <div class="summary__card">
           <input id="done-tasks" type="checkbox" class="summary__checkbox" />
           <label for="done-tasks" class="summary__label">Done</label>
           <p class="summary__detail">1 Task Completed</p>
         </div>
       </div>
 
-      <div class="legend">
-        <span class="category--legend">Category</span>
-        <span class="activity--legend">Activity Type</span>
+      <div class="homepage__legend">
+        <span class="legend--category">Category</span>
+        <span class="legend--activity">Activity Type</span>
       </div>
-      <div class="results">
+      <div class="homepage__results">
         <div class="results__container">
           <p class="results__result">test</p>
         </div>

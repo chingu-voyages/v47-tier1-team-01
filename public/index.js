@@ -163,7 +163,7 @@ function createTaskElement(task) {
 
 function populateTasks() {
   const tasks = getTasksFromLocalStorage();
-  const resultsContainer = document.querySelector('.results');
+  const resultsContainer = document.querySelector('.homepage__results');
 
   //makes sure tasks are not duplicated since this function is called both on page load and when SAVE button is clicked
   while (resultsContainer.firstChild) {
