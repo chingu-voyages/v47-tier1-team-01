@@ -1,9 +1,5 @@
+// Show the selected deadline mode
 function showDiv(divId) {
-  // Hide all divs
-  document.querySelector("#date").style.display = "none";
-  document.querySelector("#repeat-options").style.display = "none";
-
-  // Show the selected div
   document.getElementById(divId).style.display = "flex";
 }
 
@@ -123,6 +119,9 @@ function saveTask(e) {
   populateTasks();
   closeModal();
   activity.innerHTML = `<option disabled selected>Select Activity</option>`;
+
+  document.querySelector("#date").style.display = "none";
+  document.querySelector("#repeat-options").style.display = "none";
 }
 
 function getRepeatDays() {
