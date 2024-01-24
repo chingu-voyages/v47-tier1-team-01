@@ -73,7 +73,6 @@ function updateActivitySelection() {
 }
 
 //Add new task START
-
 const form = document.querySelector('form')
 const taskNameEl = document.querySelector('#task-name')
 const descriptionEl = document.querySelector('#description')
@@ -100,12 +99,14 @@ function saveTask(e) {
   const activity = document.querySelector('#activity')
   const activityText = activity.options[activity.selectedIndex].text
 
-  if (!formValidation()) return
+  //Form Validation
+  const formHasError = formValidation()
+  if (formHasError) return
 
   const object = {
     id: new Date().getTime(),
-    taskName: taskNameEl.value,
-    taskDescription: taskDescriptionErrorEl.value,
+    taskName: DOMPurify.sanitize(taskNameEl.value),
+    taskDescription: DOMPurify.sanitize(descriptionEl.value),
     category: categoryText,
     activity: activityText,
     priority: priority.checked
@@ -137,13 +138,13 @@ function getTaskById(taskId) {
 }
 //Add new task END
 
-//Task name and description validation
+//Task name and description validation function
 function formValidation() {
   let formHasError = false
-  const taskName = taskNameEl.value
+  const taskName = DOMPurify.sanitize(taskNameEl.value)
   const taskNameErrorEl = taskNameEl.nextElementSibling
   taskNameErrorEl.style.visibility = 'hidden'
-  const taskDescription = descriptionEl.value
+  const taskDescription = DOMPurify.sanitize(descriptionEl.value)
   const taskDescriptionErrorEl = descriptionEl.nextElementSibling
   taskDescriptionErrorEl.style.visibility = 'hidden'
 
@@ -164,5 +165,5 @@ function formValidation() {
     formHasError = true
   }
 
-  if (formHasError) return false
+  return formHasError
 }
