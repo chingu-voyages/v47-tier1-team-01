@@ -1,10 +1,6 @@
+// Show the selected deadline mode
 function showDiv(divId) {
-  // Hide all divs
-  document.querySelector("#date").style.display = "none";
-  document.querySelector("#repeat-options").style.display = "none";
-
-  // Show the selected div
-  document.getElementById(divId).style.display = "block";
+  document.getElementById(divId).style.display = "flex";
 }
 
 // modal functionalities
@@ -61,7 +57,7 @@ function updateActivitySelection() {
     (act) => act.activityName
   );
 
-  activitySelection.innerHTML = `<option value="">Select Activity</option>`;
+  activitySelection.innerHTML = `<option disabled selected>Select Activity</option>`;
 
   activities.forEach((activity) => {
     const option = document.createElement("option");
@@ -72,83 +68,86 @@ function updateActivitySelection() {
   });
 }
 
-
-
 //Add new task START
-
-const form = document.querySelector('form')
-const taskName = document.querySelector('#task-name')
-const description = document.querySelector('#description')
-const category = document.querySelector('#category')
-const categoryText = category.options[category.selectedIndex].text
-const activity = document.querySelector('#activity')
-const activityText = activity.options[activity.selectedIndex].text
-const dueDate = document.querySelector('#due-date')
-const date = document.querySelector('#date')
-const repeat = document.querySelector('#repeat')
-const repeatOptions = document.querySelector('#repeat-options')
-const priority = document.querySelector('#switch')
+const form = document.querySelector("form");
+const taskNameEl = document.querySelector("#task-name");
+const descriptionEl = document.querySelector("#description");
+const category = document.querySelector("#category");
+const categoryText = category.options[category.selectedIndex].text;
+const activity = document.querySelector("#activity");
+const activityText = activity.options[activity.selectedIndex].text;
+const dueDate = document.querySelector("#due-date");
+const date = document.querySelector("#date");
+const repeat = document.querySelector("#repeat");
+const repeatOptions = document.querySelector("#repeat-options");
+const priority = document.querySelector("#switch");
 const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-const submit = document.querySelector('#save-task')
+const submit = document.querySelector("#save-task");
 
-submit.addEventListener('click', saveTask)
-console.log(submit)
-console.log(localStorage.tasks)
-
-
+submit.addEventListener("click", saveTask);
+console.log(submit);
+console.log(localStorage.tasks);
 
 function saveTask(e) {
-  e.preventDefault()
-  const category = document.querySelector('#category')
-  const categoryText = category.options[category.selectedIndex].text
-  const activity = document.querySelector('#activity')
-  const activityText = activity.options[activity.selectedIndex].text
+  e.preventDefault();
+  const category = document.querySelector("#category");
+  const categoryText = category.options[category.selectedIndex].text;
+  const activity = document.querySelector("#activity");
+  const activityText = activity.options[activity.selectedIndex].text;
+
+  //Form Validation
+  const formHasError = formValidation();
+  if (formHasError) return;
+
   const object = {
     id: new Date().getTime(),
-    taskName: taskName.value,
-    description: description.value,
+    taskName: DOMPurify.sanitize(taskNameEl.value),
+    taskDescription: DOMPurify.sanitize(descriptionEl.value),
     category: categoryText,
     activity: activityText,
-    priority: priority.checked
-  }
+    priority: priority.checked,
+  };
   if (dueDate.checked) {
-    object.deadline = date.value.split('-').reverse().join('/');
+    object.deadline = date.value.split("-").reverse().join("/");
   } else if (repeat.checked) {
-    object.deadline = getRepeatDays()
+    object.deadline = getRepeatDays();
   }
   existingTasks.push(object);
   localStorage.setItem("tasks", JSON.stringify(existingTasks));
-  console.log(object)
+  console.log(object);
   form.reset();
-  populateTasks()
+  populateTasks();
   closeModal();
+  activity.innerHTML = `<option disabled selected>Select Activity</option>`;
+
+  document.querySelector("#date").style.display = "none";
+  document.querySelector("#repeat-options").style.display = "none";
 }
 
 function getRepeatDays() {
   let daysArray = [];
-  [...repeatOptions.children].forEach(day => {
-    if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id)
+  [...repeatOptions.children].forEach((day) => {
+    if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id);
   });
-  return daysArray
+  return daysArray;
 }
 
 //retrieves a task and updates it. Not yet in use
 function getTaskById(taskId) {
-  const foundTask = existingTasks.find(task => task.id === taskId);
+  const foundTask = existingTasks.find((task) => task.id === taskId);
   return foundTask;
 }
 //Add new task END
 
-
-
 //dinamically display tasks START
 
 function getTasksFromLocalStorage() {
-  const tasksJson = localStorage.getItem('tasks');
+  const tasksJson = localStorage.getItem("tasks");
   return tasksJson ? JSON.parse(tasksJson) : [];
 }
 
 function createTaskElement(task) {
+
   const div = `
   <div class="task__container">
     <div class="taks__name">
@@ -161,12 +160,15 @@ function createTaskElement(task) {
     </div>
   </div>
   `
+
   return div;
 }
 
 function populateTasks() {
   const tasks = getTasksFromLocalStorage();
+
   const taskContainer = document.querySelector('.homepage__task');
+
 
   //makes sure tasks are not duplicated since this function is called both on page load and when SAVE button is clicked
   while (taskContainer.firstChild) {
@@ -174,18 +176,51 @@ function populateTasks() {
   }
 
   if (tasks.length === 0) {
+
     const noTasksPara = document.createElement('p');
     noTasksPara.textContent = 'No tasks at this time';
     taskContainer.appendChild(noTasksPara);
+
   } else {
-    tasks.forEach(task => {
+    tasks.forEach((task) => {
       const taskElement = createTaskElement(task);
       taskContainer.innerHTML += taskElement;
     });
   }
 }
+
 populateTasks()
+
 
 console.log(getTasksFromLocalStorage());
 
 //dinamically display tasks END
+
+//Task name and description validation function
+function formValidation() {
+  let formHasError = false;
+  const taskName = DOMPurify.sanitize(taskNameEl.value);
+  const taskNameErrorEl = taskNameEl.nextElementSibling; //might need to change this to select it independently from the DOM
+  taskNameErrorEl.style.visibility = "hidden";
+  const taskDescription = DOMPurify.sanitize(descriptionEl.value);
+  const taskDescriptionErrorEl = descriptionEl.nextElementSibling;
+  taskDescriptionErrorEl.style.visibility = "hidden";
+
+  if (taskName.trim() === "") {
+    taskNameErrorEl.textContent = "Task Name cannot be empty";
+    taskNameErrorEl.style.visibility = "visible";
+    formHasError = true;
+  } else if (taskName.trim().length > 40) {
+    taskNameErrorEl.textContent = "Task Name must be under 40 characters";
+    taskNameErrorEl.style.visibility = "visible";
+    formHasError = true;
+  }
+
+  if (taskDescription.trim().length > 100) {
+    taskDescriptionErrorEl.textContent =
+      "Description must be under 100 characters";
+    taskDescriptionErrorEl.style.visibility = "visible";
+    formHasError = true;
+  }
+  return formHasError;
+}

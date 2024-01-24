@@ -9,7 +9,8 @@
       src="https://kit.fontawesome.com/bb8e411a96.js"
       crossorigin="anonymous"
     ></script>
-    <title>Document</title>
+    <script src="https://unpkg.com/dompurify@3.0.8/dist/purify.min.js"></script>
+    <title>Daily Tasks App</title>
   </head>
   <body>
     <nav class="nav">
@@ -61,60 +62,124 @@
               type="text"
               placeholder="Enter Description..."
             />
+            <span class="error">Error Message</span>
           </label>
           <label for="category"
             >Select category
-            <select id="category" onchange="updateActivitySelection()">
-              <option value="">Select Category</option>
-            </select></label
-          >
+            <div class="select__container">
+              <select
+                id="category"
+                class="selection"
+                onchange="updateActivitySelection()"
+              >
+                <option disabled selected>Select Category</option>
+              </select>
+              <div class="select__icon-container">
+                <i class="fa-solid fa-plus"></i>
+              </div>
+            </div>
+          </label>
           <label for="activity"
             >Select Activity Type
-            <select id="activity">
-              <option value="">Select Activity</option>
-            </select>
+            <div class="select__container">
+              <select id="activity" class="selection">
+                <option disabled selected>Select Activity</option>
+              </select>
+              <div class="select__icon-container">
+                <i class="fa-solid fa-plus"></i>
+              </div>
+            </div>
           </label>
 
-          <label class="block" for="due-date">
-            <input
-              checked
-              onclick="showDiv('date')"
-              type="radio"
-              name="recurrency"
-              id="due-date"
-            />Due Date</label
+          <label class="frequency" for="due-date">
+            <div class="custom-radio-btn">
+              <input
+                onclick="showDiv('date')"
+                type="radio"
+                name="recurrency"
+                id="due-date"
+              />
+              <span class="radio-checker"></span>
+            </div>
+            Due Date</label
           >
-          <input type="date" id="date" />
+          <input type="date" id="date" class="hidden" />
 
-          <label class="block" for="repeat">
-            <input
-              onclick="showDiv('repeat-options')"
-              type="radio"
-              name="recurrency"
-              id="repeat"
-            />Repeat</label
-          >
+          <label class="frequency" for="repeat">
+            <div class="custom-radio-btn">
+              <input
+                onclick="showDiv('repeat-options')"
+                type="radio"
+                name="recurrency"
+                id="repeat"
+              />
+              <span class="radio-checker"></span>
+            </div>
+            Repeat
+          </label>
           <div class="hidden" id="repeat-options">
-            <label for="Sunday">
-              <input type="checkbox" id="Sunday" />Sunday
+            <label for="Sunday" class="hidden__checkbox">
+              <input
+                type="checkbox"
+                id="Sunday"
+                class="hidden__main-checkbox"
+              />
+              <div class="hidden__custom-checkbox"></div>
+              Sunday
             </label>
-            <label for="Monday">
-              <input type="checkbox" id="Monday" />Monday
+            <label for="Monday" class="hidden__checkbox">
+              <input
+                type="checkbox"
+                id="Monday"
+                class="hidden__main-checkbox"
+              />
+              <div class="hidden__custom-checkbox"></div>
+              Monday
             </label>
-            <label for="Tuesday">
-              <input type="checkbox" id="Tuesday" />Tuesday
+            <label for="Tuesday" class="hidden__checkbox">
+              <input
+                type="checkbox"
+                id="Tuesday"
+                class="hidden__main-checkbox"
+              />
+              <div class="hidden__custom-checkbox"></div>
+              Tuesday
             </label>
-            <label for="Wednesday">
-              <input type="checkbox" id="Wednesday" />Wednesday
+            <label for="Wednesday" class="hidden__checkbox">
+              <input
+                type="checkbox"
+                id="Wednesday"
+                class="hidden__main-checkbox"
+              />
+              <div class="hidden__custom-checkbox"></div>
+              Wednesday
             </label>
-            <label for="Thursday">
-              <input type="checkbox" id="Thursday" />Thursday
+            <label for="Thursday" class="hidden__checkbox">
+              <input
+                type="checkbox"
+                id="Thursday"
+                class="hidden__main-checkbox"
+              />
+              <div class="hidden__custom-checkbox"></div>
+              Thursday
             </label>
-            <label for="Friday">
-              <input type="checkbox" id="Friday" />Friday
+            <label for="Friday" class="hidden__checkbox">
+              <input
+                type="checkbox"
+                id="Friday"
+                class="hidden__main-checkbox"
+              />
+              <div class="hidden__custom-checkbox"></div>
+              Friday
             </label>
-            <label for="Saturday">
-              <input type="checkbox" id="Saturday" />Saturday
+            <label for="Saturday" class="hidden__checkbox">
+              <input
+                type="checkbox"
+                id="Saturday"
+                class="hidden__main-checkbox"
+              />
+              <div class="hidden__custom-checkbox"></div>
+              Saturday
             </label>
           </div>
           <div class="flex">
