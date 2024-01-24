@@ -64,15 +64,29 @@
           </label>
           <label for="category"
             >Select category
-            <select id="category" onchange="updateActivitySelection()">
-              <option value="">Select Category</option>
-            </select></label
-          >
+            <div class="select__container">
+              <select
+                id="category"
+                class="selection"
+                onchange="updateActivitySelection()"
+              >
+                <option disabled selected>Select Category</option>
+              </select>
+              <div class="select__icon-container">
+                <i class="fa-solid fa-plus"></i>
+              </div>
+            </div>
+          </label>
           <label for="activity"
             >Select Activity Type
-            <select id="activity">
-              <option value="">Select Activity</option>
-            </select>
+            <div class="select__container">
+              <select id="activity" class="selection">
+                <option disabled selected>Select Activity</option>
+              </select>
+              <div class="select__icon-container">
+                <i class="fa-solid fa-plus"></i>
+              </div>
+            </div>
           </label>
 
           <label class="block" for="due-date">
