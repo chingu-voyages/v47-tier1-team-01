@@ -89,25 +89,33 @@
             </div>
           </label>
 
-          <label class="block" for="due-date">
-            <input
-              checked
-              onclick="showDiv('date')"
-              type="radio"
-              name="recurrency"
-              id="due-date"
-            />Due Date</label
+          <label class="frequency" for="due-date">
+            <div class="custom-radio-btn">
+              <input
+                checked
+                onclick="showDiv('date')"
+                type="radio"
+                name="recurrency"
+                id="due-date"
+              />
+              <span class="radio-checker"></span>
+            </div>
+            Due Date</label
           >
           <input type="date" id="date" />
 
-          <label class="block" for="repeat">
-            <input
-              onclick="showDiv('repeat-options')"
-              type="radio"
-              name="recurrency"
-              id="repeat"
-            />Repeat</label
-          >
+          <label class="frequency" for="repeat">
+            <div class="custom-radio-btn">
+              <input
+                onclick="showDiv('repeat-options')"
+                type="radio"
+                name="recurrency"
+                id="repeat"
+              />
+              <span class="radio-checker"></span>
+            </div>
+            Repeat
+          </label>
           <div class="hidden" id="repeat-options">
             <label for="Sunday" class="hidden__checkbox">
               <input
