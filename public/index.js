@@ -147,41 +147,50 @@ function getTasksFromLocalStorage() {
 }
 
 function createTaskElement(task) {
-  const div = document.createElement("div");
-  div.classList.add("results__container");
 
-  const para = document.createElement("p");
-  para.classList.add("results__result");
-  para.textContent = JSON.stringify(task);
+  const div = `
+  <div class="task__container">
+    <div class="taks__name">
+      <input type="checkbox" name="" id="mockID" />
+      <label for="mockID">${task.taskName}</label>
+    </div>
+    <div class="task__labels">
+      <span class="legend--category">${task.category}</span>
+      <span class="legend--activity">${task.activity}</span>
+    </div>
+  </div>
+  `
 
-  div.appendChild(para);
   return div;
 }
 
 function populateTasks() {
   const tasks = getTasksFromLocalStorage();
-  const resultsContainer = document.querySelector(".results");
+
+  const taskContainer = document.querySelector('.homepage__task');
+
 
   //makes sure tasks are not duplicated since this function is called both on page load and when SAVE button is clicked
-  while (resultsContainer.firstChild) {
-    resultsContainer.removeChild(resultsContainer.firstChild);
+  while (taskContainer.firstChild) {
+    taskContainer.removeChild(taskContainer.firstChild);
   }
 
   if (tasks.length === 0) {
-    const noTasksPara = document.createElement("p");
-    noTasksPara.textContent = "No tasks at this time";
-    resultsContainer.appendChild(noTasksPara);
+
+    const noTasksPara = document.createElement('p');
+    noTasksPara.textContent = 'No tasks at this time';
+    taskContainer.appendChild(noTasksPara);
+
   } else {
     tasks.forEach((task) => {
       const taskElement = createTaskElement(task);
-      resultsContainer.appendChild(taskElement);
+      taskContainer.innerHTML += taskElement;
     });
   }
 }
-populateTasks();
 
-//check functionality...a bit faulty...
-//check with no tasks
+populateTasks()
+
 
 console.log(getTasksFromLocalStorage());
 
