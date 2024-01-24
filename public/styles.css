@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
 *,
 *::before,
 *::after {
@@ -89,6 +91,49 @@ input {
 
 .hidden {
   display: none;
+}
+
+#repeat-options {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hidden {
+  padding-left: 24px;
+}
+
+.hidden__checkbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.hidden__main-checkbox {
+  display: none;
+}
+
+.hidden__custom-checkbox {
+  height: 16px;
+  width: 16px;
+  border: solid 1px #6d6d6d;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden__main-checkbox:checked + .hidden__custom-checkbox {
+  border: none;
+  background-color: #34d3a2;
+}
+
+.hidden__main-checkbox:checked + .hidden__custom-checkbox::after {
+  content: "\2713";
+  font-size: 8px;
+  font-weight: 1000;
+  color: #f6f6f6;
 }
 
 /*#Toggle Priority Style */

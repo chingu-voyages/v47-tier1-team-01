@@ -4,7 +4,7 @@ function showDiv(divId) {
   document.querySelector("#repeat-options").style.display = "none";
 
   // Show the selected div
-  document.getElementById(divId).style.display = "block";
+  document.getElementById(divId).style.display = "flex";
 }
 
 // modal functionalities
@@ -72,98 +72,91 @@ function updateActivitySelection() {
   });
 }
 
-
-
 //Add new task START
 
-const form = document.querySelector('form')
-const taskName = document.querySelector('#task-name')
-const description = document.querySelector('#description')
-const category = document.querySelector('#category')
-const categoryText = category.options[category.selectedIndex].text
-const activity = document.querySelector('#activity')
-const activityText = activity.options[activity.selectedIndex].text
-const dueDate = document.querySelector('#due-date')
-const date = document.querySelector('#date')
-const repeat = document.querySelector('#repeat')
-const repeatOptions = document.querySelector('#repeat-options')
-const priority = document.querySelector('#switch')
+const form = document.querySelector("form");
+const taskName = document.querySelector("#task-name");
+const description = document.querySelector("#description");
+const category = document.querySelector("#category");
+const categoryText = category.options[category.selectedIndex].text;
+const activity = document.querySelector("#activity");
+const activityText = activity.options[activity.selectedIndex].text;
+const dueDate = document.querySelector("#due-date");
+const date = document.querySelector("#date");
+const repeat = document.querySelector("#repeat");
+const repeatOptions = document.querySelector("#repeat-options");
+const priority = document.querySelector("#switch");
 const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-const submit = document.querySelector('#save-task')
+const submit = document.querySelector("#save-task");
 
-submit.addEventListener('click', saveTask)
-console.log(submit)
-console.log(localStorage.tasks)
-
-
+submit.addEventListener("click", saveTask);
+console.log(submit);
+console.log(localStorage.tasks);
 
 function saveTask(e) {
-  e.preventDefault()
-  const category = document.querySelector('#category')
-  const categoryText = category.options[category.selectedIndex].text
-  const activity = document.querySelector('#activity')
-  const activityText = activity.options[activity.selectedIndex].text
+  e.preventDefault();
+  const category = document.querySelector("#category");
+  const categoryText = category.options[category.selectedIndex].text;
+  const activity = document.querySelector("#activity");
+  const activityText = activity.options[activity.selectedIndex].text;
   const object = {
     id: new Date().getTime(),
     taskName: taskName.value,
     description: description.value,
     category: categoryText,
     activity: activityText,
-    priority: priority.checked
-  }
+    priority: priority.checked,
+  };
   if (dueDate.checked) {
-    object.deadline = date.value.split('-').reverse().join('/');
+    object.deadline = date.value.split("-").reverse().join("/");
   } else if (repeat.checked) {
-    object.deadline = getRepeatDays()
+    object.deadline = getRepeatDays();
   }
   existingTasks.push(object);
   localStorage.setItem("tasks", JSON.stringify(existingTasks));
-  console.log(object)
+  console.log(object);
   form.reset();
-  populateTasks()
+  populateTasks();
   closeModal();
 }
 
 function getRepeatDays() {
   let daysArray = [];
-  [...repeatOptions.children].forEach(day => {
-    if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id)
+  [...repeatOptions.children].forEach((day) => {
+    if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id);
   });
-  return daysArray
+  return daysArray;
 }
 
 //retrieves a task and updates it. Not yet in use
 function getTaskById(taskId) {
-  const foundTask = existingTasks.find(task => task.id === taskId);
+  const foundTask = existingTasks.find((task) => task.id === taskId);
   return foundTask;
 }
 //Add new task END
 
-
-
 //dinamically display tasks START
 
 function getTasksFromLocalStorage() {
-  const tasksJson = localStorage.getItem('tasks');
+  const tasksJson = localStorage.getItem("tasks");
   return tasksJson ? JSON.parse(tasksJson) : [];
 }
 
 function createTaskElement(task) {
-  const div = document.createElement('div');
-  div.classList.add('results__container');
+  const div = document.createElement("div");
+  div.classList.add("results__container");
 
-  const para = document.createElement('p');
-  para.classList.add('results__result');
+  const para = document.createElement("p");
+  para.classList.add("results__result");
   para.textContent = JSON.stringify(task);
 
   div.appendChild(para);
   return div;
 }
 
-
 function populateTasks() {
   const tasks = getTasksFromLocalStorage();
-  const resultsContainer = document.querySelector('.results');
+  const resultsContainer = document.querySelector(".results");
 
   //makes sure tasks are not duplicated since this function is called both on page load and when SAVE button is clicked
   while (resultsContainer.firstChild) {
@@ -171,23 +164,20 @@ function populateTasks() {
   }
 
   if (tasks.length === 0) {
-    const noTasksPara = document.createElement('p');
-    noTasksPara.textContent = 'No tasks at this time';
+    const noTasksPara = document.createElement("p");
+    noTasksPara.textContent = "No tasks at this time";
     resultsContainer.appendChild(noTasksPara);
   } else {
-    tasks.forEach(task => {
+    tasks.forEach((task) => {
       const taskElement = createTaskElement(task);
       resultsContainer.appendChild(taskElement);
     });
   }
 }
-populateTasks()
-
-
+populateTasks();
 
 //check functionality...a bit faulty...
-//check with no tasks 
-
+//check with no tasks
 
 console.log(getTasksFromLocalStorage());
 
