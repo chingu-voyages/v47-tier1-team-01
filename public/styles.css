@@ -267,7 +267,7 @@ span#closeBtn:hover {
 .homepage {
   flex-direction: column;
 }
-.results__container {
+.task__container {
   border: 1px solid black;
   margin-inline: 10px;
   padding: 5px;

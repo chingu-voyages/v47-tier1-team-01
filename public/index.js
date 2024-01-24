@@ -150,10 +150,10 @@ function getTasksFromLocalStorage() {
 
 function createTaskElement(task) {
   const div = document.createElement('div');
-  div.classList.add('results__container');
+  div.classList.add('task__container');
 
   const para = document.createElement('p');
-  para.classList.add('results__result');
+  para.classList.add('task__result');
   para.textContent = JSON.stringify(task);
 
   div.appendChild(para);
@@ -163,25 +163,25 @@ function createTaskElement(task) {
 
 function populateTasks() {
   const tasks = getTasksFromLocalStorage();
-  const resultsContainer = document.querySelector('.homepage__results');
+  const taskContainer = document.querySelector('.homepage__task');
 
   //makes sure tasks are not duplicated since this function is called both on page load and when SAVE button is clicked
-  while (resultsContainer.firstChild) {
-    resultsContainer.removeChild(resultsContainer.firstChild);
+  while (taskContainer.firstChild) {
+    taskContainer.removeChild(taskContainer.firstChild);
   }
 
   if (tasks.length === 0) {
     const noTasksPara = document.createElement('p');
     noTasksPara.textContent = 'No tasks at this time';
-    resultsContainer.appendChild(noTasksPara);
+    taskContainer.appendChild(noTasksPara);
   } else {
     tasks.forEach(task => {
       const taskElement = createTaskElement(task);
-      resultsContainer.appendChild(taskElement);
+      taskContainer.appendChild(taskElement);
     });
   }
 }
-populateTasks()
+// populateTasks()
 
 
 
