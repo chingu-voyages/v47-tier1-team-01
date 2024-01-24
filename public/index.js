@@ -73,10 +73,9 @@ function updateActivitySelection() {
 }
 
 //Add new task START
-
 const form = document.querySelector("form");
-const taskName = document.querySelector("#task-name");
-const description = document.querySelector("#description");
+const taskNameEl = document.querySelector("#task-name");
+const descriptionEl = document.querySelector("#description");
 const category = document.querySelector("#category");
 const categoryText = category.options[category.selectedIndex].text;
 const activity = document.querySelector("#activity");
@@ -99,10 +98,15 @@ function saveTask(e) {
   const categoryText = category.options[category.selectedIndex].text;
   const activity = document.querySelector("#activity");
   const activityText = activity.options[activity.selectedIndex].text;
+
+  //Form Validation
+  const formHasError = formValidation();
+  if (formHasError) return;
+
   const object = {
     id: new Date().getTime(),
-    taskName: taskName.value,
-    description: description.value,
+    taskName: DOMPurify.sanitize(taskNameEl.value),
+    taskDescription: DOMPurify.sanitize(descriptionEl.value),
     category: categoryText,
     activity: activityText,
     priority: priority.checked,
@@ -118,7 +122,6 @@ function saveTask(e) {
   form.reset();
   populateTasks();
   closeModal();
-  activity.innerHTML = `<option disabled selected>Select Activity</option>`;
 }
 
 function getRepeatDays() {
@@ -181,3 +184,35 @@ populateTasks();
 //check with no tasks
 
 console.log(getTasksFromLocalStorage());
+
+//dinamically display tasks END
+
+//Task name and description validation function
+function formValidation() {
+  let formHasError = false;
+  const taskName = DOMPurify.sanitize(taskNameEl.value);
+  const taskNameErrorEl = taskNameEl.nextElementSibling; //might need to change this to select it independently from the DOM
+  taskNameErrorEl.style.visibility = "hidden";
+  const taskDescription = DOMPurify.sanitize(descriptionEl.value);
+  const taskDescriptionErrorEl = descriptionEl.nextElementSibling;
+  taskDescriptionErrorEl.style.visibility = "hidden";
+
+  if (taskName.trim() === "") {
+    taskNameErrorEl.textContent = "Task Name cannot be empty";
+    taskNameErrorEl.style.visibility = "visible";
+    formHasError = true;
+  } else if (taskName.trim().length > 40) {
+    taskNameErrorEl.textContent = "Task Name must be under 40 characters";
+    taskNameErrorEl.style.visibility = "visible";
+    formHasError = true;
+  }
+
+  if (taskDescription.trim().length > 100) {
+    taskDescriptionErrorEl.textContent =
+      "Description must be under 100 characters";
+    taskDescriptionErrorEl.style.visibility = "visible";
+    formHasError = true;
+  }
+
+  return formHasError;
+}
