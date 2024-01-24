@@ -125,9 +125,9 @@ function saveTask(e) {
 
 function getRepeatDays() {
   let daysArray = []
-  ;[...repeatOptions.children].forEach((day) => {
-    if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id)
-  })
+    ;[...repeatOptions.children].forEach((day) => {
+      if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id)
+    })
   return daysArray
 }
 
@@ -142,7 +142,7 @@ function getTaskById(taskId) {
 function formValidation() {
   let formHasError = false
   const taskName = DOMPurify.sanitize(taskNameEl.value)
-  const taskNameErrorEl = taskNameEl.nextElementSibling
+  const taskNameErrorEl = taskNameEl.nextElementSibling  //might need to change this to select it independently from the DOM
   taskNameErrorEl.style.visibility = 'hidden'
   const taskDescription = DOMPurify.sanitize(descriptionEl.value)
   const taskDescriptionErrorEl = descriptionEl.nextElementSibling
