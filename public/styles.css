@@ -356,7 +356,8 @@ span#closeBtn:hover {
 }
 
 .legend--category,
-.legend--activity {
+.legend--activity,
+.legend--priority {
   margin: 5px;
   padding: 4px 8px 4px 8px;
   border-radius: 4px;
@@ -370,6 +371,10 @@ span#closeBtn:hover {
 
 .legend--activity {
   background-color: #4d7c0f;
+}
+
+.legend--priority {
+  background-color: #b91c1c;
 }
 
 /* Homapage styles */
