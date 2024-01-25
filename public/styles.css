@@ -375,9 +375,90 @@ span#closeBtn:hover {
 /* Homapage styles */
 .homepage {
   flex-direction: column;
+  background-color: #ecfdf8;
+}
+
+/* task card styles */
+.homepage__task {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 .task__container {
-  border: 1px solid black;
-  margin-inline: 10px;
-  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid #6d6d6d;
+  padding: 8px 12px;
+  background-color: inherit;
+  border-radius: 4px;
+}
+
+.task__container-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task__name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+.task__name input {
+  height: 16px;
+  width: 16px;
+}
+
+#show-btn {
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+#show-btn:hover {
+  transform: scale(1.1);
+}
+
+.task__container-mid {
+  display: none;
+}
+
+.task__container-mid.show {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.task__settings {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.task__settings button {
+  width: 100%;
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 8px;
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.task__settings button:hover {
+  transform: scale(1.05);
+}
+
+#edit-task-btn {
+  border: 1px solid currentColor;
+  color: #3b82f6;
+}
+
+#del-task-btn {
+  border: 1px solid currentColor;
+  color: #ef4444;
 }
