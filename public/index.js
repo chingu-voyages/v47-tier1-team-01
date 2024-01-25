@@ -244,9 +244,8 @@ function showButton(e) {
     ".task__container-mid"
   );
 
+  currentContainerEl.classList.toggle("show");
   midContainerEl.classList.toggle("show");
   button.classList.toggle("fa-angle-down");
   button.classList.toggle("fa-angle-up");
 }
-
-//

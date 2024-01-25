@@ -389,14 +389,16 @@ span#closeBtn:hover {
   flex-direction: column;
   gap: 16px;
 }
+
 .task__container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 4px;
   border: 1px solid #6d6d6d;
   padding: 8px 12px;
   background-color: inherit;
   border-radius: 4px;
+  transition: gap 0.3s;
 }
 
 .task__container-top {
@@ -426,13 +428,26 @@ span#closeBtn:hover {
 }
 
 .task__container-mid {
-  display: none;
-}
-
-.task__container-mid.show {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  opacity: 0;
+  max-height: 0;
+  transition: all 0.3s ease;
+}
+
+.task__container-mid.show {
+  opacity: 1;
+  max-height: 400px;
+}
+
+.task__container.show {
+  gap: 16px;
+}
+
+.task__description {
+  font-size: 14px;
+  color: #454545;
 }
 
 .task__settings {
