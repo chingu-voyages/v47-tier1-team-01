@@ -72,10 +72,6 @@ function updateActivitySelection() {
 const form = document.querySelector("form");
 const taskNameEl = document.querySelector("#task-name");
 const descriptionEl = document.querySelector("#description");
-const category = document.querySelector("#category");
-const categoryText = category.options[category.selectedIndex].text;
-const activity = document.querySelector("#activity");
-const activityText = activity.options[activity.selectedIndex].text;
 const dueDate = document.querySelector("#due-date");
 const date = document.querySelector("#date");
 const repeat = document.querySelector("#repeat");
@@ -147,19 +143,35 @@ function getTasksFromLocalStorage() {
 }
 
 function createTaskElement(task) {
-
+  console.log(task, "test");
   const div = `
   <div class="task__container">
-    <div class="taks__name">
-      <input type="checkbox" name="" id="mockID" />
-      <label for="mockID">${task.taskName}</label>
+    <div class="task__container-top">
+      <div class="task__name">
+        <input type="checkbox" name="" id="mockID" />
+        <label for="mockID">${task.taskName}</label>
+      </div>
+      <div>
+        <i class="fa-solid fa-angle-down" id="show-btn" onclick="showButton(event)"></i>
+      </div>
     </div>
-    <div class="task__labels">
-      <span class="legend--category">${task.category}</span>
-      <span class="legend--activity">${task.activity}</span>
+    <div class="task__container-mid">
+      <div class="task__description">
+        ${task.description || task.taskDescription}
+      </div>
+      <div class="task__settings">
+        <button id="edit-task-btn">Edit Task <i class="fas fa-edit"></i></button>
+        <button id="del-task-btn">Delete Task <i class="fa-solid fa-trash"></i></button>
+      </div>
+    </div>
+    <div class="task__container-bot">
+      <div class="task__labels">
+        <span class="legend--category">${task.category}</span>
+        <span class="legend--activity">${task.activity}</span>
+      </div>
     </div>
   </div>
-  `
+  `;
 
   return div;
 }
@@ -167,8 +179,7 @@ function createTaskElement(task) {
 function populateTasks() {
   const tasks = getTasksFromLocalStorage();
 
-  const taskContainer = document.querySelector('.homepage__task');
-
+  const taskContainer = document.querySelector(".homepage__task");
 
   //makes sure tasks are not duplicated since this function is called both on page load and when SAVE button is clicked
   while (taskContainer.firstChild) {
@@ -176,11 +187,9 @@ function populateTasks() {
   }
 
   if (tasks.length === 0) {
-
-    const noTasksPara = document.createElement('p');
-    noTasksPara.textContent = 'No tasks at this time';
+    const noTasksPara = document.createElement("p");
+    noTasksPara.textContent = "No tasks at this time";
     taskContainer.appendChild(noTasksPara);
-
   } else {
     tasks.forEach((task) => {
       const taskElement = createTaskElement(task);
@@ -189,8 +198,7 @@ function populateTasks() {
   }
 }
 
-populateTasks()
-
+populateTasks();
 
 console.log(getTasksFromLocalStorage());
 
@@ -223,4 +231,17 @@ function formValidation() {
     formHasError = true;
   }
   return formHasError;
+}
+
+// function to for show button on task-card
+function showButton(e) {
+  const button = e.currentTarget;
+  const currentContainerEl = button.closest(".task__container");
+  const midContainerEl = currentContainerEl.querySelector(
+    ".task__container-mid"
+  );
+
+  midContainerEl.classList.toggle("show");
+  button.classList.toggle("fa-angle-down");
+  button.classList.toggle("fa-angle-up");
 }
