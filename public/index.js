@@ -143,7 +143,7 @@ function getTasksFromLocalStorage() {
 }
 
 function createTaskElement(task) {
-  console.log(task, "hi");
+  console.log(task, "test");
   const div = `
   <div class="task__container">
     <div class="task__container-top">
@@ -152,12 +152,12 @@ function createTaskElement(task) {
         <label for="mockID">${task.taskName}</label>
       </div>
       <div>
-        <i class="fa-solid fa-angle-down" id="show-btn"></i>
+        <i class="fa-solid fa-angle-down" id="show-btn" onclick="showButton(event)"></i>
       </div>
     </div>
     <div class="task__container-mid">
       <div class="task__description">
-        ${task.description}
+        ${task.description || task.taskDescription}
       </div>
       <div class="task__settings">
         <button id="edit-task-btn">Edit Task <i class="fas fa-edit"></i></button>
@@ -234,16 +234,14 @@ function formValidation() {
 }
 
 // function to for show button on task-card
-const showBtnEl = document.querySelectorAll("#show-btn");
-showBtnEl.forEach((button) => {
-  button.addEventListener("click", () => {
-    const currentContainerEl = button.closest(".task__container");
-    const midContainerEl = currentContainerEl.querySelector(
-      ".task__container-mid"
-    );
+function showButton(e) {
+  const button = e.currentTarget;
+  const currentContainerEl = button.closest(".task__container");
+  const midContainerEl = currentContainerEl.querySelector(
+    ".task__container-mid"
+  );
 
-    midContainerEl.classList.toggle("show");
-    button.classList.toggle("fa-angle-down");
-    button.classList.toggle("fa-angle-up");
-  });
-});
+  midContainerEl.classList.toggle("show");
+  button.classList.toggle("fa-angle-down");
+  button.classList.toggle("fa-angle-up");
+}
