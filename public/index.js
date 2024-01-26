@@ -168,9 +168,8 @@ function createTaskElement(task) {
       <div class="task__labels">
         <span class="legend--category">${task.category}</span>
         <span class="legend--activity">${task.activity}</span>
-        ${
-          task.priority ? `<span class="legend--priority">Important</span>` : ""
-        }
+        ${task.priority ? `<span class="legend--priority">Important</span>` : ""
+    }
       </div>
     </div>
   </div>
@@ -190,9 +189,12 @@ function populateTasks() {
   }
 
   if (tasks.length === 0) {
-    const noTasksPara = document.createElement("p");
-    noTasksPara.textContent = "No tasks at this time";
-    taskContainer.appendChild(noTasksPara);
+    taskContainer.innerHTML += `
+    <div class="task__noTask">
+        <p>&#8856;</p>
+        <p>There are no tasks for today</p>
+      </div>
+    `
   } else {
     tasks.forEach((task) => {
       const taskElement = createTaskElement(task);
