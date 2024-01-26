@@ -482,3 +482,26 @@ span#closeBtn:hover {
   border: 1px solid currentColor;
   color: #ef4444;
 }
+
+/* create task button styles */
+#createBtn {
+  height: 44px;
+  width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ecfdf8;
+  border: none;
+  background-image: linear-gradient(#34d3a2, #059669);
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 14px;
+  transition: transform 0.2s;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+}
+
+#createBtn:hover {
+  transform: scale(1.1);
+}
