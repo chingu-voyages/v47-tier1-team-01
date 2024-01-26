@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 
+:root {
+  --no-task: #6d6d6d;
+}
+
 *,
 *::before,
 *::after {
@@ -10,11 +14,13 @@
 
 body {
   font-family: "Inter", sans-serif;
+  background-color: #ecfdf8;
+  display: flex;
+  flex-direction: column;
 }
 
 .flex {
   display: flex;
-  align-items: center;
 }
 
 /* navbar */
@@ -26,6 +32,7 @@ nav {
   align-items: center;
   justify-content: center;
   padding: 8px 16px;
+  width: 100%;
 }
 
 .nav__container {
@@ -246,9 +253,9 @@ input {
 
 /* Summary components */
 .summary {
-  width: 288px;
   display: flex;
-  gap: 12px;
+
+  justify-content: space-between;
 }
 
 .summary__card {
@@ -316,10 +323,6 @@ input {
   height: 100vh;
 } */
 
-.homepage {
-  display: flex;
-}
-
 /* modal styles */
 .createTaskModal {
   display: none;
@@ -351,14 +354,9 @@ span#closeBtn:hover {
   z-index: 1;
 } */
 
-.homepage__legend {
-  margin: 10px;
-}
-
 .legend--category,
 .legend--activity,
 .legend--priority {
-  margin: 5px;
   padding: 4px 8px 4px 8px;
   border-radius: 4px;
   color: #f6f6f6;
@@ -380,7 +378,9 @@ span#closeBtn:hover {
 /* Homapage styles */
 .homepage {
   flex-direction: column;
-  background-color: #ecfdf8;
+  margin-inline: 1rem;
+  gap: 1rem;
+  max-width: 350px;
 }
 
 /* task card styles */
@@ -504,4 +504,24 @@ span#closeBtn:hover {
 
 #createBtn:hover {
   transform: scale(1.1);
+}
+
+/* no task */
+.task__noTask {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--no-task);
+  border-radius: 5px;
+  padding: 0.6rem 1.5rem;
+}
+.task__noTask > p {
+  color: var(--no-task);
+  font-size: 1rem;
+  font-weight: 900;
+}
+.task__noTask :first-child {
+  display: inline-block;
+  font-size: 1.5rem;
+
+  transform: rotate(110deg);
 }
