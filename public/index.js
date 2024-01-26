@@ -167,10 +167,19 @@ function createTaskElement(task) {
       </div>
     </div>
     <div class="task__container-bot">
-      <div class="task__labels">
-        <span class="legend--category">${task.category}</span>
-        <span class="legend--activity">${task.activity}</span>
-      </div>
+        ${
+          task.category === "Select Category"
+            ? ""
+            : ` <span class="legend--category">${task.category}</span>`
+        }
+        ${
+          task.activity === "Select Activity"
+            ? ""
+            : `<span class="legend--activity">${task.activity}</span>`
+        }
+        ${
+          task.priority ? `<span class="legend--priority">Important</span>` : ""
+        }
     </div>
   </div>
   `
@@ -235,7 +244,7 @@ function formValidation() {
   return formHasError
 }
 
-// function to for show button on task-card
+// function for show button on task-card
 function showButton(e) {
   const button = e.currentTarget
   const currentContainerEl = button.closest('.task__container')
