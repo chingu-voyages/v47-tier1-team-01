@@ -294,6 +294,7 @@ input {
 .summary__checkbox:checked + .summary__label::after {
   display: inline-block;
 }
+
 .summary__label {
   position: relative;
   font-size: 16px;
@@ -357,7 +358,7 @@ span#closeBtn:hover {
 .legend--category,
 .legend--activity,
 .legend--priority {
-  padding: 4px 8px 4px 8px;
+  padding: 4px 8px;
   border-radius: 4px;
   color: #f6f6f6;
   font-size: 12px;
@@ -393,12 +394,13 @@ span#closeBtn:hover {
 .task__container {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  width: 288px;
+  gap: 0;
   border: 1px solid #6d6d6d;
   padding: 8px 12px;
   background-color: inherit;
   border-radius: 4px;
-  transition: gap 0.3s;
+  transition: gap 0.8s;
 }
 
 .task__container-top {
@@ -430,13 +432,14 @@ span#closeBtn:hover {
 .task__container-mid {
   display: flex;
   flex-direction: column;
-  gap: 16px;
   opacity: 0;
+  gap: 0;
   max-height: 0;
-  transition: all 0.3s ease;
+  transition: max-height 0.5s, opacity 0.3s, gap 0.8s;
 }
 
 .task__container-mid.show {
+  gap: 16px;
   opacity: 1;
   max-height: 400px;
 }
@@ -483,8 +486,15 @@ span#closeBtn:hover {
   color: #ef4444;
 }
 
+.task__container-bot {
+  display: flex;
+  font-size: 12px;
+  gap: 4px;
+}
+
 /* create task button styles */
 #createBtn {
+  border: 1px solid red;
   height: 44px;
   width: 44px;
   display: flex;
@@ -500,6 +510,7 @@ span#closeBtn:hover {
   position: fixed;
   bottom: 25px;
   right: 25px;
+  z-index: 1000;
 }
 
 #createBtn:hover {

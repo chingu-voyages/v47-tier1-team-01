@@ -165,12 +165,19 @@ function createTaskElement(task) {
       </div>
     </div>
     <div class="task__container-bot">
-      <div class="task__labels">
-        <span class="legend--category">${task.category}</span>
-        <span class="legend--activity">${task.activity}</span>
-        ${task.priority ? `<span class="legend--priority">Important</span>` : ""
-    }
-      </div>
+        ${
+          task.category === "Select Category"
+            ? ""
+            : ` <span class="legend--category">${task.category}</span>`
+        }
+        ${
+          task.activity === "Select Activity"
+            ? ""
+            : `<span class="legend--activity">${task.activity}</span>`
+        }
+        ${
+          task.priority ? `<span class="legend--priority">Important</span>` : ""
+        }
     </div>
   </div>
   `;
@@ -244,6 +251,9 @@ function showButton(e) {
   const currentContainerEl = button.closest(".task__container");
   const midContainerEl = currentContainerEl.querySelector(
     ".task__container-mid"
+  );
+  const botContainerEl = currentContainerEl.querySelector(
+    ".task__container-bot"
   );
 
   currentContainerEl.classList.toggle("show");
