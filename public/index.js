@@ -168,6 +168,9 @@ function createTaskElement(task) {
       <div class="task__labels">
         <span class="legend--category">${task.category}</span>
         <span class="legend--activity">${task.activity}</span>
+        ${
+          task.priority ? `<span class="legend--priority">Important</span>` : ""
+        }
       </div>
     </div>
   </div>
@@ -233,7 +236,7 @@ function formValidation() {
   return formHasError;
 }
 
-// function to for show button on task-card
+// function for show button on task-card
 function showButton(e) {
   const button = e.currentTarget;
   const currentContainerEl = button.closest(".task__container");
@@ -241,6 +244,7 @@ function showButton(e) {
     ".task__container-mid"
   );
 
+  currentContainerEl.classList.toggle("show");
   midContainerEl.classList.toggle("show");
   button.classList.toggle("fa-angle-down");
   button.classList.toggle("fa-angle-up");
