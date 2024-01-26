@@ -196,9 +196,12 @@ function populateTasks() {
   }
 
   if (tasks.length === 0) {
-    const noTasksPara = document.createElement("p");
-    noTasksPara.textContent = "No tasks at this time";
-    taskContainer.appendChild(noTasksPara);
+    taskContainer.innerHTML += `
+    <div class="task__noTask">
+        <p>&#8856;</p>
+        <p>There are no tasks for today</p>
+      </div>
+    `
   } else {
     tasks.forEach((task) => {
       const taskElement = createTaskElement(task);
