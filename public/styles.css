@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 
 :root {
   --no-task: #6d6d6d;
@@ -171,7 +171,7 @@ input {
 }
 
 .hidden__main-checkbox:checked + .hidden__custom-checkbox::after {
-  content: '\2713';
+  content: "\2713";
   font-size: 8px;
   font-weight: 1000;
   color: #f6f6f6;
@@ -227,7 +227,7 @@ input {
 }
 
 #toggle:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 2px;
   left: 2px;
@@ -270,7 +270,7 @@ input {
 
 /* custom checkbox */
 .summary__label::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -279,7 +279,7 @@ input {
 }
 
 .summary__label::after {
-  content: '';
+  content: "";
   display: none;
   width: 5px;
   height: 10px;
@@ -446,13 +446,14 @@ span#closeBtn:hover {
   opacity: 0;
   gap: 0;
   max-height: 0;
-  transition: max-height 0.5s, opacity 0.3s, gap 0.8s;
+  transition: max-height 0.5s, opacity 0.3s, gap 0.8s, margin 0.8s;
 }
 
 .task__container-mid.show {
   gap: 16px;
   opacity: 1;
   max-height: 400px;
+  margin: 4px 0px;
 }
 
 .task__container.show {
@@ -536,14 +537,30 @@ span#closeBtn:hover {
   border-radius: 5px;
   padding: 0.6rem 1.5rem;
 }
+
 .task__noTask > p {
   color: var(--no-task);
   font-size: 1rem;
   font-weight: 900;
 }
+
 .task__noTask :first-child {
   display: inline-block;
   font-size: 1.5rem;
 
   transform: rotate(110deg);
+}
+
+/* buttons inside modals styles */
+.btn-update,
+.btn-cancel,
+.btn-save {
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.btn-update:hover,
+.btn-cancel:hover,
+.btn-save:hover {
+  transform: scale(1.01);
 }
