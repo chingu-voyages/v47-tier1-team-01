@@ -407,6 +407,7 @@ span#closeBtn:hover {
   flex-direction: column;
   width: 288px;
   gap: 0;
+  overflow: hidden;
   border: 1px solid #6d6d6d;
   padding: 8px 12px;
   background-color: inherit;
@@ -563,4 +564,19 @@ span#closeBtn:hover {
 .btn-cancel:hover,
 .btn-save:hover {
   transform: scale(1.01);
+}
+
+/* feedback styles */
+
+.homepage__feedback {
+  display: none;
+  gap: 4px;
+  width: 288px;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  background-color: #d1faed;
+  padding: 16px 32px;
+  color: #10b985;
 }

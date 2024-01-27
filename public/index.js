@@ -84,6 +84,10 @@ const submit = document.querySelector("#save-task");
 // create task button element
 const createTaskBtn = document.querySelector("#createBtn");
 
+// feedback container
+const taskFb = document.querySelector(".new-task");
+const updateFb = document.querySelector(".update-task");
+
 submit.addEventListener("click", saveTask);
 // console.log(localStorage.tasks)
 
@@ -121,6 +125,8 @@ function saveTask(e) {
 
   document.querySelector("#date").style.display = "none";
   document.querySelector("#repeat-options").style.display = "none";
+
+  showFeedback("save");
 }
 
 function getRepeatDays() {
@@ -465,6 +471,7 @@ function updateTask(event, taskId) {
   editTaskModalEl.innerHTML = "";
   editTaskModalEl.style.display = "none";
   populateTasks();
+  showFeedback("edit");
 }
 
 function cancelEditTask() {
@@ -474,3 +481,18 @@ function cancelEditTask() {
 }
 
 // Task edit functionality end - Jimmy
+
+// show feedback function
+function showFeedback(mode) {
+  if (mode === "save") {
+    taskFb.style.display = "flex";
+    setTimeout(() => {
+      taskFb.style.display = "none";
+    }, 3000);
+  } else {
+    updateFb.style.display = "flex";
+    setTimeout(() => {
+      updateFb.style.display = "none";
+    }, 3000);
+  }
+}
