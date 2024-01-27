@@ -471,6 +471,7 @@ function updateTask(event, taskId) {
   editTaskModalEl.innerHTML = "";
   editTaskModalEl.style.display = "none";
   populateTasks();
+  createTaskBtn.style.display = "flex";
   showFeedback("edit");
 }
 
