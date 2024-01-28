@@ -169,26 +169,22 @@ function createTaskElement(task) {
         ${task.description || task.taskDescription}
       </div>
       <div class="task__settings">
-        <button id="edit-task-btn" onclick="editTask(${
-          task.id
-        })">Edit Task <i class="fas fa-edit"></i></button>
+        <button id="edit-task-btn" onclick="editTask(${task.id
+    })">Edit Task <i class="fas fa-edit"></i></button>
         <button id="del-task-btn">Delete Task <i class="fa-solid fa-trash"></i></button>
       </div>
     </div>
     <div class="task__container-bot">
-        ${
-          task.category === "Select Category"
-            ? ""
-            : ` <span class="legend--category">${task.category}</span>`
-        }
-        ${
-          task.activity === "Select Activity"
-            ? ""
-            : `<span class="legend--activity">${task.activity}</span>`
-        }
-        ${
-          task.priority ? `<span class="legend--priority">Important</span>` : ""
-        }
+        ${task.category === "Select Category"
+      ? ""
+      : ` <span class="legend--category">${task.category}</span>`
+    }
+        ${task.activity === "Select Activity"
+      ? ""
+      : `<span class="legend--activity">${task.activity}</span>`
+    }
+        ${task.priority ? `<span class="legend--priority">Important</span>` : ""
+    }
     </div>
   </div>
   `;
@@ -297,9 +293,8 @@ function editTask(taskId) {
   let categoryOptionsContent = "";
   categoriesArr.forEach((category) => {
     categoryOptionsContent += `
-  <option ${category === "Select Category" ? "disabled" : ""} ${
-      category === taskObj.category ? "selected" : ""
-    }>${category}</option>
+  <option ${category === "Select Category" ? "disabled" : ""} ${category === taskObj.category ? "selected" : ""
+      }>${category}</option>
   `;
   });
 
@@ -315,9 +310,8 @@ function editTask(taskId) {
       .activityTypes.map((activityType) => activityType.activityName);
 
     availableActivityOptions.forEach((activity) => {
-      activityOptionsContent += `<option ${
-        activity === taskObj.activity ? "selected" : ""
-      }>${activity}</option>`;
+      activityOptionsContent += `<option ${activity === taskObj.activity ? "selected" : ""
+        }>${activity}</option>`;
     });
   }
 
@@ -420,8 +414,7 @@ function editTask(taskId) {
     ${repeatOptionsContent}
   </div>
   <div class="flex">
-    <input type="checkbox" id="switch" name='priority' ${
-      taskObj.priority ? "checked" : ""
+    <input type="checkbox" id="switch" name='priority' ${taskObj.priority ? "checked" : ""
     }/>
     <label for="switch" id="toggle" class="block">Priority </label>
     <label for="switch">Priority</label>
@@ -497,3 +490,78 @@ function showFeedback(mode) {
     }, 3000);
   }
 }
+
+
+
+//carrousel madness
+
+
+function createCarrousel() {
+  const date = new Date
+  const dateInMonth = new Date(date.getFullYear(), date.getMonth(), 1).getDay()
+  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+  console.log(dateInMonth)
+
+  //for days of week
+  // let n = 0
+  // while (n < totalDaysInCurrentMonth) {
+  //   const dayOfWeek = document.createElement('td')
+  //   dayOfWeek.textContent = dayNames[((dateInMonth) + n) % 7]
+  //   const date = document.createElement('td')
+  //   date.textContent = n + 1
+  //   firstRow.append(dayOfWeek)
+  //   secondRow.append(date)
+  //   n++
+  // }
+
+  const container = document.querySelector('.carrousel__dates')
+  container.innerHTML += `
+<div class="carrousel__date">
+  <div class="date__top">
+    <p>${dayNames[(date.getDay() - 2) % 7]}</p>
+  </div>
+  <div class="date__middle"></div>
+  <div class="date__bottom">
+    <p>${date.getDate() - 2}</p>
+  </div>
+</div>
+<div class="carrousel__date">
+  <div class="date__top">
+    <p>${dayNames[(date.getDay() - 1) % 7]}</p>
+  </div>
+  <div class="date__middle"></div>
+  <div class="date__bottom">
+    <p>${date.getDate() - 1}</p>
+  </div>
+</div>
+<div class="carrousel__date date--active">
+  <div class="date__top">
+    <p>${dayNames[(date.getDay() % 7)]}</p>
+  </div>
+  <div class="date__middle date__middle--active"></div>
+  <div class="date__bottom">
+    <p>${date.getDate()}</p>
+  </div>
+</div>
+<div class="carrousel__date">
+  <div class="date__top">
+    <p>${dayNames[(date.getDay() + 1) % 7]}</p>
+  </div>
+  <div class="date__middle"></div>
+  <div class="date__bottom">
+    <p>${date.getDate() + 1}</p>
+  </div>
+</div>
+<div class="carrousel__date">
+  <div class="date__top">
+    <p>${dayNames[(date.getDay() + 2) % 7]}</p>
+  </div>
+  <div class="date__middle"></div>
+  <div class="date__bottom">
+    <p>${date.getDate() + 1}</p>
+  </div>
+</div>
+`
+}
+
+createCarrousel()
