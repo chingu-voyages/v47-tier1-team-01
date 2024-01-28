@@ -496,72 +496,67 @@ function showFeedback(mode) {
 //carrousel madness
 
 
-function createCarrousel() {
-  const date = new Date
-  const dateInMonth = new Date(date.getFullYear(), date.getMonth(), 1).getDay()
-  const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-  console.log(dateInMonth)
+const dateToday = new Date
+const dateInMonth = new Date(dateToday.getFullYear(), dateToday.getMonth(), 1).getDay()
+const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+console.log(dateInMonth)
 
-  //for days of week
-  // let n = 0
-  // while (n < totalDaysInCurrentMonth) {
-  //   const dayOfWeek = document.createElement('td')
-  //   dayOfWeek.textContent = dayNames[((dateInMonth) + n) % 7]
-  //   const date = document.createElement('td')
-  //   date.textContent = n + 1
-  //   firstRow.append(dayOfWeek)
-  //   secondRow.append(date)
-  //   n++
-  // }
 
-  const container = document.querySelector('.carrousel__dates')
-  container.innerHTML += `
-<div class="carrousel__date">
-  <div class="date__top">
-    <p>${dayNames[(date.getDay() - 2) % 7]}</p>
-  </div>
-  <div class="date__middle"></div>
-  <div class="date__bottom">
-    <p>${date.getDate() - 2}</p>
-  </div>
-</div>
-<div class="carrousel__date">
-  <div class="date__top">
-    <p>${dayNames[(date.getDay() - 1) % 7]}</p>
-  </div>
-  <div class="date__middle"></div>
-  <div class="date__bottom">
-    <p>${date.getDate() - 1}</p>
-  </div>
-</div>
-<div class="carrousel__date date--active">
-  <div class="date__top">
-    <p>${dayNames[(date.getDay() % 7)]}</p>
-  </div>
-  <div class="date__middle date__middle--active"></div>
-  <div class="date__bottom">
-    <p>${date.getDate()}</p>
-  </div>
-</div>
-<div class="carrousel__date">
-  <div class="date__top">
-    <p>${dayNames[(date.getDay() + 1) % 7]}</p>
-  </div>
-  <div class="date__middle"></div>
-  <div class="date__bottom">
-    <p>${date.getDate() + 1}</p>
-  </div>
-</div>
-<div class="carrousel__date">
-  <div class="date__top">
-    <p>${dayNames[(date.getDay() + 2) % 7]}</p>
-  </div>
-  <div class="date__middle"></div>
-  <div class="date__bottom">
-    <p>${date.getDate() + 1}</p>
-  </div>
-</div>
-`
+
+let cardArray = []
+
+const container = document.querySelector('.carrousel__dates')
+const dayCard = document.createElement('div')
+dayCard.classList.add('carrousel__date')
+
+
+let n = 0
+while (n < 5) {
+  const day = document.createElement('div')
+  day.classList.add('carrousel__date')
+  day.innerHTML = `
+    <div class="date__top">
+      <p>${dayNames[(dateToday.getDay() + n + 5) % 7]}</p>
+    </div>
+    <div class="date__middle"></div>
+    <div class="date__bottom">
+      <p>${dateToday.getDate() - 2 + n}</p>
+    </div>
+  `
+  n++
+  container.append(day)
+  cardArray.push(dayCard)
+
+}
+console.log(cardArray)
+
+
+
+const nextDayBtn = document.querySelector('#button-right')
+nextDayBtn.addEventListener('click', next)
+function next() {
+  let nextDayCard = document.createElement('div')
+  nextDayCard.classList.add('carrousel__date')
+
+  nextDayCard.innerHTML = `
+      <div class="date__top">
+        <p>${dayNames[(dateToday.getDay() + n + 5) % 7]}</p>
+      </div>
+      <div class="date__middle">laaaaaaaa</div>
+      <div class="date__bottom">
+        <p>${dateToday.getDate() - 2 + n}</p>
+      </div>
+  `
+  cardArray.push(nextDayCard)
+  container.append(nextDayCard)
+
+  container.removeChild(container.childNodes[0])
+  console.log(container.childElementCount)
 }
 
-createCarrousel()
+
+//style for middle card
+//tarnsition/translate...??
+//fix buttons
+
+//no task shit got lost
