@@ -518,7 +518,7 @@ while (n < 5) {
     <div class="date__top">
       <p>${dayNames[(dateToday.getDay() + n + 5) % 7]}</p>
     </div>
-    <div class="date__middle"></div>
+    <div class="date__middle ${n === 2 ? 'date__middle--active' : ''} "></div>
     <div class="date__bottom">
       <p>${dateToday.getDate() - 2 + n}</p>
     </div>
@@ -528,6 +528,7 @@ while (n < 5) {
   cardArray.push(dayCard)
 
 }
+console.log(container.childNodes[2].classList.add('date--active')) // today 
 console.log(cardArray)
 
 
@@ -542,7 +543,7 @@ function next() {
       <div class="date__top">
         <p>${dayNames[(dateToday.getDay() + n + 5) % 7]}</p>
       </div>
-      <div class="date__middle">laaaaaaaa</div>
+      <div class="date__middle ${n === 2 ? 'date__middle--active' : ''}"></div>
       <div class="date__bottom">
         <p>${dateToday.getDate() - 2 + n}</p>
       </div>
@@ -551,7 +552,44 @@ function next() {
   container.append(nextDayCard)
 
   container.removeChild(container.childNodes[0])
-  console.log(container.childElementCount)
+  container.childNodes[2].classList.add('date--active') //today
+  container.childNodes[1].classList.remove('date--active') //yesterday
+  container.childNodes[2].childNodes[3].classList.add('date__middle--active') //yesterday styling
+  container.childNodes[1].childNodes[3].classList.remove('date__middle--active') //remove yesterday styling
+  console.log(container.childNodes[1].childNodes[3])
+
+  n++
+}
+
+const prevDayBtn = document.querySelector('#button-left')
+prevDayBtn.addEventListener('click', previous)
+function previous() {
+  let prevDayCard = document.createElement('div')
+  prevDayCard.classList.add('carrousel__date')
+
+  prevDayCard.innerHTML = `
+      <div class="date__top">
+        <p>${dayNames[(dateToday.getDay() + n - 2) % 7]}</p>
+      </div>
+      <div class="date__middle ${n === 2 ? 'date__middle--active' : ''}"></div>
+      <div class="date__bottom">
+        <p>${dateToday.getDate() - 2 + n}</p>
+      </div>
+  `
+  cardArray.unshift(prevDayCard)
+  container.prepend(prevDayCard)
+
+  console.log(cardArray)
+
+  container.removeChild(container.childNodes[4])
+
+  container.childNodes[2].classList.add('date--active') //today
+  container.childNodes[3].classList.remove('date--active') //yesterday
+  container.childNodes[2].childNodes[3].classList.add('date__middle--active') //yesterday styling
+  container.childNodes[3].childNodes[3].classList.remove('date__middle--active') //remove yesterday styling
+  console.log(container.childNodes[1].childNodes[3])
+
+  n--
 }
 
 
