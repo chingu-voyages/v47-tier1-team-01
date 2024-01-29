@@ -504,11 +504,13 @@ console.log(dateInMonth)
 
 
 let cardArray = []
-
 const container = document.querySelector('.carrousel__dates')
 const dayCard = document.createElement('div')
 dayCard.classList.add('carrousel__date')
 
+let month = dateToday.getMonth()
+const totalDaysInCurrentMonth = new Date(dateToday.getFullYear(), dateToday.getMonth() + month, 0).getDate()
+console.log(month)
 
 let n = 0
 while (n < 5) {
@@ -538,6 +540,11 @@ nextDayBtn.addEventListener('click', next)
 function next() {
   let nextDayCard = document.createElement('div')
   nextDayCard.classList.add('carrousel__date')
+  let tomorrow = dateToday.getDate() - 2 + n
+  if (tomorrow > totalDaysInCurrentMonth) {
+    tomorrow = 1
+  }
+  console.log(tomorrow)
 
   nextDayCard.innerHTML = `
       <div class="date__top">
@@ -545,7 +552,7 @@ function next() {
       </div>
       <div class="date__middle ${n === 2 ? 'date__middle--active' : ''}"></div>
       <div class="date__bottom">
-        <p>${dateToday.getDate() - 2 + n}</p>
+        <p>${tomorrow + n - 5}</p>
       </div>
   `
   cardArray.push(nextDayCard)
