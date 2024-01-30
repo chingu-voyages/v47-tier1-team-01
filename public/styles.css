@@ -445,6 +445,7 @@ span#closeBtn:hover {
 .task__container-mid {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   opacity: 0;
   gap: 0;
   max-height: 0;
