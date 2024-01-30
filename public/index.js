@@ -172,7 +172,9 @@ function createTaskElement(task) {
         <button id="edit-task-btn" onclick="editTask(${
           task.id
         })">Edit Task <i class="fas fa-edit"></i></button>
-        <button id="del-task-btn">Delete Task <i class="fa-solid fa-trash"></i></button>
+        <button id="del-task-btn" onclick="deleteTask(${
+          task.id
+        })">Delete Task <i class="fa-solid fa-trash"></i></button>
       </div>
     </div>
     <div class="task__container-bot">
@@ -496,4 +498,12 @@ function showFeedback(mode) {
       updateFb.style.display = "none";
     }, 3000);
   }
+}
+
+// delete task function
+function deleteTask(id) {
+  const tasks = getTasksFromLocalStorage();
+  const newTaskList = tasks.filter((task) => task.id !== id);
+  localStorage.setItem("tasks", JSON.stringify(newTaskList));
+  populateTasks();
 }
