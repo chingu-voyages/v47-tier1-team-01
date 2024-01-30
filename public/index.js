@@ -78,7 +78,7 @@ const date = document.querySelector("#date");
 const repeat = document.querySelector("#repeat");
 const repeatOptions = document.querySelector("#repeat-options");
 const priority = document.querySelector("#switch");
-const existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
+let existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
 const submit = document.querySelector("#save-task");
 
 // create task button element
@@ -115,6 +115,8 @@ function saveTask(e) {
   } else if (repeat.checked) {
     object.deadline = getRepeatDays();
   }
+
+  existingTasks = JSON.parse(localStorage.getItem("tasks")) || [];
   existingTasks.push(object);
   localStorage.setItem("tasks", JSON.stringify(existingTasks));
   console.log(object);
