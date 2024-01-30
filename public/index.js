@@ -494,42 +494,78 @@ function showFeedback(mode) {
 
 
 //carrousel madness
+const container = document.querySelector('.carrousel__dates')
+const month = document.querySelector('#calendar__month')
+month.textContent = monthNames[dateToday.getMonth()]
 
+let currentMonth = dateToday.getMonth() + 1
+let totalDaysInCurrentMonth = new Date(dateToday.getFullYear(), currentMonth, 0).getDate()
 const dateToday = new Date
 const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 
 
+let today = dateToday.getDate()
+let secondLastDay = today + 1
+let lastDay = today + 2
 
-const container = document.querySelector('.carrousel__dates')
-const dayCard = document.createElement('div')
-dayCard.classList.add('carrousel__date')
-
-
-const month = document.querySelector('#calendar__month')
-month.textContent = monthNames[dateToday.getMonth()]
-
-let currentMonth = dateToday.getMonth() + 1
-// console.log(currentMonth)
-
-let n = 0
-while (n < 5) {
-  const day = document.createElement('div')
-  day.classList.add('carrousel__date')
-  day.innerHTML = `
-  <div class="date__top">
-  <p>${dayNames[(dateToday.getDay() + n + 5) % 7]}</p>
+switch (true) {
+  case today + 1 > totalDaysInCurrentMonth: secondLastDay = 1; lastDay = 2; break
+  case today + 2 > totalDaysInCurrentMonth: secondLastDay = totalDaysInCurrentMonth; lastDay = 1; break
+}
+console.log(lastDay)
+container.innerHTML = `
+  <div class="carrousel__date">
+    <div class="date__top">
+      <p>${dayNames[(dateToday.getDay() + 5) % 7]}</p>
+    </div>
+    <div class="date__middle  "></div>
+    <div class="date__bottom">
+      <p>${today - 2}</p>
+    </div>
   </div>
-  <div class="date__middle ${n === 2 ? 'date__middle--active' : ''} "></div>
-  <div class="date__bottom">
-  <p>${dateToday.getDate() - 2 + n}</p>
+  <div class="carrousel__date">
+    <div class="date__top">
+      <p>${dayNames[(dateToday.getDay() + 6) % 7]}</p>
+    </div>
+    <div class="date__middle  "></div>
+    <div class="date__bottom">
+      <p>${today - 1}</p>
+    </div>
+  </div>
+  <div class="carrousel__date date--active">
+    <div class="date__top">
+      <p>${dayNames[(dateToday.getDay()) % 7]}</p>
+    </div>
+    <div class="date__middle date__middle--active"></div>
+    <div class="date__bottom">
+      <p>${today}</p>
+    </div>
+  </div>
+  <div class="carrousel__date">
+    <div class="date__top">
+      <p>${dayNames[(dateToday.getDay() + 1) % 7]}</p>
+    </div>
+    <div class="date__middle  "></div>
+    <div class="date__bottom">
+      <p>${secondLastDay}</p>
+    </div>
+  </div>
+  <div class="carrousel__date">
+    <div class="date__top">
+      <p>${dayNames[(dateToday.getDay() + 2) % 7]}</p>
+    </div>
+    <div class="date__middle  "></div>
+    <div class="date__bottom">
+      <p>${lastDay}</p>
+    </div>
   </div>
   `
-  n++
-  container.append(day)
-}
-container.childNodes[2].classList.add('date--active') // today 
+
+
+
+
 
 
 
@@ -537,15 +573,15 @@ container.childNodes[2].classList.add('date--active') // today
 const nextDayBtn = document.querySelector('#button-right')
 nextDayBtn.addEventListener('click', next)
 let m = 1;
-
+let n = 0
 let tomorrow = dateToday.getDate() + 2
+
 function next() {
   let nextDayCard = document.createElement('div')
   nextDayCard.classList.add('carrousel__date')
 
   tomorrow++
   // console.log(tomorrow)
-  let totalDaysInCurrentMonth = new Date(dateToday.getFullYear(), currentMonth, 0).getDate()
   if (tomorrow > totalDaysInCurrentMonth) {
     tomorrow = 1
     currentMonth++;
@@ -582,6 +618,7 @@ function next() {
 const prevDayBtn = document.querySelector('#button-left')
 prevDayBtn.addEventListener('click', previous)
 
+
 function previous() {
   let prevDayCard = document.createElement('div')
   prevDayCard.classList.add('carrousel__date')
@@ -595,10 +632,8 @@ function previous() {
         <p>${dateToday.getDate() - 2 + n}</p>
       </div>
   `
-  cardArray.unshift(prevDayCard)
   container.prepend(prevDayCard)
 
-  console.log(cardArray)
 
   container.removeChild(container.childNodes[4])
 
