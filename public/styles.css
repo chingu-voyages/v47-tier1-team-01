@@ -454,6 +454,7 @@ span#closeBtn:hover {
 
 .task__container-mid.show {
   gap: 16px;
+  overflow: visible;
   opacity: 1;
   overflow: visible;
   max-height: 400px;
