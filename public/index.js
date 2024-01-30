@@ -513,7 +513,7 @@ switch (true) {
   case today + 1 > totalDaysInCurrentMonth: secondLastDay = 1; lastDay = 2; break
   case today + 2 > totalDaysInCurrentMonth: secondLastDay = totalDaysInCurrentMonth; lastDay = 1; break
 }
-console.log(lastDay)
+lastDay === 1 || 2 ? currentMonth++ : 0
 container.innerHTML = `
   <div class="carrousel__date">
     <div class="date__top">
@@ -561,26 +561,16 @@ container.innerHTML = `
     </div>
   </div>
   `
-
-const nextDayBtn = document.querySelector('#button-right')
-nextDayBtn.addEventListener('click', next)
-let m = 1;
-let n = 0
-let tomorrow = dateToday.getDate() + 2
-
-
-// console.log('container children', container.childNodes)
-const elementNodes = Array.from(container.childNodes).filter(node => node.nodeType === 1);
-console.log('elem nodes', elementNodes, 'original', container.childNodes)
-
+//remove textnodes
 container.removeChild(container.childNodes[10])
 container.removeChild(container.childNodes[8])
 container.removeChild(container.childNodes[6])
 container.removeChild(container.childNodes[4])
 container.removeChild(container.childNodes[0])
 container.removeChild(container.childNodes[1])
-console.log('elem nodes', elementNodes, 'original', container.childNodes)
 
+const nextDayBtn = document.querySelector('#button-right')
+nextDayBtn.addEventListener('click', next)
 
 function next() {
   console.log('container children', container.childNodes)
@@ -588,27 +578,26 @@ function next() {
   let nextDayCard = document.createElement('div')
   nextDayCard.classList.add('carrousel__date')
 
-  tomorrow++
+  lastDay++
 
-  if (tomorrow > totalDaysInCurrentMonth) {
-    tomorrow = 1
+  if (lastDay > totalDaysInCurrentMonth) {
+    lastDay = 1
     currentMonth++;
     totalDaysInCurrentMonth = new Date(dateToday.getFullYear(), currentMonth, 0).getDate()
   }
-  if (tomorrow === 3) {
+  if (lastDay === 3) {
     month.textContent = monthNames[currentMonth - 1]
   }
 
-
-  // console.log('tomorrow', tomorrow, 'total day', totalDaysInCurrentMonth, 'current month', currentMonth)
+  console.log('lastDay', lastDay, 'total day', totalDaysInCurrentMonth, 'current month', currentMonth)
 
   nextDayCard.innerHTML = `
   <div class="date__top">
-  <p>${dayNames[(dateToday.getDay() + n + 5) % 7]}</p>
+  <p>${dayNames[(dateToday.getDay() + lastDay + 2) % 7]}</p>
   </div>
   <div class="date__middle"></div>
   <div class="date__bottom">
-  <p>${tomorrow}</p>
+  <p>${lastDay}</p>
   </div>
   `
   container.append(nextDayCard)
@@ -617,7 +606,6 @@ function next() {
   container.childNodes[1].classList.remove('date--active') //yesterday
   container.childNodes[2].childNodes[3].classList.add('date__middle--active') //yesterday styling
   container.childNodes[1].childNodes[3].classList.remove('date__middle--active') //remove yesterday styling
-  n++
 }
 
 
@@ -653,8 +641,8 @@ function previous() {
 }
 
 
-//style for middle card
+//previous day function
+
+
 //tarnsition/translate...??
 //fix buttons
-
-//no task shit got lost
