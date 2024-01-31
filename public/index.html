@@ -208,44 +208,48 @@
           </div>
         </div>
       </div>
-      <button id="createBtn" onclick="openCreateTask()">
-        <i class="fa-solid fa-plus"></i>
-      </button>
-      <div class="summary">
-        <div class="summary__card">
-          <input id="to-do-tasks" type="checkbox" class="summary__checkbox" />
-          <label for="to-do-tasks" class="summary__label">To do</label>
-          <p class="summary__detail">2 Tasks Remaining</p>
-        </div>
 
-        <div class="summary__card">
-          <input id="done-tasks" type="checkbox" class="summary__checkbox" />
-          <label for="done-tasks" class="summary__label">Done</label>
-          <p class="summary__detail">1 Task Completed</p>
-        </div>
-      </div>
-
-      <div class="homepage__legend">
-        <span class="legend--category">Category</span>
-        <span class="legend--activity">Activity Type</span>
-      </div>
-      <div class="homepage__feedback new-task">
-        <i class="fa-regular fa-circle-check"></i>
-        <p>New Task Added</p>
-      </div>
-      <div class="homepage__feedback update-task">
-        <i class="far fa-edit"></i>
-        <p>Update Complete</p>
-      </div>
-      <div class="homepage__task">
-        <div class="task__container">
-          <div class="task__name">
-            <input type="checkbox" name="" id="mockID" />
-            <label for="mockID">Task Name</label>
+      <div class="task__section">
+        <div class="summary">
+          <div class="summary__card">
+            <input id="to-do-tasks" type="checkbox" class="summary__checkbox" />
+            <label for="to-do-tasks" class="summary__label">To do</label>
+            <p class="summary__detail">2 Tasks Remaining</p>
           </div>
-          <div class="task__labels">
-            <span class="legend--category">Category</span>
-            <span class="legend--activity">Activity Type</span>
+
+          <div class="summary__card">
+            <input id="done-tasks" type="checkbox" class="summary__checkbox" />
+            <label for="done-tasks" class="summary__label">Done</label>
+            <p class="summary__detail">1 Task Completed</p>
+          </div>
+
+          <button id="createBtn" onclick="openCreateTask()">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+
+        <div class="homepage__legend">
+          <span class="legend--category">Category</span>
+          <span class="legend--activity">Activity Type</span>
+        </div>
+        <div class="homepage__feedback new-task">
+          <i class="fa-regular fa-circle-check"></i>
+          <p>New Task Added</p>
+        </div>
+        <div class="homepage__feedback update-task">
+          <i class="far fa-edit"></i>
+          <p>Update Complete</p>
+        </div>
+        <div class="homepage__task">
+          <div class="task__container">
+            <div class="task__name">
+              <input type="checkbox" name="" id="mockID" />
+              <label for="mockID">Task Name</label>
+            </div>
+            <div class="task__labels">
+              <span class="legend--category">Category</span>
+              <span class="legend--activity">Activity Type</span>
+            </div>
           </div>
         </div>
       </div>
