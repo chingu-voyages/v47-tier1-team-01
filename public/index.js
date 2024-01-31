@@ -494,7 +494,7 @@ function showFeedback(mode) {
 
 
 //carrousel madness
-const dateToday = new Date('1995-12-04T03:24:00')
+const dateToday = new Date
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 const monthNamesReverse = ["December", "November", "October", "September", "August", "July", "June", "May", "April", "March", "February", "January"];
 let currentMonth = dateToday.getMonth() + 1
