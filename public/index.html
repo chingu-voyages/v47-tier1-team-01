@@ -37,20 +37,19 @@
       </div>
     </nav>
 
-    <div class="editTaskModal"></div>
-    <div class="createTaskModal">
+    <div class="formModal">
       <span id="closeBtn" onclick="closeModal()">
         <i class="fa-solid fa-times"></i>
       </span>
 
       <div class="create-task">
-        <form>
+        <form onsubmit="submitHandler(event)">
           <label for="task-name"
             >Task Name<input
               type="text"
               id="task-name"
               placeholder="Enter Task Name..."
-            /><span class="error">Error Message</span>
+            /><span class="hidden error">Error Message</span>
           </label>
           <label for="description"
             >Description
@@ -59,7 +58,7 @@
               type="text"
               placeholder="Enter Description..."
             />
-            <span class="error">Error Message</span>
+            <span class="hidden error">Error Message</span>
           </label>
           <label for="category"
             >Select category
@@ -68,9 +67,7 @@
                 id="category"
                 class="selection"
                 onchange="updateActivitySelection()"
-              >
-                <option disabled selected>Select Category</option>
-              </select>
+              ></select>
               <div class="select__icon-container">
                 <i class="fa-solid fa-plus"></i>
               </div>
@@ -79,9 +76,7 @@
           <label for="activity"
             >Select Activity Type
             <div class="select__container">
-              <select id="activity" class="selection">
-                <option disabled selected>Select Activity</option>
-              </select>
+              <select id="activity" class="selection"></select>
               <div class="select__icon-container">
                 <i class="fa-solid fa-plus"></i>
               </div>
@@ -91,7 +86,7 @@
           <label class="frequency" for="due-date">
             <div class="custom-radio-btn">
               <input
-                onclick="showDiv('date')"
+                onclick="toggleDueDateAndRepeat(event)"
                 type="radio"
                 name="recurrency"
                 id="due-date"
@@ -101,11 +96,12 @@
             Due Date</label
           >
           <input type="date" id="date" class="hidden" />
+          <span class="hidden error">Error Message</span>
 
           <label class="frequency" for="repeat">
             <div class="custom-radio-btn">
               <input
-                onclick="showDiv('repeat-options')"
+                onclick="toggleDueDateAndRepeat(event)"
                 type="radio"
                 name="recurrency"
                 id="repeat"
@@ -114,85 +110,33 @@
             </div>
             Repeat
           </label>
-          <div class="hidden" id="repeat-options">
-            <label for="Sunday" class="hidden__checkbox">
-              <input
-                type="checkbox"
-                id="Sunday"
-                class="hidden__main-checkbox"
-              />
-              <div class="hidden__custom-checkbox"></div>
-              Sunday
-            </label>
-            <label for="Monday" class="hidden__checkbox">
-              <input
-                type="checkbox"
-                id="Monday"
-                class="hidden__main-checkbox"
-              />
-              <div class="hidden__custom-checkbox"></div>
-              Monday
-            </label>
-            <label for="Tuesday" class="hidden__checkbox">
-              <input
-                type="checkbox"
-                id="Tuesday"
-                class="hidden__main-checkbox"
-              />
-              <div class="hidden__custom-checkbox"></div>
-              Tuesday
-            </label>
-            <label for="Wednesday" class="hidden__checkbox">
-              <input
-                type="checkbox"
-                id="Wednesday"
-                class="hidden__main-checkbox"
-              />
-              <div class="hidden__custom-checkbox"></div>
-              Wednesday
-            </label>
-            <label for="Thursday" class="hidden__checkbox">
-              <input
-                type="checkbox"
-                id="Thursday"
-                class="hidden__main-checkbox"
-              />
-              <div class="hidden__custom-checkbox"></div>
-              Thursday
-            </label>
-            <label for="Friday" class="hidden__checkbox">
-              <input
-                type="checkbox"
-                id="Friday"
-                class="hidden__main-checkbox"
-              />
-              <div class="hidden__custom-checkbox"></div>
-              Friday
-            </label>
-            <label for="Saturday" class="hidden__checkbox">
-              <input
-                type="checkbox"
-                id="Saturday"
-                class="hidden__main-checkbox"
-              />
-              <div class="hidden__custom-checkbox"></div>
-              Saturday
-            </label>
-          </div>
+
+          <div class="hidden" id="repeat-options"></div>
+          <span class="hidden error">Error Message</span>
           <div class="flex">
             <input type="checkbox" id="switch" />
             <label for="switch" id="toggle" class="block">Priority </label>
             <label for="switch">Priority</label>
           </div>
-          <!-- Save button -->
-          <button id="save-task" class="btn-save">Save</button>
+          <!-- Action buttons -->
+          <button id="submit-task" class="btn-submit" type="submit"></button>
+          <button
+            id="cancel-edit"
+            class="btn-cancel"
+            type="button"
+            onclick="closeModal()"
+          >
+            Cancel
+          </button>
+
+          <!-- hidden input to save taskId so we can access it in the update function -->
+          <input type="text" id="taskId" class="hidden" />
         </form>
       </div>
     </div>
     <!-- <div class="overlay"></div> -->
 
     <!-- Summary Components -->
-
     <div class="homepage flex">
       <div class="homepage__calendar">
         <h2>Month</h2>
@@ -208,7 +152,6 @@
           </div>
         </div>
       </div>
-
       <div class="task__section">
         <div class="summary">
           <div class="summary__card">
@@ -223,7 +166,7 @@
             <p class="summary__detail">1 Task Completed</p>
           </div>
 
-          <button id="createBtn" onclick="openCreateTask()">
+          <button id="createBtn" onclick="openForm('create')">
             <i class="fa-solid fa-plus"></i>
           </button>
         </div>

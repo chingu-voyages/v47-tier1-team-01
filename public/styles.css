@@ -92,7 +92,7 @@ input {
 .error {
   font-size: 12px;
   color: #ef4444;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 /* selection styles */
@@ -311,7 +311,7 @@ input {
 /* save button */
 .btn-update,
 .btn-cancel,
-.btn-save {
+.btn-submit {
   background: linear-gradient(to right, #34d3a2, #059669);
   font-size: 16px;
   font-weight: 600;
@@ -338,7 +338,7 @@ input {
 }
 
 /* modal styles */
-.createTaskModal {
+.formModal {
   display: none;
   background-color: #ecfdf8;
   flex-direction: column;
@@ -569,14 +569,14 @@ span#closeBtn:hover {
 /* buttons inside modals styles */
 .btn-update,
 .btn-cancel,
-.btn-save {
+.btn-submit {
   cursor: pointer;
   transition: transform 0.3s;
 }
 
 .btn-update:hover,
 .btn-cancel:hover,
-.btn-save:hover {
+.btn-submit:hover {
   transform: scale(1.01);
 }
 
@@ -673,3 +673,6 @@ span#closeBtn:hover {
     content: "Add Task";
   }
 }
+
+/* onclick="showDiv('date')"
+onclick="showDiv('repeat-options')" */
