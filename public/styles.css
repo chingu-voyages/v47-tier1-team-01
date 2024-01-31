@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 
 :root {
   --no-task: #6d6d6d;
@@ -13,7 +13,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   background-color: #ecfdf8;
   display: flex;
   flex-direction: column;
@@ -171,7 +171,7 @@ input {
 }
 
 .hidden__main-checkbox:checked + .hidden__custom-checkbox::after {
-  content: '\2713';
+  content: "\2713";
   font-size: 8px;
   font-weight: 1000;
   color: #f6f6f6;
@@ -227,7 +227,7 @@ input {
 }
 
 #toggle:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 2px;
   left: 2px;
@@ -254,12 +254,14 @@ input {
 /* Summary components */
 .summary {
   display: flex;
-
-  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
 }
 
 .summary__card {
-  border: 1px solid black;
+  border: 1px solid #3d3d3d;
+  width: 100%;
+  color: #3d3d3d;
   border-radius: 4px;
   padding: 10px;
 }
@@ -270,7 +272,7 @@ input {
 
 /* custom checkbox */
 .summary__label::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -279,7 +281,7 @@ input {
 }
 
 .summary__label::after {
-  content: '';
+  content: "";
   display: none;
   width: 5px;
   height: 10px;
@@ -390,9 +392,10 @@ span#closeBtn:hover {
 /* Homepage styles */
 .homepage {
   flex-direction: column;
-  margin-inline: 1rem;
+  margin: 0 auto;
   gap: 1rem;
-  max-width: 350px;
+  width: 100%;
+  padding: 8px 16px;
 }
 
 /* task card styles */
@@ -400,6 +403,14 @@ span#closeBtn:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 16px;
+}
+
+/* task section styles */
+
+.task__section {
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 
@@ -448,12 +459,14 @@ span#closeBtn:hover {
   opacity: 0;
   gap: 0;
   max-height: 0;
+  overflow: hidden;
   transition: max-height 0.5s, opacity 0.3s, gap 0.8s, margin 0.8s;
 }
 
 .task__container-mid.show {
   gap: 16px;
   opacity: 1;
+  overflow: visible;
   max-height: 400px;
   margin: 4px 0px;
 }
@@ -504,11 +517,11 @@ span#closeBtn:hover {
   display: flex;
   font-size: 12px;
   gap: 4px;
+  margin-top: 4px;
 }
 
 /* create task button styles */
 #createBtn {
-  border: 1px solid red;
   height: 44px;
   width: 44px;
   display: flex;
@@ -594,6 +607,70 @@ span#closeBtn:hover {
   }
   100% {
     top: 50px;
+  }
+}
+
+/* calendar temporary layout */
+.homepage__calendar {
+  height: 102px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calendar__carrousel {
+  display: flex;
+  gap: 8px;
+}
+
+/* media queries */
+
+/* desktop styles, applied to screen above 992px */
+@media (min-width: 992px) {
+  .homepage {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .homepage__calendar {
+    padding: 30px;
+    width: 502px;
+    height: 497px;
+    justify-content: center;
+    border: 1px solid #3d3d3d;
+    border-radius: 4px;
+  }
+
+  .task__section {
+    padding: 32px;
+    width: 564px;
+    height: 521px;
+    border: 1px solid #3d3d3d;
+    border-radius: 4px;
+  }
+
+  .summary__card {
+    width: 50%; /* modified this to 50% so we can apply width to the createBtn */
+  }
+
+  #createBtn {
+    position: static;
+    width: 126px;
+    justify-content: space-around;
+    bottom: auto;
+    right: auto;
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 10px;
+  }
+
+  #createBtn:hover {
+    transform: scale(1.03);
+  }
+
+  #createBtn::before {
+    content: "Add Task";
   }
 }
 
