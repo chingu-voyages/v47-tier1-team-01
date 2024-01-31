@@ -496,6 +496,7 @@ function showFeedback(mode) {
 //carrousel madness
 const dateToday = new Date('1995-12-04T03:24:00')
 const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const monthNamesReverse = ["December", "November", "October", "September", "August", "July", "June", "May", "April", "March", "February", "January"];
 let currentMonth = dateToday.getMonth() + 1
 let pastMonth = (dateToday.getMonth() + 12) % 12
 let totalDaysInCurrentMonth = new Date(dateToday.getFullYear(), currentMonth, 0).getDate()
@@ -576,44 +577,44 @@ container.removeChild(container.childNodes[4])
 container.removeChild(container.childNodes[0])
 container.removeChild(container.childNodes[1])
 
-// const nextDayBtn = document.querySelector('#button-right')
-// nextDayBtn.addEventListener('click', next)
+const nextDayBtn = document.querySelector('#button-right')
+nextDayBtn.addEventListener('click', next)
 
-// let n = 0
-// function next() {
-//   n++
-//   let nextDayCard = document.createElement('div')
-//   nextDayCard.classList.add('carrousel__date')
+let n = 0
+function next() {
+  n++
+  let nextDayCard = document.createElement('div')
+  nextDayCard.classList.add('carrousel__date')
 
-//   lastDay++
+  lastDay++
 
-//   if (lastDay > totalDaysInCurrentMonth) {
-//     lastDay = 1
-//     currentMonth++;
-//     totalDaysInCurrentMonth = new Date(dateToday.getFullYear(), currentMonth, 0).getDate()
-//   }
-//   if (lastDay === 3) {
-//     month.textContent = monthNames[currentMonth - 1]
-//   }
+  if (lastDay > totalDaysInCurrentMonth) {
+    lastDay = 1
+    currentMonth++;
+    totalDaysInCurrentMonth = new Date(dateToday.getFullYear(), currentMonth, 0).getDate()
+  }
+  if (lastDay === 3) {
+    month.textContent = monthNames[currentMonth - 1]
+  }
 
-//   console.log('lastDay', lastDay, 'total day', totalDaysInCurrentMonth, 'current month', currentMonth)
+  console.log('lastDay', lastDay, 'total day', totalDaysInCurrentMonth, 'current month', currentMonth)
 
-//   nextDayCard.innerHTML = `
-//   <div class="date__top">
-//   <p>${dayNames[(dateToday.getDay() + n + 2) % 7]}</p>
-//   </div>
-//   <div class="date__middle"></div>
-//   <div class="date__bottom">
-//   <p>${lastDay}</p>
-//   </div>
-//   `
-//   container.append(nextDayCard)
-//   container.removeChild(container.childNodes[0])
-//   container.childNodes[2].classList.add('date--active') //today
-//   container.childNodes[1].classList.remove('date--active') //yesterday
-//   container.childNodes[2].childNodes[3].classList.add('date__middle--active') //yesterday styling
-//   container.childNodes[1].childNodes[3].classList.remove('date__middle--active') //remove yesterday styling
-// }
+  nextDayCard.innerHTML = `
+  <div class="date__top">
+  <p>${dayNames[(dateToday.getDay() + n + 2) % 7]}</p>
+  </div>
+  <div class="date__middle"></div>
+  <div class="date__bottom">
+  <p>${lastDay}</p>
+  </div>
+  `
+  container.append(nextDayCard)
+  container.removeChild(container.childNodes[0])
+  container.childNodes[2].classList.add('date--active') //today
+  container.childNodes[1].classList.remove('date--active') //yesterday
+  container.childNodes[2].childNodes[3].classList.add('date__middle--active') //yesterday styling
+  container.childNodes[1].childNodes[3].classList.remove('date__middle--active') //remove yesterday styling
+}
 
 
 const prevDayBtn = document.querySelector('#button-left')
@@ -621,6 +622,17 @@ prevDayBtn.addEventListener('click', previous)
 
 let m = 0
 function previous() {
+  console.log('totalDaysInPreviousMonth:', totalDaysInPreviousMonth, 'pastMonth:', pastMonth)
+  //here the work begins
+  if (firstDay < 2) {
+    pastMonth--
+    firstDay = totalDaysInPreviousMonth + 1
+    totalDaysInPreviousMonth = new Date(dateToday.getFullYear(), pastMonth, 0).getDate()
+  }
+  if (firstDay === totalDaysInPreviousMonth) {
+    month.textContent = monthNames[pastMonth]
+  }
+
   m++
   firstDay--
   let prevDayCard = document.createElement('div')
@@ -638,18 +650,7 @@ function previous() {
   container.prepend(prevDayCard)
 
 
-  //here the work begins
-  if (lastDay > totalDaysInCurrentMonth) {
-    lastDay = 1
-    currentMonth++;
-    totalDaysInCurrentMonth = new Date(dateToday.getFullYear(), currentMonth, 0).getDate()
-  }
-  if (lastDay === 3) {
-    month.textContent = monthNames[currentMonth - 1]
-  }
-
   container.removeChild(container.childNodes[5])
-
   container.childNodes[2].classList.add('date--active') //today
   container.childNodes[3].classList.remove('date--active') //yesterday
   container.childNodes[2].childNodes[3].classList.add('date__middle--active') //yesterday styling
