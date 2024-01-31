@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 :root {
   --no-task: #6d6d6d;
@@ -13,7 +13,7 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: #ecfdf8;
   display: flex;
   flex-direction: column;
@@ -92,7 +92,7 @@ input {
 .error {
   font-size: 12px;
   color: #ef4444;
-  visibility: hidden;
+  /* visibility: hidden; */
 }
 
 /* selection styles */
@@ -171,7 +171,7 @@ input {
 }
 
 .hidden__main-checkbox:checked + .hidden__custom-checkbox::after {
-  content: "\2713";
+  content: '\2713';
   font-size: 8px;
   font-weight: 1000;
   color: #f6f6f6;
@@ -227,7 +227,7 @@ input {
 }
 
 #toggle:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 2px;
   left: 2px;
@@ -270,7 +270,7 @@ input {
 
 /* custom checkbox */
 .summary__label::before {
-  content: "";
+  content: '';
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -279,7 +279,7 @@ input {
 }
 
 .summary__label::after {
-  content: "";
+  content: '';
   display: none;
   width: 5px;
   height: 10px;
@@ -309,7 +309,7 @@ input {
 /* save button */
 .btn-update,
 .btn-cancel,
-.btn-save {
+.btn-submit {
   background: linear-gradient(to right, #34d3a2, #059669);
   font-size: 16px;
   font-weight: 600;
@@ -336,7 +336,7 @@ input {
 }
 
 /* modal styles */
-.createTaskModal {
+.formModal {
   display: none;
   background-color: #ecfdf8;
   flex-direction: column;
@@ -556,14 +556,14 @@ span#closeBtn:hover {
 /* buttons inside modals styles */
 .btn-update,
 .btn-cancel,
-.btn-save {
+.btn-submit {
   cursor: pointer;
   transition: transform 0.3s;
 }
 
 .btn-update:hover,
 .btn-cancel:hover,
-.btn-save:hover {
+.btn-submit:hover {
   transform: scale(1.01);
 }
 
@@ -596,3 +596,6 @@ span#closeBtn:hover {
     top: 50px;
   }
 }
+
+/* onclick="showDiv('date')"
+onclick="showDiv('repeat-options')" */
