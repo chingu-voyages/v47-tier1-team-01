@@ -399,13 +399,14 @@ span#closeBtn:hover {
 .homepage__task {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 16px;
 }
 
 .task__container {
   display: flex;
   flex-direction: column;
-  width: 288px;
+  width: 100%;
   gap: 0;
   overflow: hidden;
   border: 1px solid #6d6d6d;
@@ -571,12 +572,27 @@ span#closeBtn:hover {
 .homepage__feedback {
   display: none;
   gap: 4px;
-  width: 288px;
+  width: 300px;
+  align-self: center;
   border-radius: 4px;
   justify-content: center;
   align-items: center;
   font-weight: 600;
   background-color: #d1faed;
   padding: 16px 32px;
+  position: fixed;
+  top: 50px;
+  opacity: 1;
   color: #10b985;
+  z-index: 1000;
+  animation: popout 0.8s ease-out;
+}
+
+@keyframes popout {
+  0% {
+    top: -100px;
+  }
+  100% {
+    top: 50px;
+  }
 }
