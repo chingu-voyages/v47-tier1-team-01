@@ -92,9 +92,9 @@ function submitHandler(event) {
     taskObj.deadline = getRepeatDays();
   }
 
-  if (submitBtn.textContent === "Save") {
+  if (submitBtn.textContent === "Save Task") {
     saveTask(taskObj, existingTasks);
-  } else if (submitBtn.textContent === "Update") {
+  } else if (submitBtn.textContent === "Update Task") {
     updateTask(taskObj, existingTasks);
   }
 
