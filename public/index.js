@@ -64,7 +64,7 @@ const repeatOptionsErrorEl = repeatOptionsEl.nextElementSibling;
 const priorityEl = document.querySelector("#switch");
 
 const submitBtn = document.querySelector("#submit-task");
-const cancelBtn = document.querySelector("#cancel-edit");
+const cancelBtn = document.querySelector("#cancel-btn");
 const taskIdInputEl = document.querySelector("#taskId");
 
 function submitHandler(event) {
@@ -187,8 +187,7 @@ function openForm(mode, taskId) {
     addCategories();
     activityEl.innerHTML = "<option disabled selected>Select Activity</option>";
     repeatOptionsEl.innerHTML = defaultRepeatOptionsContent;
-    submitBtn.textContent = "Save";
-    cancelBtn.style.display = "none";
+    submitBtn.textContent = "Save Task";
   }
 
   if (mode === "edit") {
@@ -252,7 +251,7 @@ function openForm(mode, taskId) {
     //Render priority
     priorityEl.checked = taskObj.priority;
 
-    submitBtn.textContent = "Update";
+    submitBtn.textContent = "Update Task";
     cancelBtn.style.display = "block";
   }
 }

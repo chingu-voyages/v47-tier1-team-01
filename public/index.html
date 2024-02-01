@@ -38,9 +38,9 @@
     </nav>
 
     <div class="formModal">
-      <span id="closeBtn" onclick="closeModal()">
+      <!-- <span id="closeBtn" onclick="closeModal()">
         <i class="fa-solid fa-times"></i>
-      </span>
+      </span> -->
 
       <div class="create-task">
         <form onsubmit="submitHandler(event)">
@@ -119,15 +119,18 @@
             <label for="switch">Priority</label>
           </div>
           <!-- Action buttons -->
-          <button id="submit-task" class="btn-submit" type="submit"></button>
-          <button
-            id="cancel-edit"
-            class="btn-cancel"
-            type="button"
-            onclick="closeModal()"
-          >
-            Cancel
-          </button>
+
+          <div class="create-task__buttons">
+            <button
+              id="cancel-btn"
+              class="btn-cancel"
+              type="button"
+              onclick="closeModal()"
+            >
+              Cancel
+            </button>
+            <button id="submit-task" class="btn-submit" type="submit"></button>
+          </div>
 
           <!-- hidden input to save taskId so we can access it in the update function -->
           <input type="text" id="taskId" class="hidden" />
@@ -139,17 +142,35 @@
     <!-- Summary Components -->
     <div class="homepage flex">
       <div class="homepage__calendar">
-        <h2>Month</h2>
-        <div class="calendar__carrousel">
-          <div class="calendar__date">
-            <p>placeholder</p>
+        <h2 id="month">Month</h2>
+        <div class="calendar__carousel">
+          <button id="prevBtn"><i class="fa-solid fa-angle-left"></i></button>
+          <div class="carousel__card">
+            <p class="day">Mon</p>
+            <div class="bar"></div>
+            <p class="dayNo">15</p>
           </div>
-          <div class="calendar__date">
-            <p>placeholder</p>
+          <div class="carousel__card">
+            <p class="day">Tue</p>
+            <div class="bar"></div>
+            <p class="dayNo">16</p>
           </div>
-          <div class="calendar__date">
-            <p>placeholder</p>
+          <div class="carousel__card today">
+            <p class="day">Wed</p>
+            <div class="bar"></div>
+            <p class="dayNo">17</p>
           </div>
+          <div class="carousel__card">
+            <p class="day">Thu</p>
+            <div class="bar"></div>
+            <p class="dayNo">18</p>
+          </div>
+          <div class="carousel__card">
+            <p class="day">Fri</p>
+            <div class="bar"></div>
+            <p class="dayNo">19</p>
+          </div>
+          <button id="nextBtn"><i class="fa-solid fa-angle-right"></i></button>
         </div>
       </div>
       <div class="task__section">
