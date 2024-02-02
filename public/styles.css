@@ -327,11 +327,14 @@ input {
 /* modal styles */
 .formModal {
   display: none;
-  margin-top: 12px;
+  height: 100%;
+  width: 100%;
+  top: 35px;
+  position: absolute;
   background-color: #ecfdf8;
   flex-direction: column;
   gap: 4px;
-  padding: 8px;
+  padding: 16px 8px;
   z-index: 3;
 }
 
