@@ -327,11 +327,12 @@ input {
 /* modal styles */
 .formModal {
   display: none;
+  margin-top: 12px;
   background-color: #ecfdf8;
   flex-direction: column;
   gap: 4px;
   padding: 8px;
-  z-index: 2;
+  z-index: 3;
 }
 
 span#closeBtn {
@@ -343,17 +344,6 @@ span#closeBtn:hover {
   transform: scale(1.1);
   cursor: pointer;
 }
-
-/* .overlay {
-  height: 100%;
-  width: 100%;
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(61, 61, 61, 0.8);
-  z-index: 1;
-} */
 
 .legend--category,
 .legend--activity,
@@ -378,6 +368,7 @@ span#closeBtn:hover {
 
 /* Homepage styles */
 .homepage {
+  height: 100%;
   flex-direction: column;
   margin: 0 auto;
   gap: 1rem;
@@ -524,7 +515,7 @@ span#closeBtn:hover {
   position: fixed;
   bottom: 25px;
   right: 25px;
-  z-index: 1000;
+  z-index: 1;
 }
 
 #createBtn:hover {
@@ -710,6 +701,7 @@ span#closeBtn:hover {
     height: 521px;
     border: 1px solid #3d3d3d;
     border-radius: 4px;
+    overflow: auto;
   }
 
   .summary__card {
@@ -733,6 +725,32 @@ span#closeBtn:hover {
 
   #createBtn::before {
     content: "Add Task";
+  }
+
+  /* desktop modals */
+  .formModal {
+    width: fit-content;
+    height: fit-content;
+    border-radius: 4px;
+    padding: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    bottom: auto;
+    transform: translate(-50%, -50%);
+    overflow: auto;
+    margin-bottom: 40px;
+  }
+
+  .overlay {
+    height: 100%;
+    width: 100%;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(61, 61, 61, 0.8);
+    z-index: 2;
   }
 }
 

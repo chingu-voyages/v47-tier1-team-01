@@ -174,13 +174,13 @@ function closeModal() {
   repeatOptionsErrorEl.classList.add("hidden");
   formModalEl.style.display = "none";
   document.querySelector(".homepage").style.display = "flex";
-  //   document.querySelector(".overlay").style.display = "none";
+  document.querySelector(".overlay").style.display = "none";
 }
 
 //Dynamically render the form modal based on mode
 function openForm(mode, taskId) {
   formModalEl.style.display = "flex";
-  document.querySelector(".homepage").style.display = "none";
+  document.querySelector(".overlay").style.display = "block";
 
   if (mode === "create") {
     categoryEl.innerHTML = "<option disabled selected>Select Category</option>";
