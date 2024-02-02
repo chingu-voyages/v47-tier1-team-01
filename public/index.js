@@ -29,6 +29,22 @@ const daysOfTheWeekArr = [
   "Friday",
   "Saturday",
 ];
+const daysOfTheWeekShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+const monthsArr = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 let defaultRepeatOptionsContent = "";
 daysOfTheWeekArr.forEach((day) => {
@@ -450,5 +466,51 @@ function showFeedback(mode) {
     }, 3000);
   }
 }
+
+//calendar carousel START  -----------------------------------
+
+let currentDayInMilSecs = new Date().getTime();
+//getTime() returns the number of milliseconds since January 1, 1970
+const carouselMonthEl = document.querySelector(".calendar__month");
+const carouselCardsContainerEl = document.querySelector(
+  ".carousel__cards___container"
+);
+
+function formatDate(dayInMilSecs, i) {
+  const weekday = daysOfTheWeekShort[dayInMilSecs.getDay()];
+  const date = dayInMilSecs.getDate();
+
+  return `<div class="carousel__card ${i === 2 ? "center-day" : ""}">
+  <p class="day">${weekday}</p>
+  <div class="bar"></div>
+  <p class="date">${date}</p>
+</div>`;
+}
+
+function addDays(startDay, numDays = 5) {
+  let itemsContainerContent = "";
+  // Start from two days before the current day
+  const startDate = new Date(startDay - 2 * 24 * 60 * 60 * 1000);
+
+  for (let i = 0; i < numDays; i++) {
+    const itemDate = new Date(startDate.getTime() + i * 24 * 60 * 60 * 1000);
+    itemsContainerContent += formatDate(itemDate, i);
+  }
+  carouselCardsContainerEl.innerHTML = itemsContainerContent;
+  carouselMonthEl.textContent = monthsArr[new Date(startDay).getMonth()];
+}
+
+function forwardHandler() {
+  currentDayInMilSecs += 24 * 60 * 60 * 1000;
+  addDays(currentDayInMilSecs);
+}
+
+function backwardHandler() {
+  currentDayInMilSecs -= 24 * 60 * 60 * 1000;
+  addDays(currentDayInMilSecs);
+}
+
+addDays(currentDayInMilSecs);
+//calendar carousel END -----------------------------------
 
 populateTasks();
