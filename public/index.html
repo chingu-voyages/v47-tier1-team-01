@@ -38,9 +38,9 @@
     </nav>
 
     <div class="formModal">
-      <span id="closeBtn" onclick="closeModal()">
+      <!-- <span id="closeBtn" onclick="closeModal()">
         <i class="fa-solid fa-times"></i>
-      </span>
+      </span> -->
 
       <div class="create-task">
         <form onsubmit="submitHandler(event)">
@@ -119,15 +119,18 @@
             <label for="switch">Priority</label>
           </div>
           <!-- Action buttons -->
-          <button id="submit-task" class="btn-submit" type="submit"></button>
-          <button
-            id="cancel-edit"
-            class="btn-cancel"
-            type="button"
-            onclick="closeModal()"
-          >
-            Cancel
-          </button>
+
+          <div class="create-task__buttons">
+            <button
+              id="cancel-btn"
+              class="btn-cancel"
+              type="button"
+              onclick="closeModal()"
+            >
+              Cancel
+            </button>
+            <button id="submit-task" class="btn-submit" type="submit"></button>
+          </div>
 
           <!-- hidden input to save taskId so we can access it in the update function -->
           <input type="text" id="taskId" class="hidden" />

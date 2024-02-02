@@ -62,26 +62,26 @@ daysOfTheWeekArr.forEach((day) => {
 })
 
 //Add new task START
-const formEl = document.querySelector('form')
-const formModalEl = document.querySelector('.formModal')
-const taskNameEl = document.querySelector('#task-name')
-const taskNameErrorEl = taskNameEl.nextElementSibling
-const descriptionEl = document.querySelector('#description')
-const taskDescriptionErrorEl = descriptionEl.nextElementSibling
+const formEl = document.querySelector("form");
+const formModalEl = document.querySelector(".formModal");
+const taskNameEl = document.querySelector("#task-name");
+const taskNameErrorEl = taskNameEl.nextElementSibling;
+const descriptionEl = document.querySelector("#description");
+const taskDescriptionErrorEl = descriptionEl.nextElementSibling;
 
-const categoryEl = document.querySelector('#category')
-const activityEl = document.querySelector('#activity')
-const dueDateEl = document.querySelector('#due-date')
-const dateEl = document.querySelector('#date')
-const repeatEl = document.querySelector('#repeat')
-const repeatOptionsEl = document.querySelector('#repeat-options')
-const dueDateErrorEl = dateEl.nextElementSibling
-const repeatOptionsErrorEl = repeatOptionsEl.nextElementSibling
-const priorityEl = document.querySelector('#switch')
+const categoryEl = document.querySelector("#category");
+const activityEl = document.querySelector("#activity");
+const dueDateEl = document.querySelector("#due-date");
+const dateEl = document.querySelector("#date");
+const repeatEl = document.querySelector("#repeat");
+const repeatOptionsEl = document.querySelector("#repeat-options");
+const dueDateErrorEl = dateEl.nextElementSibling;
+const repeatOptionsErrorEl = repeatOptionsEl.nextElementSibling;
+const priorityEl = document.querySelector("#switch");
 
-const submitBtn = document.querySelector('#submit-task')
-const cancelBtn = document.querySelector('#cancel-edit')
-const taskIdInputEl = document.querySelector('#taskId')
+const submitBtn = document.querySelector("#submit-task");
+const cancelBtn = document.querySelector("#cancel-btn");
+const taskIdInputEl = document.querySelector("#taskId");
 
 function submitHandler(event) {
   event.preventDefault()
@@ -108,10 +108,11 @@ function submitHandler(event) {
     taskObj.deadline = getRepeatDays()
   }
 
-  if (submitBtn.textContent === 'Save') {
-    saveTask(taskObj, existingTasks)
-  } else if (submitBtn.textContent === 'Update') {
-    updateTask(taskObj, existingTasks)
+
+  if (submitBtn.textContent === "Save Task") {
+    saveTask(taskObj, existingTasks);
+  } else if (submitBtn.textContent === "Update Task") {
+    updateTask(taskObj, existingTasks);
   }
 
   localStorage.setItem('tasks', JSON.stringify(existingTasks))
@@ -195,16 +196,15 @@ function closeModal() {
 
 //Dynamically render the form modal based on mode
 function openForm(mode, taskId) {
-  formModalEl.style.display = 'flex'
-  document.querySelector('.homepage').style.display = 'none'
+  formModalEl.style.display = "flex";
+  document.querySelector(".homepage").style.display = "none";
 
-  if (mode === 'create') {
-    categoryEl.innerHTML = '<option disabled selected>Select Category</option>'
-    addCategories()
-    activityEl.innerHTML = '<option disabled selected>Select Activity</option>'
-    repeatOptionsEl.innerHTML = defaultRepeatOptionsContent
-    submitBtn.textContent = 'Save'
-    cancelBtn.style.display = 'none'
+  if (mode === "create") {
+    categoryEl.innerHTML = "<option disabled selected>Select Category</option>";
+    addCategories();
+    activityEl.innerHTML = "<option disabled selected>Select Activity</option>";
+    repeatOptionsEl.innerHTML = defaultRepeatOptionsContent;
+    submitBtn.textContent = "Save Task";
   }
 
   if (mode === 'edit') {
@@ -267,9 +267,8 @@ function openForm(mode, taskId) {
 
     //Render priority
     priorityEl.checked = taskObj.priority
-
-    submitBtn.textContent = 'Update'
-    cancelBtn.style.display = 'block'
+    submitBtn.textContent = "Update Task";
+    cancelBtn.style.display = "block";
   }
 }
 
