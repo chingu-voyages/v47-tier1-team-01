@@ -136,7 +136,7 @@
     <div class="overlay"></div>
 
     <div class="homepage flex">
-      <div class="homepage__calendar">
+      <div class="homepage__calendar-mobile">
         <h2 class="calendar__month">Month</h2>
 
         <div class="calendar__carousel">
@@ -173,6 +173,34 @@
           <button id="nextBtn" onclick="forwardHandler()">
             <i class="fa-solid fa-angle-right"></i>
           </button>
+        </div>
+      </div>
+      <div class="homepage__calendar-desktop">
+        <div class="calendar-desktop__header">
+          <div class="header__content">
+            <p id="desktopMonth">May</p>
+            <p class="desktopYear">2023</p>
+          </div>
+          <div class="header__buttons">
+            <button id="prevMonth">
+              <i class="fa-solid fa-angle-left"></i>
+            </button>
+            <button id="nextMonth">
+              <i class="fa-solid fa-angle-right"></i>
+            </button>
+          </div>
+        </div>
+        <div class="calendar-desktop__body">
+          <div class="body__days">
+            <p class="body-day">Mo</p>
+            <p class="body-day">Tu</p>
+            <p class="body-day">We</p>
+            <p class="body-day">Th</p>
+            <p class="body-day">Fr</p>
+            <p class="body-day">Sa</p>
+            <p class="body-day">Su</p>
+          </div>
+          <div class="body__grid"></div>
         </div>
       </div>
 
