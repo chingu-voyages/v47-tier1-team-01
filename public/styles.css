@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 :root {
   --no-task: #6d6d6d;
@@ -13,7 +13,7 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: #ecfdf8;
   display: flex;
   flex-direction: column;
@@ -171,7 +171,7 @@ input {
 }
 
 .hidden__main-checkbox:checked + .hidden__custom-checkbox::after {
-  content: "\2713";
+  content: '\2713';
   font-size: 8px;
   font-weight: 1000;
   color: #f6f6f6;
@@ -227,7 +227,7 @@ input {
 }
 
 #toggle:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 2px;
   left: 2px;
@@ -272,7 +272,7 @@ input {
 
 /* custom checkbox */
 .summary__label::before {
-  content: "";
+  content: '';
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -281,7 +281,7 @@ input {
 }
 
 .summary__label::after {
-  content: "";
+  content: '';
   display: none;
   width: 5px;
   height: 10px;
@@ -732,9 +732,76 @@ span#closeBtn:hover {
   }
 
   #createBtn::before {
-    content: "Add Task";
+    content: 'Add Task';
   }
 }
 
-/* onclick="showDiv('date')"
-onclick="showDiv('repeat-options')" */
+/* calendar carousel styles */
+.homepage__calendar {
+  height: 102px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.homepage__calendar h2 {
+  color: #454545;
+  font-size: 24px;
+}
+
+.calendar__carousel {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.carousel__cards___container {
+  display: flex;
+  gap: 8px;
+}
+
+.carousel__card {
+  border: 1px solid #6d6d6d;
+  border-radius: 4px;
+  color: #6d6d6d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 64px;
+  gap: 10px;
+  padding: 8px;
+}
+
+.day,
+.date {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.carousel__card .bar {
+  border: 1px solid;
+  border-radius: 8px;
+  width: 24px;
+}
+
+.calendar__carousel button {
+  border: none;
+  align-self: center;
+  font-size: 14px;
+  background-color: #10b985;
+  color: #ecfdf8;
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: transform 0.1s;
+}
+
+.calendar__carousel button:active {
+  transform: scale(0.8);
+}
+
+.center-day {
+  color: #f6f6f6;
+  background-image: linear-gradient(to right, #34d3a2, #059669);
+  border: none;
+}
