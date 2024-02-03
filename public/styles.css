@@ -513,8 +513,8 @@ span#closeBtn:hover {
 
 /* create task button styles */
 #createBtn {
-  height: 44px;
-  width: 44px;
+  height: 60px;
+  width: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -526,8 +526,8 @@ span#closeBtn:hover {
   padding: 14px;
   transition: transform 0.2s;
   position: fixed;
-  bottom: 25px;
-  right: 25px;
+  bottom: 60px;
+  right: 50px;
   z-index: 1;
 }
 
@@ -733,6 +733,7 @@ span#closeBtn:hover {
   #createBtn {
     position: static;
     width: 126px;
+    height: auto;
     justify-content: space-around;
     bottom: auto;
     right: auto;
