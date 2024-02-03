@@ -155,9 +155,9 @@ function deleteTask(id) {
 
 function getRepeatDays() {
   let daysArray = []
-  ;[...repeatOptionsEl.children].forEach((day) => {
-    if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id)
-  })
+    ;[...repeatOptionsEl.children].forEach((day) => {
+      if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id)
+    })
   return daysArray
 }
 
@@ -218,9 +218,8 @@ function openForm(mode, taskId) {
     let categoryOptionsContent = ''
     categoriesArr.forEach((category) => {
       categoryOptionsContent += `
-        <option ${category === 'Select Category' ? 'disabled' : ''} ${
-        category === taskObj.category ? 'selected' : ''
-      }>${category}</option>`
+        <option ${category === 'Select Category' ? 'disabled' : ''} ${category === taskObj.category ? 'selected' : ''
+        }>${category}</option>`
     })
     categoryEl.innerHTML = categoryOptionsContent
 
@@ -232,9 +231,8 @@ function openForm(mode, taskId) {
         .activityTypes.map((activityType) => activityType.activityName)
 
       availableActivityOptions.forEach((activity) => {
-        activityOptionsContent += `<option ${
-          activity === taskObj.activity ? 'selected' : ''
-        }>${activity}</option>`
+        activityOptionsContent += `<option ${activity === taskObj.activity ? 'selected' : ''
+          }>${activity}</option>`
       })
     }
     activityEl.innerHTML = activityOptionsContent
@@ -331,28 +329,23 @@ function createTaskElement(task) {
         ${task.description || task.taskDescription}
       </div>
       <div class="task__settings">
-        <button id="edit-task-btn" onclick="openForm('edit','${
-          task.id
-        }')">Edit Task <i class="fas fa-edit"></i></button>
-        <button id="del-task-btn" onclick="deleteTask('${
-          task.id
-        }')">Delete Task <i class="fa-solid fa-trash"></i></button>
+        <button id="edit-task-btn" onclick="openForm('edit','${task.id
+    }')">Edit Task <i class="fas fa-edit"></i></button>
+        <button id="del-task-btn" onclick="deleteTask('${task.id
+    }')">Delete Task <i class="fa-solid fa-trash"></i></button>
       </div>
     </div>
     <div class="task__container-bot">
-        ${
-          task.category === 'Select Category'
-            ? ''
-            : ` <span class="legend--category">${task.category}</span>`
-        }
-        ${
-          task.activity === 'Select Activity'
-            ? ''
-            : `<span class="legend--activity">${task.activity}</span>`
-        }
-        ${
-          task.priority ? `<span class="legend--priority">Important</span>` : ''
-        }
+        ${task.category === 'Select Category'
+      ? ''
+      : ` <span class="legend--category">${task.category}</span>`
+    }
+        ${task.activity === 'Select Activity'
+      ? ''
+      : `<span class="legend--activity">${task.activity}</span>`
+    }
+        ${task.priority ? `<span class="legend--priority">Important</span>` : ''
+    }
     </div>
   </div>
   `
@@ -503,6 +496,8 @@ function addDays(startDay, numDays = 5) {
 function forwardHandler() {
   currentDayInMilSecs += 24 * 60 * 60 * 1000
   addDays(currentDayInMilSecs)
+  console.log(new Date(currentDayInMilSecs))
+
 }
 
 function backwardHandler() {
@@ -514,3 +509,8 @@ addDays(currentDayInMilSecs)
 //calendar carousel END -----------------------------------
 
 populateTasks()
+
+
+console.log(new Date(currentDayInMilSecs).getDate())
+console.log(JSON.parse(localStorage.tasks))
+console.log(new Date(+(JSON.parse(localStorage.tasks)[1].id)))
