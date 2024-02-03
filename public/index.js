@@ -353,7 +353,7 @@ function createTaskElement(task) {
   return div
 }
 
-function populateTasks() {
+function populateTasks(today) {
   const tasks = getTasksFromLocalStorage()
   const taskContainer = document.querySelector('.homepage__task')
 
@@ -361,17 +361,16 @@ function populateTasks() {
   while (taskContainer.firstChild) {
     taskContainer.removeChild(taskContainer.firstChild)
   }
-
-  if (tasks.length === 0) {
-    const noTasksPara = document.createElement('p')
-    noTasksPara.textContent = 'No tasks at this time'
-    taskContainer.appendChild(noTasksPara)
-  } else {
-    tasks.forEach((task) => {
+  tasks.forEach((task) => {
+    if (new Date(task.deadline).toDateString().slice(4, 15) === new Date(today).toDateString().slice(4, 15)) {
       const taskElement = createTaskElement(task)
       taskContainer.innerHTML += taskElement
-    })
-  }
+    } else {
+      const noTasksPara = document.createElement('p')
+      noTasksPara.textContent = 'No tasks at this time'
+      taskContainer.appendChild(noTasksPara)
+    }
+  })
 }
 
 //dinamically display tasks END
@@ -496,21 +495,19 @@ function addDays(startDay, numDays = 5) {
 function forwardHandler() {
   currentDayInMilSecs += 24 * 60 * 60 * 1000
   addDays(currentDayInMilSecs)
-  console.log(new Date(currentDayInMilSecs))
+  populateTasks(currentDayInMilSecs)
 
 }
 
 function backwardHandler() {
   currentDayInMilSecs -= 24 * 60 * 60 * 1000
   addDays(currentDayInMilSecs)
+  populateTasks(currentDayInMilSecs)
 }
 
 addDays(currentDayInMilSecs)
 //calendar carousel END -----------------------------------
 
-populateTasks()
+populateTasks(currentDayInMilSecs)
 
 
-console.log(new Date(currentDayInMilSecs).getDate())
-console.log(JSON.parse(localStorage.tasks))
-console.log(new Date(+(JSON.parse(localStorage.tasks)[1].id)))
