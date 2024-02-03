@@ -156,8 +156,8 @@ function getRepeatDays() {
 
   let daysArray = [];
   [...repeatOptionsEl.children].forEach((day) => {
-      if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id)
-    })
+    if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id)
+  })
   return daysArray
 
 }
@@ -220,9 +220,8 @@ function openForm(mode, taskId) {
     categoriesArr.forEach((category) => {
       categoryOptionsContent += `
 
-        <option ${category === "Select Category" ? "disabled" : ""} ${
-        category === taskObj.category ? "selected" : ""
-      }>${category}</option>`;
+        <option ${category === "Select Category" ? "disabled" : ""} ${category === taskObj.category ? "selected" : ""
+        }>${category}</option>`;
     });
     categoryEl.innerHTML = categoryOptionsContent;
 
@@ -237,7 +236,7 @@ function openForm(mode, taskId) {
       availableActivityOptions.forEach((activity) => {
 
         activityOptionsContent += `<option ${activity === taskObj.activity ? "selected" : ""
-        }>${activity}</option>`;
+          }>${activity}</option>`;
       });
 
     }
@@ -366,22 +365,24 @@ function createTaskElement(task) {
 function populateTasks(today) {
   const tasks = getTasksFromLocalStorage()
   const taskContainer = document.querySelector('.homepage__task')
-=======
+
 
 
   //makes sure tasks are not duplicated since this function is called both on page load and when SAVE button is clicked
   while (taskContainer.firstChild) {
     taskContainer.removeChild(taskContainer.firstChild);
   }
+  if (tasks.length === 0) {
+    const noTasksPara = document.createElement('p')
+    noTasksPara.textContent = 'No tasks at this time'
+    taskContainer.appendChild(noTasksPara)
+  }
+  console.log(taskContainer.childNodes)
 
   tasks.forEach((task) => {
     if (new Date(task.deadline).toDateString().slice(4, 15) === new Date(today).toDateString().slice(4, 15)) {
       const taskElement = createTaskElement(task)
       taskContainer.innerHTML += taskElement
-    } else {
-      const noTasksPara = document.createElement('p')
-      noTasksPara.textContent = 'No tasks at this time'
-      taskContainer.appendChild(noTasksPara)
     }
   })
 
