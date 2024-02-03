@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
 :root {
   --no-task: #6d6d6d;
@@ -13,7 +13,7 @@
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: #ecfdf8;
   display: flex;
   flex-direction: column;
@@ -171,7 +171,7 @@ input {
 }
 
 .hidden__main-checkbox:checked + .hidden__custom-checkbox::after {
-  content: "\2713";
+  content: '\2713';
   font-size: 8px;
   font-weight: 1000;
   color: #f6f6f6;
@@ -227,7 +227,7 @@ input {
 }
 
 #toggle:after {
-  content: "";
+  content: '';
   position: absolute;
   top: 2px;
   left: 2px;
@@ -272,7 +272,7 @@ input {
 
 /* custom checkbox */
 .summary__label::before {
-  content: "";
+  content: '';
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -281,7 +281,7 @@ input {
 }
 
 .summary__label::after {
-  content: "";
+  content: '';
   display: none;
   width: 5px;
   height: 10px;
@@ -732,9 +732,9 @@ span#closeBtn:hover {
   }
 
   #createBtn::before {
-    content: "Add Task";
+    content: 'Add Task';
   }
-
+  
   /* desktop calendar */
   .homepage__calendar-desktop {
     display: grid;

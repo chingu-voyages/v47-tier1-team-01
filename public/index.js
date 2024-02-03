@@ -29,7 +29,6 @@ const daysOfTheWeekArr = [
   "Friday",
   "Saturday",
 ];
-
 const daysOfTheWeekShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const monthsArr = [
@@ -469,7 +468,6 @@ function showFeedback(mode) {
 }
 
 //calendar carousel START  -----------------------------------
-
 let currentDayInMilSecs = new Date().getTime();
 //getTime() returns the number of milliseconds since January 1, 1970
 const carouselMonthEl = document.querySelector(".calendar__month");
