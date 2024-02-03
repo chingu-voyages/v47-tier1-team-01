@@ -29,6 +29,7 @@ const daysOfTheWeekArr = [
   "Friday",
   "Saturday",
 ];
+
 const daysOfTheWeekShort = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 const monthsArr = [
@@ -512,5 +513,86 @@ function backwardHandler() {
 
 addDays(currentDayInMilSecs);
 //calendar carousel END -----------------------------------
+
+// calendar desktop
+let year = new Date().getFullYear();
+let month = new Date().getMonth();
+const prevMonthBtn = document.querySelector("#prevMonth");
+const nextMonthBtn = document.querySelector("#nextMonth");
+
+function renderDesktopCalendar() {
+  const today = new Date().getDate();
+  let days = "";
+  const monthEl = document.querySelector("#desktopMonth");
+  const yearEl = document.querySelector("#desktopYear");
+  // containers elements
+  const dayContainerEl = document.querySelector(".body__days");
+  const gridDaysContainerEl = document.querySelector(".body__grid");
+  // current month
+  const currentFirstDay = new Date(year, month, 1);
+  const currentLastDay = new Date(year, month + 1, 0);
+  const currentLastDayIndex = currentLastDay.getDay();
+  const currentLastDayDate = currentLastDay.getDate();
+  // previous month
+  const prevLastDay = new Date(year, month, 0);
+  const prevLastDayDate = prevLastDay.getDate();
+  // next month
+  const nextMonthDays = 7 - currentLastDayIndex - 1;
+
+  gridDaysContainerEl.innerHTML = "";
+  dayContainerEl.innerHTML = "";
+
+  // render the current year and month
+  yearEl.innerText = year;
+  monthEl.innerText = monthsArr[month];
+
+  // render the days of the week on the header
+  daysOfTheWeekShort.forEach((day) => {
+    const dayElement = `<p class="body-day">${day.slice(0, 2)}</p>`;
+    dayContainerEl.innerHTML += dayElement;
+  });
+
+  // render the prev month days
+  for (let i = currentFirstDay.getDay(); i > 0; i--) {
+    days += `<div class="grid-day prevDays">${prevLastDayDate - i + 1}</div>`;
+  }
+
+  for (let j = 1; j <= currentLastDayDate; j++) {
+    if (j === new Date().getDate() && month === new Date().getMonth()) {
+      days += `<div class="grid-day today">${j}</div>`;
+    } else {
+      days += `<div class="grid-day">${j}</div>`;
+    }
+  }
+
+  for (let k = 1; k <= nextMonthDays; k++) {
+    days += `<div class="grid-day nextDays">${k}</div>`;
+  }
+
+  gridDaysContainerEl.innerHTML = days;
+}
+
+prevMonthBtn.addEventListener("click", () => {
+  if (month === 0) {
+    month = 11;
+    year--;
+  } else {
+    month--;
+  }
+  renderDesktopCalendar();
+});
+
+nextMonthBtn.addEventListener("click", () => {
+  if (month === 11) {
+    month = 0;
+    year++;
+  } else {
+    month++;
+  }
+
+  renderDesktopCalendar();
+});
+
+renderDesktopCalendar();
 
 populateTasks();

@@ -632,6 +632,7 @@ span#closeBtn:hover {
 .calendar__carousel {
   display: flex;
   width: 100%;
+  max-width: 380px;
   justify-content: space-around;
 }
 
@@ -685,13 +686,17 @@ span#closeBtn:hover {
   border: none;
 }
 
+.homepage__calendar-desktop {
+  display: none;
+}
+
 /* media queries */
 
 /* desktop styles, applied to screen above 992px */
 @media (min-width: 992px) {
   .homepage {
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
   }
 
   .homepage__calendar-mobile {
@@ -739,7 +744,7 @@ span#closeBtn:hover {
     border-radius: 4px;
     height: 502px;
     width: 497px;
-    padding: 30px;
+    padding: 20px;
   }
 
   .calendar-desktop__header {
@@ -765,6 +770,16 @@ span#closeBtn:hover {
     background-color: inherit;
     padding: 16px;
     font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+
+  .header__buttons button:hover {
+    transform: scale(1.05);
+  }
+
+  .header__buttons button:active {
+    color: #afafaf;
   }
 
   .calendar-desktop__body {
@@ -782,10 +797,28 @@ span#closeBtn:hover {
   }
 
   .body__grid {
-    border: 1px solid #6d6d6d;
     display: grid;
+    padding: 0px 8px;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+  }
+
+  .grid-day {
+    border: 1px solid #6d6d6d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .today {
+    color: #ffffff;
+    background-color: #10b985;
+  }
+
+  .prevDays,
+  .nextDays {
+    color: #6d6d6d;
+    background-color: #e7e7e7;
   }
 
   /* desktop modals */
@@ -793,14 +826,32 @@ span#closeBtn:hover {
     width: fit-content;
     height: fit-content;
     border-radius: 4px;
-    padding: 24px;
+    padding: 16px;
     position: absolute;
     top: 50%;
     left: 50%;
     bottom: auto;
     transform: translate(-50%, -50%);
     overflow: auto;
-    margin-bottom: 40px;
+  }
+
+  .create-task label {
+    font-size: 8px;
+  }
+
+  .create-task input,
+  .create-task select {
+    font-size: 12px;
+    padding: 4px;
+    height: 24px;
+  }
+
+  .create-task__buttons button {
+    font-size: 12px;
+  }
+
+  #repeat-options {
+    gap: 4px;
   }
 
   .overlay {
