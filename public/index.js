@@ -558,7 +558,11 @@ function renderDesktopCalendar() {
   }
 
   for (let j = 1; j <= currentLastDayDate; j++) {
-    if (j === new Date().getDate() && month === new Date().getMonth()) {
+    if (
+      j === new Date().getDate() &&
+      month === new Date().getMonth() &&
+      year === new Date().getFullYear()
+    ) {
       days += `<div class="grid-day today">${j}</div>`;
     } else {
       days += `<div class="grid-day">${j}</div>`;
