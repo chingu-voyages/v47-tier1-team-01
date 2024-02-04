@@ -366,26 +366,29 @@ function populateTasks(today) {
   const tasks = getTasksFromLocalStorage()
   const taskContainer = document.querySelector('.homepage__task')
 
-
-
   //makes sure tasks are not duplicated since this function is called both on page load and when SAVE button is clicked
   while (taskContainer.firstChild) {
     taskContainer.removeChild(taskContainer.firstChild);
   }
-  if (tasks.length === 0) {
+
+  const tasksForToday = tasks.filter(t => {
+    return new Date(t.deadline).toDateString().slice(4, 15) === new Date(today).toDateString().slice(4, 15)
+
+  })
+  console.log(tasksForToday)
+
+  if (tasksForToday.length === 0) {
+    console.log('not equal')
     const noTasksPara = document.createElement('p')
     noTasksPara.textContent = 'No tasks at this time'
     taskContainer.appendChild(noTasksPara)
-  }
-  console.log(taskContainer.childNodes)
-
-  tasks.forEach((task) => {
-    if (new Date(task.deadline).toDateString().slice(4, 15) === new Date(today).toDateString().slice(4, 15)) {
+  } else {
+    tasksForToday.forEach((task) => {
       const taskElement = createTaskElement(task)
       taskContainer.innerHTML += taskElement
-    }
-  })
-
+    })
+  }
+  console.log(tasks)
 }
 
 //dinamically display tasks END
