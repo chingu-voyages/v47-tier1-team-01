@@ -187,13 +187,14 @@ function closeModal() {
   dueDateErrorEl.classList.add('hidden')
   repeatOptionsErrorEl.classList.add('hidden')
   formModalEl.style.display = 'none'
-  document.querySelector('.homepage').style.display = 'flex'
+  document.querySelector('.homepage').classList.toggle('display')
   document.querySelector('.overlay').style.display = 'none'
 }
 
 //Dynamically render the form modal based on mode
 function openForm(mode, taskId) {
   formModalEl.style.display = 'flex'
+  document.querySelector('.homepage').classList.toggle('display')
   document.querySelector('.overlay').style.display = 'block'
 
   if (mode === 'create') {
