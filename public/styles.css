@@ -825,6 +825,31 @@ span#closeBtn:hover {
     align-items: center;
   }
 
+  .grid-date.due-task {
+    position: relative;
+  }
+
+  .grid-date.due-task i,
+  .grid-date.due-task.selected i {
+    font-size: 8px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  .grid-date.due-task i {
+    color: #10b985;
+  }
+
+  .grid-date.due-task.selected i {
+    color: #ffffff;
+  }
+
+  .prevMonthDate.due-task i,
+  .nextMonthDate.grid-date.due-task i {
+    color: #726b6b;
+  }
+
   .prevMonthDate,
   .nextMonthDate {
     color: #6d6d6d;

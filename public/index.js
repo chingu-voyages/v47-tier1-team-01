@@ -16,7 +16,7 @@ const categoriesArr = [
   'ROUTINE ACTIVITIES',
   'STUDYING',
   'DAILY TASKS PROJECT',
-  'CHINGU'
+  'CHINGU',
 ]
 
 const daysOfTheWeekArr = [
@@ -26,7 +26,7 @@ const daysOfTheWeekArr = [
   'Wednesday',
   'Thursday',
   'Friday',
-  'Saturday'
+  'Saturday',
 ]
 const daysOfTheWeekShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
@@ -42,7 +42,7 @@ const monthsArr = [
   'September',
   'October',
   'November',
-  'December'
+  'December',
 ]
 
 let defaultRepeatOptionsContent = ''
@@ -97,7 +97,7 @@ function submitHandler(event) {
     taskDescription: DOMPurify.sanitize(descriptionEl.value),
     category: categoryEl.value,
     activity: activityEl.value,
-    priority: priorityEl.checked
+    priority: priorityEl.checked,
   }
 
   const existingTasks = getTasksFromLocalStorage()
@@ -115,6 +115,7 @@ function submitHandler(event) {
   }
 
   localStorage.setItem('tasks', JSON.stringify(existingTasks))
+  renderDesktopCalendar()
   formEl.reset()
   populateTasks(selectedDay)
   closeModal()
@@ -148,6 +149,7 @@ function deleteTask(id) {
   const updatedTasks = tasks.filter((task) => task.id !== id)
   localStorage.setItem('tasks', JSON.stringify(updatedTasks))
   populateTasks(selectedDay)
+  renderDesktopCalendar()
 }
 
 function getRepeatDays() {
@@ -582,10 +584,15 @@ function renderDesktopCalendar() {
     )
 
     const prevMonthDayString = prevMonthDay.toLocaleString().split(',')[0]
-    gridDates += `<div class="grid-date prevMonthDate" data-date='${prevMonthDayString}' onclick="
-      setSelectedDay('${prevMonthDayString}')">${
-      prevMonthLastDay.getDate() - i + 1
-    }</div>`
+    const isDue = checkDateTask(getSimpleDate(prevMonthDay))
+
+    gridDates += `<div class="grid-date prevMonthDate ${
+      isDue ? 'due-task' : ''
+    }" data-date='${prevMonthDayString}' onclick="
+      setSelectedDay('${prevMonthDayString}')">
+      ${isDue ? "<i class='fa-solid fa-file'></i>" : ''}
+      ${prevMonthLastDay.getDate() - i + 1}
+      </div>`
   }
 
   // render the CURRENT month days
@@ -597,13 +604,17 @@ function renderDesktopCalendar() {
     )
 
     const currentMonthDayString = currentMonthDay.toLocaleString().split(',')[0]
+    const isDue = checkDateTask(getSimpleDate(currentMonthDay))
 
     gridDates += `<div class="grid-date ${
       getSimpleDate(currentMonthDay) === getSimpleDate(selectedDay)
         ? 'selected'
         : ''
-    }" data-date='${currentMonthDayString}' onclick="
-    setSelectedDay('${currentMonthDayString}')">${currentMonthDay.getDate()}</div>`
+    } ${isDue ? 'due-task' : ''}" data-date='${currentMonthDayString}' onclick="
+    setSelectedDay('${currentMonthDayString}')">
+    ${isDue ? "<i class='fa-solid fa-file'></i>" : ''}
+    ${currentMonthDay.getDate()}
+    </div>`
   }
 
   // render the NEXT month days
@@ -614,8 +625,15 @@ function renderDesktopCalendar() {
       nextMonthFirstDay.getDate() + k
     )
     const nextMonthDayString = nextMonthDay.toLocaleString().split(',')[0]
-    gridDates += `<div class="grid-date nextMonthDate" data-date='${nextMonthDayString}' onclick="
-    setSelectedDay('${nextMonthDayString}')">${nextMonthDay.getDate()}</div>`
+    const isDue = checkDateTask(getSimpleDate(nextMonthDay))
+
+    gridDates += `<div class="grid-date nextMonthDate ${
+      isDue ? 'due-task' : ''
+    }" data-date='${nextMonthDayString}' onclick="
+    setSelectedDay('${nextMonthDayString}')">
+    ${isDue ? "<i class='fa-solid fa-file'></i>" : ''}
+    ${nextMonthDay.getDate()}
+    </div>`
   }
 
   gridDatesContainerEl.innerHTML = gridDates
@@ -674,6 +692,12 @@ function getSimpleDate(date) {
   month = month > 9 ? month + 1 : `0${month + 1}`
 
   return `${year}-${month}-${day}`
+}
+
+function checkDateTask(date) {
+  const tasks = getTasksFromLocalStorage()
+  console.log(date)
+  return tasks.some((task) => task.deadline === date)
 }
 
 renderDesktopCalendar()
