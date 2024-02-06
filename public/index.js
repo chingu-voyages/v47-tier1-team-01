@@ -696,7 +696,6 @@ function getSimpleDate(date) {
 
 function checkDateTask(date) {
   const tasks = getTasksFromLocalStorage()
-  console.log(date)
   return tasks.some((task) => task.deadline === date)
 }
 
