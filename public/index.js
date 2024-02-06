@@ -373,14 +373,12 @@ function populateTasks(today) {
 
   const tasksForToday = tasks.filter(t => {
     return new Date(t.deadline).toDateString().slice(4, 15) === new Date(today).toDateString().slice(4, 15)
-
   })
-  console.log(tasksForToday)
-
   if (tasksForToday.length === 0) {
     console.log('not equal')
     const noTasksPara = document.createElement('p')
     noTasksPara.textContent = 'No tasks at this time'
+
     taskContainer.appendChild(noTasksPara)
   } else {
     tasksForToday.forEach((task) => {
