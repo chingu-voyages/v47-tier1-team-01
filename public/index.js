@@ -153,13 +153,11 @@ function deleteTask(id) {
 }
 
 function getRepeatDays() {
-
   let daysArray = [];
   [...repeatOptionsEl.children].forEach((day) => {
-    if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id)
-  })
-  return daysArray
-
+    if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id);
+  });
+  return daysArray;
 }
 
 //retrieves a task and updates it. Not yet in use
@@ -191,13 +189,14 @@ function closeModal() {
   dueDateErrorEl.classList.add("hidden");
   repeatOptionsErrorEl.classList.add("hidden");
   formModalEl.style.display = "none";
-  document.querySelector(".homepage").style.display = "flex";
+  document.querySelector(".homepage").classList.toggle("display");
   document.querySelector(".overlay").style.display = "none";
 }
 
 //Dynamically render the form modal based on mode
 function openForm(mode, taskId) {
   formModalEl.style.display = "flex";
+  document.querySelector(".homepage").classList.toggle("display");
   document.querySelector(".overlay").style.display = "block";
 
   if (mode === "create") {
@@ -220,11 +219,11 @@ function openForm(mode, taskId) {
     categoriesArr.forEach((category) => {
       categoryOptionsContent += `
 
-        <option ${category === "Select Category" ? "disabled" : ""} ${category === taskObj.category ? "selected" : ""
-        }>${category}</option>`;
+        <option ${category === "Select Category" ? "disabled" : ""} ${
+        category === taskObj.category ? "selected" : ""
+      }>${category}</option>`;
     });
     categoryEl.innerHTML = categoryOptionsContent;
-
 
     //Render activity
     let activityOptionsContent = `<option disabled selected>Select Activity</option>`;
@@ -234,11 +233,10 @@ function openForm(mode, taskId) {
         .activityTypes.map((activityType) => activityType.activityName);
 
       availableActivityOptions.forEach((activity) => {
-
-        activityOptionsContent += `<option ${activity === taskObj.activity ? "selected" : ""
-          }>${activity}</option>`;
+        activityOptionsContent += `<option ${
+          activity === taskObj.activity ? "selected" : ""
+        }>${activity}</option>`;
       });
-
     }
     activityEl.innerHTML = activityOptionsContent;
 
@@ -335,24 +333,29 @@ function createTaskElement(task) {
         ${task.description || task.taskDescription}
       </div>
       <div class="task__settings">
-        <button id="edit-task-btn" onclick="openForm('edit','${task.id
-    }')">Edit Task <i class="fas fa-edit"></i></button>
-        <button id="del-task-btn" onclick="deleteTask('${task.id
-    }')">Delete Task <i class="fa-solid fa-trash"></i></button>
+        <button id="edit-task-btn" onclick="openForm('edit','${
+          task.id
+        }')">Edit Task <i class="fas fa-edit"></i></button>
+        <button id="del-task-btn" onclick="deleteTask('${
+          task.id
+        }')">Delete Task <i class="fa-solid fa-trash"></i></button>
       </div>
     </div>
     <div class="task__container-bot">
 
-        ${task.category === 'Select Category'
-      ? ''
-      : ` <span class="legend--category">${task.category}</span>`
-    }
-        ${task.activity === 'Select Activity'
-      ? ''
-      : `<span class="legend--activity">${task.activity}</span>`
-    }
-        ${task.priority ? `<span class="legend--priority">Important</span>` : ''
-    }
+        ${
+          task.category === "Select Category"
+            ? ""
+            : ` <span class="legend--category">${task.category}</span>`
+        }
+        ${
+          task.activity === "Select Activity"
+            ? ""
+            : `<span class="legend--activity">${task.activity}</span>`
+        }
+        ${
+          task.priority ? `<span class="legend--priority">Important</span>` : ""
+        }
 
     </div>
   </div>
@@ -361,31 +364,30 @@ function createTaskElement(task) {
   return div;
 }
 
-
 function populateTasks(today) {
-  const tasks = getTasksFromLocalStorage()
-  const taskContainer = document.querySelector('.homepage__task')
-
-
+  const tasks = getTasksFromLocalStorage();
+  const taskContainer = document.querySelector(".homepage__task");
 
   //makes sure tasks are not duplicated since this function is called both on page load and when SAVE button is clicked
   while (taskContainer.firstChild) {
     taskContainer.removeChild(taskContainer.firstChild);
   }
   if (tasks.length === 0) {
-    const noTasksPara = document.createElement('p')
-    noTasksPara.textContent = 'No tasks at this time'
-    taskContainer.appendChild(noTasksPara)
+    const noTasksPara = document.createElement("p");
+    noTasksPara.textContent = "No tasks at this time";
+    taskContainer.appendChild(noTasksPara);
   }
-  console.log(taskContainer.childNodes)
+  console.log(taskContainer.childNodes);
 
   tasks.forEach((task) => {
-    if (new Date(task.deadline).toDateString().slice(4, 15) === new Date(today).toDateString().slice(4, 15)) {
-      const taskElement = createTaskElement(task)
-      taskContainer.innerHTML += taskElement
+    if (
+      new Date(task.deadline).toDateString().slice(4, 15) ===
+      new Date(today).toDateString().slice(4, 15)
+    ) {
+      const taskElement = createTaskElement(task);
+      taskContainer.innerHTML += taskElement;
     }
-  })
-
+  });
 }
 
 //dinamically display tasks END
@@ -507,23 +509,19 @@ function addDays(startDay, numDays = 5) {
 }
 
 function forwardHandler() {
-  currentDayInMilSecs += 24 * 60 * 60 * 1000
-  addDays(currentDayInMilSecs)
-  populateTasks(currentDayInMilSecs)
+  currentDayInMilSecs += 24 * 60 * 60 * 1000;
+  addDays(currentDayInMilSecs);
+  populateTasks(currentDayInMilSecs);
 }
 
 function backwardHandler() {
-  currentDayInMilSecs -= 24 * 60 * 60 * 1000
-  addDays(currentDayInMilSecs)
-  populateTasks(currentDayInMilSecs)
+  currentDayInMilSecs -= 24 * 60 * 60 * 1000;
+  addDays(currentDayInMilSecs);
+  populateTasks(currentDayInMilSecs);
 }
 
 addDays(currentDayInMilSecs);
 //calendar carousel END -----------------------------------
-
-
-
-
 
 // calendar desktop
 let year = new Date().getFullYear();
@@ -610,5 +608,4 @@ nextMonthBtn.addEventListener("click", () => {
 
 renderDesktopCalendar();
 
-populateTasks(currentDayInMilSecs)
-
+populateTasks(currentDayInMilSecs);
