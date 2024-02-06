@@ -861,6 +861,24 @@ span#closeBtn:hover {
     background-color: #10b985;
   }
 
+  /* homepage feedback desktop */
+  .homepage__feedback {
+    display: none;
+    animation: popout 0.8s ease-out;
+    top: auto;
+    bottom: 50px;
+    right: 30px;
+  }
+
+  @keyframes popout {
+    0% {
+      right: -300px;
+    }
+    100% {
+      rigth: 30px;
+    }
+  }
+
   /* desktop modals */
   .formModal {
     width: fit-content;
