@@ -98,6 +98,7 @@ function submitHandler(event) {
     category: categoryEl.value,
     activity: activityEl.value,
     priority: priorityEl.checked,
+    isChecked: false,
   }
 
   const existingTasks = getTasksFromLocalStorage()
@@ -321,8 +322,12 @@ function createTaskElement(task) {
   <div class="task__container">
     <div class="task__container-top">
       <div class="task__name">
-        <input type="checkbox" name="" id="mockID" />
-        <label for="mockID">${task.taskName}</label>
+        <button class="task-checkbox ${
+          task.isChecked ? 'checked' : ''
+        }" onclick="toggleCheckbox(${task.id})"></button>
+        <label class="task-name ${
+          task.isChecked ? 'checked' : ''
+        }" for="mockID">${task.taskName}</label>
       </div>
       <div>
         <i class="fa-solid fa-angle-down" id="show-btn" onclick="showButton(event)"></i>
@@ -442,6 +447,17 @@ function showError(element, message) {
   element.textContent = message
   element.classList.remove('hidden')
   return true // Return true to indicate that an error occurred
+}
+
+// function to toggle the task checkbox
+function toggleCheckbox(taskId) {
+  const tasks = getTasksFromLocalStorage()
+  const taskIndex = tasks.findIndex((task) => task.id === String(taskId))
+  if (taskIndex !== -1) {
+    tasks[taskIndex].isChecked = !tasks[taskIndex].isChecked
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+    populateTasks(selectedDay)
+  }
 }
 
 // function for show button on task-card
