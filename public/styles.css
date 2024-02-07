@@ -277,39 +277,7 @@ input {
   padding: 10px;
 }
 
-.summary__checkbox {
-  display: none;
-}
-
-/* custom checkbox */
-.summary__label::before {
-  content: '';
-  display: inline-block;
-  width: 14px;
-  height: 14px;
-  margin-right: 5px;
-  border: 2px solid #000;
-}
-
-.summary__label::after {
-  content: '';
-  display: none;
-  width: 5px;
-  height: 10px;
-  border: solid #000;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-  position: absolute;
-  top: 0.5px;
-  left: 5px;
-}
-
-.summary__checkbox:checked + .summary__label::after {
-  display: inline-block;
-}
-
 .summary__label {
-  position: relative;
   font-size: 16px;
   font-weight: 600;
 }
