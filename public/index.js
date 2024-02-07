@@ -84,6 +84,9 @@ const submitBtn = document.querySelector('#submit-task')
 const cancelBtn = document.querySelector('#cancel-btn')
 const taskIdInputEl = document.querySelector('#taskId')
 
+const todoSummaryEl = document.querySelector('#todo-tasks__summary')
+const doneTaskSummaryEl = document.querySelector('#done-tasks__summary')
+
 function submitHandler(event) {
   event.preventDefault()
   const formHasError = formValidation()
@@ -116,6 +119,7 @@ function submitHandler(event) {
   }
 
   localStorage.setItem('tasks', JSON.stringify(existingTasks))
+  renderSummary()
   renderDesktopCalendar()
   formEl.reset()
   populateTasks(selectedDay)
@@ -150,6 +154,7 @@ function deleteTask(id) {
   const updatedTasks = tasks.filter((task) => task.id !== id)
   localStorage.setItem('tasks', JSON.stringify(updatedTasks))
   populateTasks(selectedDay)
+  renderSummary()
   renderDesktopCalendar()
 }
 
@@ -456,8 +461,9 @@ function toggleCheckbox(taskId) {
   if (taskIndex !== -1) {
     tasks[taskIndex].isChecked = !tasks[taskIndex].isChecked
     localStorage.setItem('tasks', JSON.stringify(tasks))
-    populateTasks(selectedDay)
   }
+  populateTasks(selectedDay)
+  renderSummary()
 }
 
 // function for show button on task-card
@@ -715,6 +721,40 @@ function checkDateTask(date) {
   return tasks.some((task) => task.deadline === date)
 }
 
-renderDesktopCalendar()
+// render summary (tasks lists counter)
+function renderSummary() {
+  const tasks = getTasksFromLocalStorage()
+  let remainingTaskCounter = 0
+  let doneTaskCounter = 0
 
+  tasks.forEach((task) => {
+    if (task.isChecked) {
+      doneTaskCounter++
+    } else {
+      remainingTaskCounter++
+    }
+  })
+  todoSummaryEl.innerText = `${
+    remainingTaskCounter === 0
+      ? 'No available task'
+      : `${
+          remainingTaskCounter === 1
+            ? `${remainingTaskCounter} Task Remaining`
+            : `${remainingTaskCounter} Tasks Remaining`
+        }`
+  }`
+
+  doneTaskSummaryEl.innerText = `${
+    doneTaskCounter === 0
+      ? 'No completed task'
+      : `${
+          doneTaskCounter === 1
+            ? `${doneTaskCounter} Task Completed`
+            : `${doneTaskCounter} Tasks Completed`
+        }`
+  }`
+}
+
+renderDesktopCalendar()
+renderSummary()
 populateTasks(selectedDay)

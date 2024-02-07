@@ -175,15 +175,15 @@
       <div class="task__section">
         <div class="summary">
           <div class="summary__card">
-            <input id="to-do-tasks" type="checkbox" class="summary__checkbox" />
-            <label for="to-do-tasks" class="summary__label">To do</label>
-            <p class="summary__detail">2 Tasks Remaining</p>
+            <i class="fa-regular fa-square"></i>
+            <label class="summary__label">To do</label>
+            <p class="summary__detail" id="todo-tasks__summary"></p>
           </div>
 
           <div class="summary__card">
-            <input id="done-tasks" type="checkbox" class="summary__checkbox" />
+            <i class="fa-regular fa-square-check"></i>
             <label for="done-tasks" class="summary__label">Done</label>
-            <p class="summary__detail">1 Task Completed</p>
+            <p class="summary__detail" id="done-tasks__summary"></p>
           </div>
 
           <button id="createBtn" onclick="openForm('create')">
