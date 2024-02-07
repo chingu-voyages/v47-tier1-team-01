@@ -160,22 +160,28 @@ input {
   display: none;
 }
 
-.hidden__custom-checkbox {
+.hidden__custom-checkbox,
+.task-checkbox {
   height: 16px;
   width: 16px;
   border: solid 1px #6d6d6d;
+  background-color: inherit;
   border-radius: 4px;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
-.hidden__main-checkbox:checked + .hidden__custom-checkbox {
+.hidden__main-checkbox:checked + .hidden__custom-checkbox,
+.task-checkbox.checked {
   border: none;
   background-color: #34d3a2;
+  cursor: pointer;
 }
 
-.hidden__main-checkbox:checked + .hidden__custom-checkbox::after {
+.hidden__main-checkbox:checked + .hidden__custom-checkbox::after,
+.task-checkbox.checked::after {
   content: '\2713';
   font-size: 8px;
   font-weight: 1000;
@@ -398,7 +404,6 @@ span#closeBtn:hover {
 }
 
 /* task section styles */
-
 .task__section {
   display: flex;
   flex-direction: column;
@@ -555,6 +560,12 @@ span#closeBtn:hover {
   font-size: 1.5rem;
 
   transform: rotate(110deg);
+}
+
+/* task name */
+.task-name.checked {
+  text-decoration: line-through;
+  color: #888888;
 }
 
 /* buttons inside modals styles */
