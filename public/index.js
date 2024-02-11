@@ -16,7 +16,7 @@ const categoriesArr = [
   'ROUTINE ACTIVITIES',
   'STUDYING',
   'DAILY TASKS PROJECT',
-  'CHINGU',
+  'CHINGU'
 ]
 
 const daysOfTheWeekArr = [
@@ -26,7 +26,7 @@ const daysOfTheWeekArr = [
   'Wednesday',
   'Thursday',
   'Friday',
-  'Saturday',
+  'Saturday'
 ]
 const daysOfTheWeekShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
@@ -42,7 +42,7 @@ const monthsArr = [
   'September',
   'October',
   'November',
-  'December',
+  'December'
 ]
 
 let defaultRepeatOptionsContent = ''
@@ -101,15 +101,18 @@ function submitHandler(event) {
     category: categoryEl.value,
     activity: activityEl.value,
     priority: priorityEl.checked,
-    isChecked: false,
+    isChecked: false
   }
 
   const existingTasks = getTasksFromLocalStorage()
 
   if (dueDateEl.checked) {
-    taskObj.deadline = dateEl.value
+    taskObj.dueDates = [dateEl.value]
+    taskObj.isCompleted = false
   } else if (repeatEl.checked) {
-    taskObj.deadline = getRepeatDays()
+    taskObj.selectedDaysIndex = getRepeatDays()
+    taskObj.dueDates = generateActualDates(taskObj.selectedDaysIndex)
+    taskObj.completedDates = []
   }
 
   if (submitBtn.textContent === 'Save Task') {
@@ -163,7 +166,10 @@ function getRepeatDays() {
   ;[...repeatOptionsEl.children].forEach((day) => {
     if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id)
   })
-  return daysArray
+  const selectedDaysIndex = daysArray.map((day) =>
+    daysOfTheWeekArr.indexOf(day)
+  )
+  return selectedDaysIndex
 }
 
 //retrieves a task and updates it. Not yet in use
@@ -246,10 +252,10 @@ function openForm(mode, taskId) {
     }
     activityEl.innerHTML = activityOptionsContent
 
-    //Render deadline
-    if (typeof taskObj.deadline === 'string') {
+    //Render due dates
+    if (!taskObj.selectedDaysIndex) {
       dueDateEl.checked = true
-      dateEl.value = taskObj.deadline
+      dateEl.value = taskObj.dueDates[0]
       dateEl.style.display = 'block'
     } else {
       repeatEl.checked = true
@@ -263,7 +269,7 @@ function openForm(mode, taskId) {
             id=${day}
             name=${day}
             class="hidden__main-checkbox"
-            ${taskObj.deadline?.includes(day) ? 'checked' : ''}/>
+            ${taskObj.dueDates?.includes(day) ? 'checked' : ''}/>
           <div class="hidden__custom-checkbox"></div>
           ${day}
         </label>`
@@ -389,7 +395,7 @@ function populateTasks(selectedDay) {
   }
 
   tasks.forEach((task) => {
-    if (getSimpleDate(selectedDay) === task.deadline) {
+    if (task.dueDates.includes(getSimpleDate(selectedDay))) {
       const taskElement = createTaskElement(task)
       taskContainer.innerHTML += taskElement
     }
@@ -718,7 +724,7 @@ function getSimpleDate(date) {
 
 function checkDateTask(date) {
   const tasks = getTasksFromLocalStorage()
-  return tasks.some((task) => task.deadline === date)
+  return tasks.some((task) => task.dueDates.includes(date))
 }
 
 // render summary (tasks lists counter)
@@ -758,3 +764,34 @@ function renderSummary() {
 renderDesktopCalendar()
 renderSummary()
 populateTasks(selectedDay)
+
+const numOfRepeatedWeeks = 4
+function generateActualDates(selectedDaysIndex) {
+  const currentDay = new Date()
+  const actualDatesArr = []
+
+  const daysToNextMonday =
+    currentDay.getDay() !== 0 ? -currentDay.getDay() + 1 + 7 : 1
+
+  const nextMonday = new Date(
+    currentDay.getFullYear(),
+    currentDay.getMonth(),
+    currentDay.getDate() + daysToNextMonday
+  )
+
+  for (i = 0; i < numOfRepeatedWeeks; i++) {
+    selectedDaysIndex.map((index) => {
+      //adjustNumber calculate the gap between the nextMonday and the due dates, if the due date falls on a Sunday, the gap will be 6 + i*7
+      const adjustNumber = index !== 0 ? index - 1 + i * 7 : 6 + i * 7
+      const dueDate = new Date(
+        nextMonday.getFullYear(),
+        nextMonday.getMonth(),
+        nextMonday.getDate() + adjustNumber
+      )
+
+      actualDatesArr.push(getSimpleDate(dueDate))
+    })
+  }
+
+  return actualDatesArr
+}
