@@ -635,13 +635,13 @@ function renderDesktopCalendar() {
     )
 
     const prevMonthDayString = prevMonthDay.toLocaleString().split(',')[0]
-    const isDue = checkDateTask(getSimpleDate(prevMonthDay))
+    const hasTasks = checkDateTask(getSimpleDate(prevMonthDay))
 
     gridDates += `<div class="grid-date prevMonthDate ${
-      isDue ? 'due-task' : ''
+      hasTasks ? 'due-task' : ''
     }" data-date='${prevMonthDayString}' onclick="
       setSelectedDay('${prevMonthDayString}')">
-      ${isDue ? "<i class='fa-solid fa-file'></i>" : ''}
+      ${hasTasks ? "<i class='fa-solid fa-file'></i>" : ''}
       ${prevMonthLastDay.getDate() - i + 1}
       </div>`
   }
@@ -655,15 +655,17 @@ function renderDesktopCalendar() {
     )
 
     const currentMonthDayString = currentMonthDay.toLocaleString().split(',')[0]
-    const isDue = checkDateTask(getSimpleDate(currentMonthDay))
+    const hasTasks = checkDateTask(getSimpleDate(currentMonthDay))
 
     gridDates += `<div class="grid-date ${
       getSimpleDate(currentMonthDay) === getSimpleDate(selectedDay)
         ? 'selected'
         : ''
-    } ${isDue ? 'due-task' : ''}" data-date='${currentMonthDayString}' onclick="
+    } ${
+      hasTasks ? 'due-task' : ''
+    }" data-date='${currentMonthDayString}' onclick="
     setSelectedDay('${currentMonthDayString}')">
-    ${isDue ? "<i class='fa-solid fa-file'></i>" : ''}
+    ${hasTasks ? "<i class='fa-solid fa-file'></i>" : ''}
     ${currentMonthDay.getDate()}
     </div>`
   }
@@ -676,13 +678,13 @@ function renderDesktopCalendar() {
       nextMonthFirstDay.getDate() + k
     )
     const nextMonthDayString = nextMonthDay.toLocaleString().split(',')[0]
-    const isDue = checkDateTask(getSimpleDate(nextMonthDay))
+    const hasTasks = checkDateTask(getSimpleDate(nextMonthDay))
 
     gridDates += `<div class="grid-date nextMonthDate ${
-      isDue ? 'due-task' : ''
+      hasTasks ? 'due-task' : ''
     }" data-date='${nextMonthDayString}' onclick="
     setSelectedDay('${nextMonthDayString}')">
-    ${isDue ? "<i class='fa-solid fa-file'></i>" : ''}
+    ${hasTasks ? "<i class='fa-solid fa-file'></i>" : ''}
     ${nextMonthDay.getDate()}
     </div>`
   }
