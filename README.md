@@ -1,3 +1,31 @@
+**Title:** ChinguTASK
+
+**Overview:** 
+ChinguTASK is a productivity tool designed to streamline daily task management. This all-in-one app functions as a daily checklist, allowing users to organize and manage their daily agendas.
+
+**Features:**
+
+ChinguTASK enables users to – 
+
+1.	Create and edit tasks.
+2.	Delete tasks.
+3.	Mark tasks as completed.
+4.	View total number of tasks pending.
+5.	View total number of completed tasks.
+6.	Select a date from calendar and easily add or view tasks for that date.
+7.	Select category and activity types for a particular task.
+8.	Set due date for tasks.
+9.	Select days of the week for tasks to be repeated.
+10.	Set priority for important tasks.
+    
+**Running the project:** How could someone else get your code working for them?
+https://chingu-voyages.github.io/v47-tier1-team-01/public/
+
+**Dependencies:** What are the main outside resources your project needs to run?
+
+**Contributors:**
+
+
 # voyage-tasks
 
 #test-me (andrei)
