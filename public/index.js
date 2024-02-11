@@ -45,6 +45,8 @@ const monthsArr = [
   'December'
 ]
 
+const numOfRepeatedWeeks = 4
+
 let defaultRepeatOptionsContent = ''
 daysOfTheWeekArr.forEach((day) => {
   defaultRepeatOptionsContent += `
@@ -100,8 +102,7 @@ function submitHandler(event) {
     taskDescription: DOMPurify.sanitize(descriptionEl.value),
     category: categoryEl.value,
     activity: activityEl.value,
-    priority: priorityEl.checked,
-    isChecked: false
+    priority: priorityEl.checked
   }
 
   const existingTasks = getTasksFromLocalStorage()
@@ -252,16 +253,17 @@ function openForm(mode, taskId) {
     }
     activityEl.innerHTML = activityOptionsContent
 
-    //Render due dates
+    //Render selected days
     if (!taskObj.selectedDaysIndex) {
       dueDateEl.checked = true
       dateEl.value = taskObj.dueDates[0]
       dateEl.style.display = 'block'
+      repeatOptionsEl.innerHTML = defaultRepeatOptionsContent
     } else {
       repeatEl.checked = true
       repeatOptionsEl.style.display = 'flex'
       let repeatOptionsContent = ''
-      daysOfTheWeekArr.forEach((day) => {
+      daysOfTheWeekArr.forEach((day, index) => {
         repeatOptionsContent += `
         <label for=${day} class="hidden__checkbox">
           <input
@@ -269,7 +271,7 @@ function openForm(mode, taskId) {
             id=${day}
             name=${day}
             class="hidden__main-checkbox"
-            ${taskObj.dueDates?.includes(day) ? 'checked' : ''}/>
+            ${taskObj.selectedDaysIndex?.includes(index) ? 'checked' : ''}/>
           <div class="hidden__custom-checkbox"></div>
           ${day}
         </label>`
@@ -328,17 +330,27 @@ function getTasksFromLocalStorage() {
   return tasksJson ? JSON.parse(tasksJson) : []
 }
 
-function createTaskElement(task) {
+function createTaskElement(task, date) {
+  let completed = false
+  if (task.selectedDaysIndex) {
+    if (task.completedDates.includes(date)) {
+      completed = true
+    } else {
+      completed = false
+    }
+  } else {
+    completed = task.isCompleted
+  }
   const div = `
   <div class="task__container">
     <div class="task__container-top">
       <div class="task__name">
         <button class="task-checkbox ${
-          task.isChecked ? 'checked' : ''
-        }" onclick="toggleCheckbox(${task.id})"></button>
-        <label class="task-name ${
-          task.isChecked ? 'checked' : ''
-        }" for="mockID">${task.taskName}</label>
+          completed ? 'checked' : ''
+        }" onclick="toggleCompleted(${task.id}, '${date}')"></button>
+        <label class="task-name ${completed ? 'checked' : ''}" for="mockID">${
+    task.taskName
+  }</label>
       </div>
       <div>
         <i class="fa-solid fa-angle-down" id="show-btn" onclick="showButton(event)"></i>
@@ -396,7 +408,8 @@ function populateTasks(selectedDay) {
 
   tasks.forEach((task) => {
     if (task.dueDates.includes(getSimpleDate(selectedDay))) {
-      const taskElement = createTaskElement(task)
+      const date = getSimpleDate(selectedDay)
+      const taskElement = createTaskElement(task, date)
       taskContainer.innerHTML += taskElement
     }
   })
@@ -461,11 +474,21 @@ function showError(element, message) {
 }
 
 // function to toggle the task checkbox
-function toggleCheckbox(taskId) {
+function toggleCompleted(taskId, date) {
   const tasks = getTasksFromLocalStorage()
   const taskIndex = tasks.findIndex((task) => task.id === String(taskId))
   if (taskIndex !== -1) {
-    tasks[taskIndex].isChecked = !tasks[taskIndex].isChecked
+    const selectedTask = tasks[taskIndex]
+    if (!selectedTask.selectedDaysIndex) {
+      selectedTask.isCompleted = !selectedTask.isCompleted
+    } else {
+      if (selectedTask.completedDates.includes(date)) {
+        selectedTask.completedDates = selectedTask.completedDates.filter(
+          (item) => item !== date
+        )
+      } else selectedTask.completedDates.push(date)
+    }
+
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }
   populateTasks(selectedDay)
@@ -729,43 +752,36 @@ function checkDateTask(date) {
 
 // render summary (tasks lists counter)
 function renderSummary() {
-  const tasks = getTasksFromLocalStorage()
-  let remainingTaskCounter = 0
-  let doneTaskCounter = 0
-
-  tasks.forEach((task) => {
-    if (task.isChecked) {
-      doneTaskCounter++
-    } else {
-      remainingTaskCounter++
-    }
-  })
-  todoSummaryEl.innerText = `${
-    remainingTaskCounter === 0
-      ? 'No available task'
-      : `${
-          remainingTaskCounter === 1
-            ? `${remainingTaskCounter} Task Remaining`
-            : `${remainingTaskCounter} Tasks Remaining`
-        }`
-  }`
-
-  doneTaskSummaryEl.innerText = `${
-    doneTaskCounter === 0
-      ? 'No completed task'
-      : `${
-          doneTaskCounter === 1
-            ? `${doneTaskCounter} Task Completed`
-            : `${doneTaskCounter} Tasks Completed`
-        }`
-  }`
+  // const tasks = getTasksFromLocalStorage()
+  // let remainingTaskCounter = 0
+  // let doneTaskCounter = 0
+  // tasks.forEach((task) => {
+  //   if (task.isChecked) {
+  //     doneTaskCounter++
+  //   } else {
+  //     remainingTaskCounter++
+  //   }
+  // })
+  // todoSummaryEl.innerText = `${
+  //   remainingTaskCounter === 0
+  //     ? 'No available task'
+  //     : `${
+  //         remainingTaskCounter === 1
+  //           ? `${remainingTaskCounter} Task Remaining`
+  //           : `${remainingTaskCounter} Tasks Remaining`
+  //       }`
+  // }`
+  // doneTaskSummaryEl.innerText = `${
+  //   doneTaskCounter === 0
+  //     ? 'No completed task'
+  //     : `${
+  //         doneTaskCounter === 1
+  //           ? `${doneTaskCounter} Task Completed`
+  //           : `${doneTaskCounter} Tasks Completed`
+  //       }`
+  // }`
 }
 
-renderDesktopCalendar()
-renderSummary()
-populateTasks(selectedDay)
-
-const numOfRepeatedWeeks = 4
 function generateActualDates(selectedDaysIndex) {
   const currentDay = new Date()
   const actualDatesArr = []
@@ -795,3 +811,7 @@ function generateActualDates(selectedDaysIndex) {
 
   return actualDatesArr
 }
+
+renderDesktopCalendar()
+renderSummary()
+populateTasks(selectedDay)
