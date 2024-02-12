@@ -16,7 +16,7 @@ const categoriesArr = [
   'ROUTINE ACTIVITIES',
   'STUDYING',
   'DAILY TASKS PROJECT',
-  'CHINGU',
+  'CHINGU'
 ]
 
 const daysOfTheWeekArr = [
@@ -26,7 +26,7 @@ const daysOfTheWeekArr = [
   'Wednesday',
   'Thursday',
   'Friday',
-  'Saturday',
+  'Saturday'
 ]
 const daysOfTheWeekShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
@@ -42,8 +42,10 @@ const monthsArr = [
   'September',
   'October',
   'November',
-  'December',
+  'December'
 ]
+
+const numOfRepeatedWeeks = 4
 
 let defaultRepeatOptionsContent = ''
 daysOfTheWeekArr.forEach((day) => {
@@ -100,16 +102,18 @@ function submitHandler(event) {
     taskDescription: DOMPurify.sanitize(descriptionEl.value),
     category: categoryEl.value,
     activity: activityEl.value,
-    priority: priorityEl.checked,
-    isChecked: false,
+    priority: priorityEl.checked
   }
 
   const existingTasks = getTasksFromLocalStorage()
 
   if (dueDateEl.checked) {
-    taskObj.deadline = dateEl.value
+    taskObj.dueDates = [dateEl.value]
+    taskObj.isCompleted = false
   } else if (repeatEl.checked) {
-    taskObj.deadline = getRepeatDays()
+    taskObj.selectedDaysIndex = getRepeatDays()
+    taskObj.dueDates = generateActualDates(taskObj.selectedDaysIndex)
+    taskObj.completedDates = []
   }
 
   if (submitBtn.textContent === 'Save Task') {
@@ -163,7 +167,10 @@ function getRepeatDays() {
   ;[...repeatOptionsEl.children].forEach((day) => {
     if (day.firstElementChild.checked) daysArray.push(day.firstElementChild.id)
   })
-  return daysArray
+  const selectedDaysIndex = daysArray.map((day) =>
+    daysOfTheWeekArr.indexOf(day)
+  )
+  return selectedDaysIndex
 }
 
 //retrieves a task and updates it. Not yet in use
@@ -246,16 +253,17 @@ function openForm(mode, taskId) {
     }
     activityEl.innerHTML = activityOptionsContent
 
-    //Render deadline
-    if (typeof taskObj.deadline === 'string') {
+    //Render selected days
+    if (!taskObj.selectedDaysIndex) {
       dueDateEl.checked = true
-      dateEl.value = taskObj.deadline
+      dateEl.value = taskObj.dueDates[0]
       dateEl.style.display = 'block'
+      repeatOptionsEl.innerHTML = defaultRepeatOptionsContent
     } else {
       repeatEl.checked = true
       repeatOptionsEl.style.display = 'flex'
       let repeatOptionsContent = ''
-      daysOfTheWeekArr.forEach((day) => {
+      daysOfTheWeekArr.forEach((day, index) => {
         repeatOptionsContent += `
         <label for=${day} class="hidden__checkbox">
           <input
@@ -263,7 +271,7 @@ function openForm(mode, taskId) {
             id=${day}
             name=${day}
             class="hidden__main-checkbox"
-            ${taskObj.deadline?.includes(day) ? 'checked' : ''}/>
+            ${taskObj.selectedDaysIndex?.includes(index) ? 'checked' : ''}/>
           <div class="hidden__custom-checkbox"></div>
           ${day}
         </label>`
@@ -322,17 +330,27 @@ function getTasksFromLocalStorage() {
   return tasksJson ? JSON.parse(tasksJson) : []
 }
 
-function createTaskElement(task) {
+function createTaskElement(task, date) {
+  let completed = false
+  if (task.selectedDaysIndex) {
+    if (task.completedDates.includes(date)) {
+      completed = true
+    } else {
+      completed = false
+    }
+  } else {
+    completed = task.isCompleted
+  }
   const div = `
   <div class="task__container">
     <div class="task__container-top">
       <div class="task__name">
         <button class="task-checkbox ${
-          task.isChecked ? 'checked' : ''
-        }" onclick="toggleCheckbox(${task.id})"></button>
-        <label class="task-name ${
-          task.isChecked ? 'checked' : ''
-        }" for="mockID">${task.taskName}</label>
+          completed ? 'checked' : ''
+        }" onclick="toggleCompleted(${task.id}, '${date}')"></button>
+        <label class="task-name ${completed ? 'checked' : ''}" for="mockID">${
+    task.taskName
+  }</label>
       </div>
       <div>
         <i class="fa-solid fa-angle-down" id="show-btn" onclick="showButton(event)"></i>
@@ -389,8 +407,9 @@ function populateTasks(selectedDay) {
   }
 
   tasks.forEach((task) => {
-    if (getSimpleDate(selectedDay) === task.deadline) {
-      const taskElement = createTaskElement(task)
+    if (task.dueDates.includes(getSimpleDate(selectedDay))) {
+      const date = getSimpleDate(selectedDay)
+      const taskElement = createTaskElement(task, date)
       taskContainer.innerHTML += taskElement
     }
   })
@@ -455,11 +474,21 @@ function showError(element, message) {
 }
 
 // function to toggle the task checkbox
-function toggleCheckbox(taskId) {
+function toggleCompleted(taskId, date) {
   const tasks = getTasksFromLocalStorage()
   const taskIndex = tasks.findIndex((task) => task.id === String(taskId))
   if (taskIndex !== -1) {
-    tasks[taskIndex].isChecked = !tasks[taskIndex].isChecked
+    const selectedTask = tasks[taskIndex]
+    if (!selectedTask.selectedDaysIndex) {
+      selectedTask.isCompleted = !selectedTask.isCompleted
+    } else {
+      if (selectedTask.completedDates.includes(date)) {
+        selectedTask.completedDates = selectedTask.completedDates.filter(
+          (item) => item !== date
+        )
+      } else selectedTask.completedDates.push(date)
+    }
+
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }
   populateTasks(selectedDay)
@@ -606,13 +635,13 @@ function renderDesktopCalendar() {
     )
 
     const prevMonthDayString = prevMonthDay.toLocaleString().split(',')[0]
-    const isDue = checkDateTask(getSimpleDate(prevMonthDay))
+    const hasTasks = checkDateTask(getSimpleDate(prevMonthDay))
 
     gridDates += `<div class="grid-date prevMonthDate ${
-      isDue ? 'due-task' : ''
+      hasTasks ? 'due-task' : ''
     }" data-date='${prevMonthDayString}' onclick="
       setSelectedDay('${prevMonthDayString}')">
-      ${isDue ? "<i class='fa-solid fa-file'></i>" : ''}
+      ${hasTasks ? "<i class='fa-solid fa-file'></i>" : ''}
       ${prevMonthLastDay.getDate() - i + 1}
       </div>`
   }
@@ -626,15 +655,17 @@ function renderDesktopCalendar() {
     )
 
     const currentMonthDayString = currentMonthDay.toLocaleString().split(',')[0]
-    const isDue = checkDateTask(getSimpleDate(currentMonthDay))
+    const hasTasks = checkDateTask(getSimpleDate(currentMonthDay))
 
     gridDates += `<div class="grid-date ${
       getSimpleDate(currentMonthDay) === getSimpleDate(selectedDay)
         ? 'selected'
         : ''
-    } ${isDue ? 'due-task' : ''}" data-date='${currentMonthDayString}' onclick="
+    } ${
+      hasTasks ? 'due-task' : ''
+    }" data-date='${currentMonthDayString}' onclick="
     setSelectedDay('${currentMonthDayString}')">
-    ${isDue ? "<i class='fa-solid fa-file'></i>" : ''}
+    ${hasTasks ? "<i class='fa-solid fa-file'></i>" : ''}
     ${currentMonthDay.getDate()}
     </div>`
   }
@@ -647,13 +678,13 @@ function renderDesktopCalendar() {
       nextMonthFirstDay.getDate() + k
     )
     const nextMonthDayString = nextMonthDay.toLocaleString().split(',')[0]
-    const isDue = checkDateTask(getSimpleDate(nextMonthDay))
+    const hasTasks = checkDateTask(getSimpleDate(nextMonthDay))
 
     gridDates += `<div class="grid-date nextMonthDate ${
-      isDue ? 'due-task' : ''
+      hasTasks ? 'due-task' : ''
     }" data-date='${nextMonthDayString}' onclick="
     setSelectedDay('${nextMonthDayString}')">
-    ${isDue ? "<i class='fa-solid fa-file'></i>" : ''}
+    ${hasTasks ? "<i class='fa-solid fa-file'></i>" : ''}
     ${nextMonthDay.getDate()}
     </div>`
   }
@@ -718,41 +749,69 @@ function getSimpleDate(date) {
 
 function checkDateTask(date) {
   const tasks = getTasksFromLocalStorage()
-  return tasks.some((task) => task.deadline === date)
+  return tasks.some((task) => task.dueDates.includes(date))
 }
 
 // render summary (tasks lists counter)
 function renderSummary() {
-  const tasks = getTasksFromLocalStorage()
-  let remainingTaskCounter = 0
-  let doneTaskCounter = 0
+  // const tasks = getTasksFromLocalStorage()
+  // let remainingTaskCounter = 0
+  // let doneTaskCounter = 0
+  // tasks.forEach((task) => {
+  //   if (task.isChecked) {
+  //     doneTaskCounter++
+  //   } else {
+  //     remainingTaskCounter++
+  //   }
+  // })
+  // todoSummaryEl.innerText = `${
+  //   remainingTaskCounter === 0
+  //     ? 'No available task'
+  //     : `${
+  //         remainingTaskCounter === 1
+  //           ? `${remainingTaskCounter} Task Remaining`
+  //           : `${remainingTaskCounter} Tasks Remaining`
+  //       }`
+  // }`
+  // doneTaskSummaryEl.innerText = `${
+  //   doneTaskCounter === 0
+  //     ? 'No completed task'
+  //     : `${
+  //         doneTaskCounter === 1
+  //           ? `${doneTaskCounter} Task Completed`
+  //           : `${doneTaskCounter} Tasks Completed`
+  //       }`
+  // }`
+}
 
-  tasks.forEach((task) => {
-    if (task.isChecked) {
-      doneTaskCounter++
-    } else {
-      remainingTaskCounter++
-    }
-  })
-  todoSummaryEl.innerText = `${
-    remainingTaskCounter === 0
-      ? 'No available task'
-      : `${
-          remainingTaskCounter === 1
-            ? `${remainingTaskCounter} Task Remaining`
-            : `${remainingTaskCounter} Tasks Remaining`
-        }`
-  }`
+function generateActualDates(selectedDaysIndex) {
+  const currentDay = new Date()
+  const actualDatesArr = []
 
-  doneTaskSummaryEl.innerText = `${
-    doneTaskCounter === 0
-      ? 'No completed task'
-      : `${
-          doneTaskCounter === 1
-            ? `${doneTaskCounter} Task Completed`
-            : `${doneTaskCounter} Tasks Completed`
-        }`
-  }`
+  const daysToNextMonday =
+    currentDay.getDay() !== 0 ? -currentDay.getDay() + 1 + 7 : 1
+
+  const nextMonday = new Date(
+    currentDay.getFullYear(),
+    currentDay.getMonth(),
+    currentDay.getDate() + daysToNextMonday
+  )
+
+  for (i = 0; i < numOfRepeatedWeeks; i++) {
+    selectedDaysIndex.map((index) => {
+      //adjustNumber calculate the gap between the nextMonday and the due dates, if the due date falls on a Sunday, the gap will be 6 + i*7
+      const adjustNumber = index !== 0 ? index - 1 + i * 7 : 6 + i * 7
+      const dueDate = new Date(
+        nextMonday.getFullYear(),
+        nextMonday.getMonth(),
+        nextMonday.getDate() + adjustNumber
+      )
+
+      actualDatesArr.push(getSimpleDate(dueDate))
+    })
+  }
+
+  return actualDatesArr
 }
 
 renderDesktopCalendar()
