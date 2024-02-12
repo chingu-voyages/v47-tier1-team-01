@@ -16,7 +16,7 @@ const categoriesArr = [
   'ROUTINE ACTIVITIES',
   'STUDYING',
   'DAILY TASKS PROJECT',
-  'CHINGU'
+  'CHINGU',
 ]
 
 const daysOfTheWeekArr = [
@@ -26,7 +26,7 @@ const daysOfTheWeekArr = [
   'Wednesday',
   'Thursday',
   'Friday',
-  'Saturday'
+  'Saturday',
 ]
 const daysOfTheWeekShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
@@ -42,7 +42,7 @@ const monthsArr = [
   'September',
   'October',
   'November',
-  'December'
+  'December',
 ]
 
 const numOfRepeatedWeeks = 4
@@ -102,7 +102,7 @@ function submitHandler(event) {
     taskDescription: DOMPurify.sanitize(descriptionEl.value),
     category: categoryEl.value,
     activity: activityEl.value,
-    priority: priorityEl.checked
+    priority: priorityEl.checked,
   }
 
   const existingTasks = getTasksFromLocalStorage()
@@ -123,11 +123,11 @@ function submitHandler(event) {
   }
 
   localStorage.setItem('tasks', JSON.stringify(existingTasks))
-  renderSummary()
   renderDesktopCalendar()
   formEl.reset()
   populateTasks(selectedDay)
   closeModal()
+  renderSummary(selectedDay)
 }
 
 // create task button element
@@ -158,8 +158,8 @@ function deleteTask(id) {
   const updatedTasks = tasks.filter((task) => task.id !== id)
   localStorage.setItem('tasks', JSON.stringify(updatedTasks))
   populateTasks(selectedDay)
-  renderSummary()
   renderDesktopCalendar()
+  renderSummary(selectedDay)
 }
 
 function getRepeatDays() {
@@ -482,17 +482,18 @@ function toggleCompleted(taskId, date) {
     if (!selectedTask.selectedDaysIndex) {
       selectedTask.isCompleted = !selectedTask.isCompleted
     } else {
-      if (selectedTask.completedDates.includes(date)) {
-        selectedTask.completedDates = selectedTask.completedDates.filter(
-          (item) => item !== date
-        )
-      } else selectedTask.completedDates.push(date)
-    }
+      const dateIndex = selectedTask.completedDates.indexOf(date)
 
+      if (dateIndex !== -1) {
+        selectedTask.completedDates.splice(dateIndex, 1)
+      } else {
+        selectedTask.completedDates.push(date)
+      }
+    }
     localStorage.setItem('tasks', JSON.stringify(tasks))
   }
   populateTasks(selectedDay)
-  renderSummary()
+  renderSummary(selectedDay)
 }
 
 // function for show button on task-card
@@ -734,6 +735,9 @@ function setSelectedDay(dateString) {
 
   //Retrieve tasks from localStorage
   populateTasks(selectedDay)
+
+  // updates the summary
+  renderSummary(selectedDay)
 }
 
 function getSimpleDate(date) {
@@ -753,36 +757,85 @@ function checkDateTask(date) {
 }
 
 // render summary (tasks lists counter)
-function renderSummary() {
-  // const tasks = getTasksFromLocalStorage()
-  // let remainingTaskCounter = 0
-  // let doneTaskCounter = 0
-  // tasks.forEach((task) => {
-  //   if (task.isChecked) {
-  //     doneTaskCounter++
-  //   } else {
-  //     remainingTaskCounter++
-  //   }
-  // })
-  // todoSummaryEl.innerText = `${
-  //   remainingTaskCounter === 0
-  //     ? 'No available task'
-  //     : `${
-  //         remainingTaskCounter === 1
-  //           ? `${remainingTaskCounter} Task Remaining`
-  //           : `${remainingTaskCounter} Tasks Remaining`
-  //       }`
-  // }`
-  // doneTaskSummaryEl.innerText = `${
-  //   doneTaskCounter === 0
-  //     ? 'No completed task'
-  //     : `${
-  //         doneTaskCounter === 1
-  //           ? `${doneTaskCounter} Task Completed`
-  //           : `${doneTaskCounter} Tasks Completed`
-  //       }`
-  // }`
+// RENDERS THE NUMBER OF ALL TODO AND DONE TASK ON SELECTED DAY
+function renderSummary(selectedDay) {
+  let remainingTaskCounter = 0
+  let doneTaskCounter = 0
+
+  const selectedDayDate = getSimpleDate(selectedDay)
+
+  const tasks = getTasksFromLocalStorage().filter((task) =>
+    task.dueDates.includes(selectedDayDate)
+  )
+
+  tasks.forEach((task) => {
+    if (task.hasOwnProperty('selectedDaysIndex')) {
+      if (
+        task.completedDates &&
+        task.completedDates.includes(selectedDayDate)
+      ) {
+        doneTaskCounter++
+      } else {
+        remainingTaskCounter++
+      }
+    } else {
+      if (task.isCompleted) {
+        doneTaskCounter++
+      } else {
+        remainingTaskCounter++
+      }
+    }
+  })
+  todoSummaryEl.innerText = `${
+    remainingTaskCounter === 0
+      ? 'No available task'
+      : `${
+          remainingTaskCounter === 1
+            ? `${remainingTaskCounter} Task Remaining`
+            : `${remainingTaskCounter} Tasks Remaining`
+        }`
+  }`
+  doneTaskSummaryEl.innerText = `${
+    doneTaskCounter === 0
+      ? 'No completed task'
+      : `${
+          doneTaskCounter === 1
+            ? `${doneTaskCounter} Task Completed`
+            : `${doneTaskCounter} Tasks Completed`
+        }`
+  }`
 }
+// RENDERS THE NUMBER OF ALL TODO AND DONE TASK
+// function renderSummary() {
+//   const tasks = getTasksFromLocalStorage()
+//   let remainingTaskCounter = 0
+//   let doneTaskCounter = 0
+//   tasks.forEach((task) => {
+//     if (task.isChecked) {
+//       doneTaskCounter++
+//     } else {
+//       remainingTaskCounter++
+//     }
+//   })
+//   todoSummaryEl.innerText = `${
+//     remainingTaskCounter === 0
+//       ? 'No available task'
+//       : `${
+//           remainingTaskCounter === 1
+//             ? `${remainingTaskCounter} Task Remaining`
+//             : `${remainingTaskCounter} Tasks Remaining`
+//         }`
+//   }`
+//   doneTaskSummaryEl.innerText = `${
+//     doneTaskCounter === 0
+//       ? 'No completed task'
+//       : `${
+//           doneTaskCounter === 1
+//             ? `${doneTaskCounter} Task Completed`
+//             : `${doneTaskCounter} Tasks Completed`
+//         }`
+//   }`
+// }
 
 function generateActualDates(selectedDaysIndex) {
   const currentDay = new Date()
@@ -815,5 +868,5 @@ function generateActualDates(selectedDaysIndex) {
 }
 
 renderDesktopCalendar()
-renderSummary()
+renderSummary(selectedDay)
 populateTasks(selectedDay)
