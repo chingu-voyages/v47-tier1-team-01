@@ -512,22 +512,17 @@ span#closeBtn:hover {
 .task__noTask {
   display: flex;
   align-items: center;
+  justify-content: center;
   border: 1px solid var(--no-task);
   border-radius: 5px;
-  padding: 0.6rem 1.5rem;
+  padding: 16px 32px;
+  width: 100%;
 }
 
 .task__noTask > p {
   color: var(--no-task);
   font-size: 1rem;
   font-weight: 900;
-}
-
-.task__noTask :first-child {
-  display: inline-block;
-  font-size: 1.5rem;
-
-  transform: rotate(110deg);
 }
 
 /* task name */

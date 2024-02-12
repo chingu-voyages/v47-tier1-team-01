@@ -393,17 +393,27 @@ function createTaskElement(task, date) {
 }
 
 function populateTasks(selectedDay) {
-  const tasks = getTasksFromLocalStorage()
+  // gets the task that has a due on the selected day
+  const tasks = getTasksFromLocalStorage().filter((task) =>
+    task.dueDates.includes(getSimpleDate(selectedDay))
+  )
+
   const taskContainer = document.querySelector('.homepage__task')
 
   //makes sure tasks are not duplicated since this function is called both on page load and when SAVE button is clicked
   while (taskContainer.firstChild) {
     taskContainer.removeChild(taskContainer.firstChild)
   }
+
   if (tasks.length === 0) {
+    const noTaskContainerEl = document.createElement('div')
+    noTaskContainerEl.classList.add('task__noTask')
     const noTasksPara = document.createElement('p')
-    noTasksPara.textContent = 'No tasks at this time'
-    taskContainer.appendChild(noTasksPara)
+    noTasksPara.innerHTML = `
+    <i class="fa-solid fa-ban"></i> There are no tasks for today
+    `
+    noTaskContainerEl.appendChild(noTasksPara)
+    taskContainer.appendChild(noTaskContainerEl)
   }
 
   tasks.forEach((task) => {
