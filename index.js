@@ -1,5 +1,5 @@
 // pull the data in json file
-const jsonFile = './assets/tasks-example.json'
+const jsonFile = './public/assets/tasks-example.json'
 let jsonData
 
 fetch(jsonFile)
@@ -16,7 +16,7 @@ const categoriesArr = [
   'ROUTINE ACTIVITIES',
   'STUDYING',
   'DAILY TASKS PROJECT',
-  'CHINGU',
+  'CHINGU'
 ]
 
 const daysOfTheWeekArr = [
@@ -26,7 +26,7 @@ const daysOfTheWeekArr = [
   'Wednesday',
   'Thursday',
   'Friday',
-  'Saturday',
+  'Saturday'
 ]
 const daysOfTheWeekShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
@@ -42,7 +42,7 @@ const monthsArr = [
   'September',
   'October',
   'November',
-  'December',
+  'December'
 ]
 
 const numOfRepeatedWeeks = 4
@@ -102,7 +102,7 @@ function submitHandler(event) {
     taskDescription: DOMPurify.sanitize(descriptionEl.value),
     category: categoryEl.value,
     activity: activityEl.value,
-    priority: priorityEl.checked,
+    priority: priorityEl.checked
   }
 
   const existingTasks = getTasksFromLocalStorage()
