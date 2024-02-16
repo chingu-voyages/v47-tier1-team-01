@@ -1,7 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
+/* variables */
 :root {
-  --no-task: #6d6d6d;
+  /* colors */
+  --white-color: #ecfdf8;
+  --green-color: #10b985;
+  --light-green-color: #d1faed;
+  --lime-color: #4d7c0f;
+  --amber-color: #b45309;
+  --red-color: #b91c1c;
+  --blue-color: #3b82f6;
+  --green-gradient-color: linear-gradient(to right, #34d3a2, #059669);
+  --black-color: #3d3d3d;
+  --gray-color: #6d6d6d;
 }
 
 *,
@@ -12,9 +23,13 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+}
+
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #ecfdf8;
+  background-color: var(--white-color);
   display: flex;
   flex-direction: column;
 }
@@ -26,12 +41,12 @@ body {
 /* navbar */
 nav {
   height: 38px;
-  color: #ecfdf8;
-  background-image: linear-gradient(to right, #34d3a2, #059669);
+  color: var(--white-color);
+  background-image: var(--green-gradient-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
   width: 100%;
 }
 
@@ -39,7 +54,7 @@ nav {
   display: flex;
   width: 100%;
   justify-content: center; /* currently center because I commented out the icons */
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .nav__logo span {
@@ -49,8 +64,8 @@ nav {
 .menu-icon,
 .search li a {
   text-decoration: none;
-  color: #ecfdf8;
-  font-size: 16px;
+  color: var(--white-color);
+  font-size: 1rem;
 }
 
 .search {
@@ -64,7 +79,7 @@ nav {
   display: flex;
   max-height: 100%;
   width: 100%;
-  padding: 16px 8px;
+  padding: 1rem 0.5rem;
   overflow-y: auto;
   margin: 0 auto;
   justify-content: center;
@@ -82,12 +97,12 @@ form label {
   display: flex;
   gap: 4px;
   flex-direction: column;
-  font-size: 14px;
+  font-size: 0.9rem;
 }
 
 input {
-  font-size: 16px;
-  padding: 8px 12px;
+  font-size: 1rem;
+  padding: 0.5rem 0.8rem;
   border-radius: 4px;
   border: 1px solid #888888;
   background-color: inherit;
@@ -95,7 +110,7 @@ input {
 }
 
 .error {
-  font-size: 12px;
+  font-size: 0.8rem;
   color: #ef4444;
   /* visibility: hidden; */
 }
@@ -110,13 +125,13 @@ input {
   -webkit-appearance: none;
   width: 100%;
   height: 35px;
-  padding: 8px 12px;
+  padding: 0.5rem 0.8rem;
   border: 1px solid #888888;
   border-radius: 4px;
   cursor: pointer;
   background-color: inherit;
   color: #888888;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .select__container .select__icon-container {
@@ -126,7 +141,7 @@ input {
   transform: translateY(-50%);
   pointer-events: none;
   color: black;
-  font-size: 8px;
+  font-size: 0.5rem;
 }
 
 /* checkbox styles */
@@ -145,7 +160,7 @@ input {
 }
 
 .hidden {
-  padding-left: 24px;
+  padding-left: 1.5rem;
 }
 
 .hidden__checkbox {
@@ -164,7 +179,7 @@ input {
 .task-checkbox {
   height: 16px;
   width: 16px;
-  border: solid 1px #6d6d6d;
+  border: solid 1px var(--gray-color);
   background-color: inherit;
   border-radius: 4px;
   display: flex;
@@ -183,7 +198,7 @@ input {
 .hidden__main-checkbox:checked + .hidden__custom-checkbox::after,
 .task-checkbox.checked::after {
   content: '\2713';
-  font-size: 8px;
+  font-size: 0.5rem;
   font-weight: 1000;
   color: #f6f6f6;
 }
@@ -209,7 +224,7 @@ input {
 .custom-radio-btn .radio-checker {
   width: 100%;
   height: 100%;
-  background-color: #10b985;
+  background-color: var(--green-color);
   border-radius: 50%;
   display: none;
 }
@@ -266,33 +281,36 @@ input {
 .summary {
   display: flex;
   align-items: center;
+  max-width: 400px;
   gap: 8px;
+  margin: 0 auto;
 }
 
 .summary__card {
-  border: 1px solid #3d3d3d;
+  border: 1px solid var(--black-color);
   width: 100%;
-  color: #3d3d3d;
+  color: var(--black-color);
   border-radius: 4px;
-  padding: 10px;
+  padding: 0.6rem;
+  white-space: nowrap;
 }
 
 .summary__label {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 600;
 }
 
 .summary__detail {
-  font-size: 12px;
+  font-size: 0.8rem;
   font-weight: 400;
 }
 
 /* Edit Task Form */
 .editTaskModal {
-  background-color: #ecfdf8;
+  background-color: var(--white-color);
   flex-direction: column;
   gap: 4px;
-  padding: 8px;
+  padding: 0.5rem;
 }
 
 .editForm {
@@ -310,7 +328,7 @@ input {
   width: 100%;
   top: 38px;
   position: relative;
-  background-color: #ecfdf8;
+  background-color: var(--white-color);
   flex-direction: column;
   align-items: center;
   gap: 4px;
@@ -330,22 +348,22 @@ span#closeBtn:hover {
 .legend--category,
 .legend--activity,
 .legend--priority {
-  padding: 4px 8px;
+  padding: 0.3rem 0.5rem;
   border-radius: 4px;
   color: #f6f6f6;
-  font-size: 12px;
+  font-size: 0.8rem;
 }
 
 .legend--category {
-  background-color: #b45309;
+  background-color: var(--amber-color);
 }
 
 .legend--activity {
-  background-color: #4d7c0f;
+  background-color: var(--lime-color);
 }
 
 .legend--priority {
-  background-color: #b91c1c;
+  background-color: var(--red-color);
 }
 
 /* Homepage styles */
@@ -356,7 +374,7 @@ span#closeBtn:hover {
   margin: 0 auto;
   gap: 1rem;
   width: 100%;
-  padding: 8px 16px;
+  padding: 0.5rem 1rem;
 }
 
 .homepage.display {
@@ -384,8 +402,8 @@ span#closeBtn:hover {
   width: 100%;
   gap: 0;
   overflow: hidden;
-  border: 1px solid #6d6d6d;
-  padding: 8px 12px;
+  border: 1px solid var(--gray-color);
+  padding: 0.5rem 0.8rem;
   background-color: inherit;
   border-radius: 4px;
   transition: gap 0.8s;
@@ -432,7 +450,7 @@ span#closeBtn:hover {
   opacity: 1;
   overflow: visible;
   max-height: 400px;
-  margin: 4px 0px;
+  margin: 0.3rem 0rem;
 }
 
 .task__container.show {
@@ -440,7 +458,7 @@ span#closeBtn:hover {
 }
 
 .task__description {
-  font-size: 14px;
+  font-size: 0.9rem;
   color: #454545;
 }
 
@@ -458,7 +476,7 @@ span#closeBtn:hover {
   justify-content: center;
   gap: 8px;
   border-radius: 8px;
-  padding: 4px 8px;
+  padding: 0.3rem 0.5rem;
   cursor: pointer;
   transition: transform 0.3s;
 }
@@ -469,7 +487,7 @@ span#closeBtn:hover {
 
 #edit-task-btn {
   border: 1px solid currentColor;
-  color: #3b82f6;
+  color: var(--blue-color);
 }
 
 #del-task-btn {
@@ -479,9 +497,9 @@ span#closeBtn:hover {
 
 .task__container-bot {
   display: flex;
-  font-size: 12px;
+  font-size: 0.8rem;
   gap: 4px;
-  margin-top: 4px;
+  margin-top: 0.3rem;
 }
 
 /* create task button styles */
@@ -491,12 +509,12 @@ span#closeBtn:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ecfdf8;
+  color: var(--white-color);
   border: none;
   background-image: linear-gradient(#34d3a2, #059669);
   border-radius: 50%;
   cursor: pointer;
-  padding: 14px;
+  padding: 0.9rem;
   transition: transform 0.2s;
   position: fixed;
   bottom: 60px;
@@ -513,14 +531,14 @@ span#closeBtn:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--no-task);
+  border: 1px solid var(--gray-color);
   border-radius: 5px;
-  padding: 16px 32px;
+  padding: 1rem 2rem;
   width: 100%;
 }
 
 .task__noTask > p {
-  color: var(--no-task);
+  color: var(--gray-color);
   font-size: 1rem;
   font-weight: 900;
 }
@@ -539,20 +557,20 @@ span#closeBtn:hover {
 
 .btn-cancel,
 .btn-submit {
-  padding: 14px;
+  padding: 0.9rem;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 500;
 }
 
 .btn-cancel {
-  border: 1px solid #10b985;
-  color: #10b985;
+  border: 1px solid var(--green-color);
+  color: var(--green-color);
   background-color: inherit;
 }
 
 .btn-submit {
-  background: linear-gradient(to right, #34d3a2, #059669);
+  background: var(--green-gradient-color);
   color: white;
   border: none;
 }
@@ -580,12 +598,12 @@ span#closeBtn:hover {
   justify-content: center;
   align-items: center;
   font-weight: 600;
-  background-color: #d1faed;
-  padding: 16px 32px;
+  background-color: var(--light-green-color);
+  padding: 1rem 2rem;
   position: fixed;
   top: 50px;
   opacity: 1;
-  color: #10b985;
+  color: var(--green-color);
   z-index: 1000;
   animation: popout 0.8s ease-out;
 }
@@ -610,7 +628,7 @@ span#closeBtn:hover {
 
 .homepage__calendar-mobile h2 {
   color: #454545;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .calendar__carousel {
@@ -626,20 +644,20 @@ span#closeBtn:hover {
 }
 
 .carousel__card {
-  border: 1px solid #6d6d6d;
+  border: 1px solid var(--gray-color);
   border-radius: 4px;
-  color: #6d6d6d;
+  color: var(--gray-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 64px;
   gap: 10px;
-  padding: 8px;
+  padding: 0.5rem;
 }
 
 .day,
 .date {
-  font-size: 12px;
+  font-size: 0.8rem;
   font-weight: 500;
 }
 
@@ -652,10 +670,10 @@ span#closeBtn:hover {
 .calendar__carousel button {
   border: none;
   align-self: center;
-  font-size: 14px;
-  background-color: #10b985;
-  color: #ecfdf8;
-  padding: 2px 4px;
+  font-size: 0.9rem;
+  background-color: var(--green-color);
+  color: var(--white-color);
+  padding: 0.13rem 0.3rem;
   border-radius: 4px;
   transition: transform 0.1s;
 }
@@ -666,7 +684,7 @@ span#closeBtn:hover {
 
 .center-day {
   color: #f6f6f6;
-  background-image: linear-gradient(to right, #34d3a2, #059669);
+  background-image: var(--green-gradient-color);
   border: none;
 }
 
@@ -680,7 +698,8 @@ span#closeBtn:hover {
 @media (min-width: 992px) {
   .homepage {
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 2rem;
   }
 
   .homepage.display {
@@ -692,10 +711,10 @@ span#closeBtn:hover {
   }
 
   .task__section {
-    padding: 32px;
+    padding: 2rem;
     width: 564px;
     height: 521px;
-    border: 1px solid #3d3d3d;
+    border: 1px solid var(--black-color);
     border-radius: 4px;
     overflow: auto;
   }
@@ -713,7 +732,7 @@ span#closeBtn:hover {
     right: auto;
     color: #ffffff;
     border-radius: 4px;
-    padding: 10px;
+    padding: 0.6rem;
   }
 
   #createBtn:hover {
@@ -733,7 +752,7 @@ span#closeBtn:hover {
     border-radius: 4px;
     height: 502px;
     width: 497px;
-    padding: 20px;
+    padding: 1.3rem;
   }
 
   .calendar-desktop__header {
@@ -743,7 +762,7 @@ span#closeBtn:hover {
   }
 
   .header__content {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: 700;
     display: flex;
     gap: 8px;
@@ -757,7 +776,7 @@ span#closeBtn:hover {
   .header__buttons button {
     border: none;
     background-color: inherit;
-    padding: 16px;
+    padding: 1rem;
     font-size: 20px;
     cursor: pointer;
     transition: transform 0.3s;
@@ -778,7 +797,7 @@ span#closeBtn:hover {
 
   .body__days {
     display: grid;
-    padding: 8px;
+    padding: 0.5rem;
     grid-template-columns: repeat(7, 1fr);
     text-align: center;
     align-items: center;
@@ -787,13 +806,13 @@ span#closeBtn:hover {
 
   .body__grid {
     display: grid;
-    padding: 0px 8px;
+    padding: 0rem 0.5rem;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
   }
 
   .grid-date {
-    border: 1px solid #6d6d6d;
+    border: 1px solid var(--gray-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -805,14 +824,14 @@ span#closeBtn:hover {
 
   .grid-date.due-task i,
   .grid-date.due-task.selected i {
-    font-size: 8px;
+    font-size: 0.5rem;
     position: absolute;
     top: 5px;
     right: 5px;
   }
 
   .grid-date.due-task i {
-    color: #10b985;
+    color: var(--green-color);
   }
 
   .grid-date.due-task.selected i {
@@ -826,13 +845,13 @@ span#closeBtn:hover {
 
   .prevMonthDate,
   .nextMonthDate {
-    color: #6d6d6d;
+    color: var(--gray-color);
     background-color: #e7e7e7;
   }
 
   .selected {
     color: #ffffff;
-    background-color: #10b985;
+    background-color: var(--green-color);
   }
 
   /* homepage feedback desktop */
@@ -858,7 +877,7 @@ span#closeBtn:hover {
     width: fit-content;
     height: fit-content;
     border-radius: 4px;
-    padding: 16px;
+    padding: 1rem;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -868,18 +887,18 @@ span#closeBtn:hover {
   }
 
   .create-task label {
-    font-size: 8px;
+    font-size: 0.5rem;
   }
 
   .create-task input,
   .create-task select {
-    font-size: 12px;
-    padding: 4px;
+    font-size: 0.8rem;
+    padding: 0.3rem;
     height: 24px;
   }
 
   .create-task__buttons button {
-    font-size: 12px;
+    font-size: 0.8rem;
   }
 
   #repeat-options {
