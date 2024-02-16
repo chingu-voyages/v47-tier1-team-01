@@ -17,6 +17,7 @@ body {
   background-color: #ecfdf8;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 .flex {
@@ -42,21 +43,12 @@ nav {
   font-size: 16px;
 }
 
+.nav__logo {
+  display: flex;
+}
+
 .nav__logo span {
   font-weight: bold;
-}
-
-.menu-icon,
-.search li a {
-  text-decoration: none;
-  color: #ecfdf8;
-  font-size: 16px;
-}
-
-.search {
-  display: flex;
-  list-style-type: none;
-  gap: 16px;
 }
 
 /* create task form */
@@ -280,27 +272,12 @@ input {
 .summary__label {
   font-size: 16px;
   font-weight: 600;
+  display: inline-block;
 }
 
 .summary__detail {
   font-size: 12px;
   font-weight: 400;
-}
-
-/* Edit Task Form */
-.editTaskModal {
-  background-color: #ecfdf8;
-  flex-direction: column;
-  gap: 4px;
-  padding: 8px;
-}
-
-.editForm {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 288px;
-  margin: 0 auto;
 }
 
 /* modal styles */
@@ -356,7 +333,9 @@ span#closeBtn:hover {
   margin: 0 auto;
   gap: 1rem;
   width: 100%;
+  max-width: 600px;
   padding: 8px 16px;
+  position: relative;
 }
 
 .homepage.display {
@@ -498,7 +477,7 @@ span#closeBtn:hover {
   cursor: pointer;
   padding: 14px;
   transition: transform 0.2s;
-  position: fixed;
+  position: absolute;
   bottom: 60px;
   right: 50px;
   z-index: 1;
@@ -681,6 +660,7 @@ span#closeBtn:hover {
   .homepage {
     flex-direction: row;
     justify-content: space-evenly;
+    max-width: 1200px;
   }
 
   .homepage.display {
