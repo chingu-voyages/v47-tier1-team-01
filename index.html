@@ -4,36 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" type="image/x-icon" href="./public/assets/favicon.ico" />
     <script src="./index.js" defer></script>
     <script
       src="https://kit.fontawesome.com/bb8e411a96.js"
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/dompurify@3.0.8/dist/purify.min.js"></script>
-    <title>Daily Tasks App</title>
+    <title>ChinguTask - Daily Tasks App</title>
   </head>
   <body>
     <nav class="nav">
       <div class="nav__container">
-        <!-- <a href="#" class="menu-icon">
-          <i class="fa-solid fa-bars"></i>
-        </a> -->
-
-        <p class="nav__logo">chingu<span>Task</span></p>
-        <!-- <ul class="search">
-          <li class="search__icon">
-            <a href="#">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </a>
-          </li>
-          <li class="search__filter">
-            <a href="#">
-              <i class="fa-solid fa-filter"></i>
-              <i class="fa-solid fa-ellipsis-vertical"></i> 
-              ellipsis icon for mobile
-            </a>
-          </li>
-        </ul> -->
+        <div class="nav__logo">
+          <img src="./public/assets/logo.svg" alt="App Logo" />hingu<span
+            >Task</span
+          >
+        </div>
       </div>
     </nav>
 
@@ -176,13 +163,13 @@
         <div class="summary">
           <div class="summary__card">
             <i class="fa-regular fa-square"></i>
-            <label class="summary__label">To do</label>
+            <div class="summary__label">To do</div>
             <p class="summary__detail" id="todo-tasks__summary"></p>
           </div>
 
           <div class="summary__card">
             <i class="fa-regular fa-square-check"></i>
-            <label for="done-tasks" class="summary__label">Done</label>
+            <div class="summary__label">Done</div>
             <p class="summary__detail" id="done-tasks__summary"></p>
           </div>
 

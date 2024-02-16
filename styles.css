@@ -32,6 +32,7 @@ body {
   background-color: var(--white-color);
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 .flex {
@@ -57,21 +58,12 @@ nav {
   font-size: 1rem;
 }
 
+.nav__logo {
+  display: flex;
+}
+
 .nav__logo span {
   font-weight: bold;
-}
-
-.menu-icon,
-.search li a {
-  text-decoration: none;
-  color: var(--white-color);
-  font-size: 1rem;
-}
-
-.search {
-  display: flex;
-  list-style-type: none;
-  gap: 16px;
 }
 
 /* create task form */
@@ -281,9 +273,7 @@ input {
 .summary {
   display: flex;
   align-items: center;
-  max-width: 400px;
   gap: 8px;
-  margin: 0 auto;
 }
 
 .summary__card {
@@ -298,27 +288,12 @@ input {
 .summary__label {
   font-size: 1rem;
   font-weight: 600;
+  display: inline-block;
 }
 
 .summary__detail {
   font-size: 0.8rem;
   font-weight: 400;
-}
-
-/* Edit Task Form */
-.editTaskModal {
-  background-color: var(--white-color);
-  flex-direction: column;
-  gap: 4px;
-  padding: 0.5rem;
-}
-
-.editForm {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 288px;
-  margin: 0 auto;
 }
 
 /* modal styles */
@@ -374,7 +349,9 @@ span#closeBtn:hover {
   margin: 0 auto;
   gap: 1rem;
   width: 100%;
+  max-width: 600px;
   padding: 0.5rem 1rem;
+  position: relative;
 }
 
 .homepage.display {
@@ -454,7 +431,7 @@ span#closeBtn:hover {
 }
 
 .task__container.show {
-  gap: 16px;
+  gap: 1rem;
 }
 
 .task__description {
@@ -516,7 +493,7 @@ span#closeBtn:hover {
   cursor: pointer;
   padding: 0.9rem;
   transition: transform 0.2s;
-  position: fixed;
+  position: absolute;
   bottom: 60px;
   right: 50px;
   z-index: 1;
@@ -700,6 +677,7 @@ span#closeBtn:hover {
     flex-direction: row;
     justify-content: center;
     gap: 2rem;
+    max-width: 75rem;
   }
 
   .homepage.display {
