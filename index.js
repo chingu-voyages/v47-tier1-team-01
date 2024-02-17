@@ -324,7 +324,7 @@ function updateActivitySelection() {
   })
 }
 
-//dinamically display tasks START
+//dynamically display tasks START
 function getTasksFromLocalStorage() {
   const tasksJson = localStorage.getItem('tasks')
   return tasksJson ? JSON.parse(tasksJson) : []
@@ -425,7 +425,7 @@ function populateTasks(selectedDay) {
   })
 }
 
-//dinamically display tasks END
+//dynamically display tasks END
 
 //Task name and description,and due date VALIDATION function
 function formValidation() {
@@ -519,7 +519,7 @@ function showButton(e) {
   button.classList.toggle('fa-angle-up')
 }
 
-// show feedback function
+// show feedback popup
 function showFeedback(mode) {
   if (mode === 'save') {
     taskFb.style.display = 'flex'
@@ -815,37 +815,6 @@ function renderSummary(selectedDay) {
         }`
   }`
 }
-// RENDERS THE NUMBER OF ALL TODO AND DONE TASK
-// function renderSummary() {
-//   const tasks = getTasksFromLocalStorage()
-//   let remainingTaskCounter = 0
-//   let doneTaskCounter = 0
-//   tasks.forEach((task) => {
-//     if (task.isChecked) {
-//       doneTaskCounter++
-//     } else {
-//       remainingTaskCounter++
-//     }
-//   })
-//   todoSummaryEl.innerText = `${
-//     remainingTaskCounter === 0
-//       ? 'No available task'
-//       : `${
-//           remainingTaskCounter === 1
-//             ? `${remainingTaskCounter} Task Remaining`
-//             : `${remainingTaskCounter} Tasks Remaining`
-//         }`
-//   }`
-//   doneTaskSummaryEl.innerText = `${
-//     doneTaskCounter === 0
-//       ? 'No completed task'
-//       : `${
-//           doneTaskCounter === 1
-//             ? `${doneTaskCounter} Task Completed`
-//             : `${doneTaskCounter} Tasks Completed`
-//         }`
-//   }`
-// }
 
 function generateActualDates(selectedDaysIndex) {
   const currentDay = new Date()

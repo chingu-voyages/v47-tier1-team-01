@@ -6,9 +6,8 @@
   --white-color: #ecfdf8;
   --green-color: #10b985;
   --light-green-color: #d1faed;
-  --lime-color: #4d7c0f;
-  --amber-color: #b45309;
-  --red-color: #b91c1c;
+  --dark-green-color: #065f43;
+  --red-color: #e74242;
   --blue-color: #3b82f6;
   --green-gradient-color: linear-gradient(to right, #34d3a2, #059669);
   --black-color: #3d3d3d;
@@ -330,11 +329,11 @@ span#closeBtn:hover {
 }
 
 .legend--category {
-  background-color: var(--amber-color);
+  background-color: var(--dark-green-color);
 }
 
 .legend--activity {
-  background-color: var(--lime-color);
+  background-color: var(--green-color);
 }
 
 .legend--priority {
