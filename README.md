@@ -7,52 +7,43 @@ ChinguTASK is a productivity tool designed to streamline daily task management. 
 
 ChinguTASK enables users to – 
 
-1.	Create and edit tasks.
-2.	Delete tasks.
-3.	Mark tasks as completed.
-4.	View total number of tasks pending.
-5.	View total number of completed tasks.
-6.	Select a date from calendar and easily add or view tasks for that date.
-7.	Select category and activity types for a particular task.
-8.	Set due date for tasks.
-9.	Select days of the week for tasks to be repeated.
-10.	Set priority for important tasks.
-    
-**Running the project:** How could someone else get your code working for them?
-https://chingu-voyages.github.io/v47-tier1-team-01/public/
+1. Create and edit tasks.
+2. Select categories and activity types for each task.
+3. Delete tasks.
+4. Mark tasks as completed.
+5. View the total number of pending tasks on a specific day.
+6. View the total number of completed tasks on a specific day.
+7. Easily add or view tasks for a specific date from the calendar.
+8. Set due dates for tasks.
+9. Select specific days of the week for task repetition. Once chosen, tasks will automatically repeat on those days for a default duration of four weeks.
+10. Mark tasks as important by toggling the "priority" option.
 
-**Dependencies:** What are the main outside resources your project needs to run?
+**Runnning the project:**
 
-**Contributors:**
+- Fork this repository
+- Clone your forked repository
+- Navigate to the project directory in your local machine using the command line.
+
+cd <your-project-name>
 
 
-# voyage-tasks
+- Open the HTML file in a web browser. You can do this by double-clicking the HTML file, or you can use a command in the terminal. For example, if you’re using a Unix-like terminal, you could use:
+  
+open index.html
 
-#test-me (andrei)
+*Please replace <your-project-name> with the actual name of your project directory.
 
-Your project's `readme` is as important to success as your code. For 
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
+**Dependencies:**
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point - 
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+This project does not require any packages to run. However, it does use the following external scripts which are loaded directly in the HTML:
 
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
+- Font Awesome: This is used for icons in the project. The script is loaded from https://kit.fontawesome.com/bb8e411a96.js.
+- DOMPurify 3.0.8: This is a JavaScript library that sanitizes HTML and prevents XSS attacks. The script is loaded from https://unpkg.com/dompurify@3.0.8/dist/purify.min.js.
 
-> Own it & Make it your Own!
+These scripts need to be available and able to be loaded for the project to function correctly. If you’re running the project locally and offline, you’ll need to make sure these scripts are available offline as well.
 
-## Team Documents
+**Contributions:**
+Emmanuel - jeru7, Jimmy - JimTK16, Andrei - andreimaier, Sneha - snehab1401
 
-You may find these helpful as you work together to organize your project.
 
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
 
-Meeting Agenda templates (located in the `/docs` directory in this repo):
-
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
