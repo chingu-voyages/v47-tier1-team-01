@@ -25,12 +25,12 @@ ChinguTASK enables users to –
 - Clone your forked repository
 - Navigate to the project directory in your local machine using the command line.
 
-cd your-project-name
+```cd <your-project-name>```
 
 
 - Open the HTML file in a web browser. You can do this by double-clicking the HTML file, or you can use a command in the terminal. For example, if you’re using a Unix-like terminal, you could use:
   
-open index.html
+```open index.html```
 
 *Please replace <your-project-name> with the actual name of your project directory.
 
