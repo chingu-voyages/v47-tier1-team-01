@@ -1,6 +1,7 @@
 **Title:** ChinguTASK
 
 **Overview:** 
+
 ChinguTASK is a productivity tool designed to streamline daily task management. This all-in-one app functions as a daily checklist, allowing users to organize and manage their daily agendas.
 
 **Features:**
@@ -24,7 +25,7 @@ ChinguTASK enables users to –
 - Clone your forked repository
 - Navigate to the project directory in your local machine using the command line.
 
-cd <your-project-name>
+cd your-project-name
 
 
 - Open the HTML file in a web browser. You can do this by double-clicking the HTML file, or you can use a command in the terminal. For example, if you’re using a Unix-like terminal, you could use:
@@ -43,6 +44,7 @@ This project does not require any packages to run. However, it does use the foll
 These scripts need to be available and able to be loaded for the project to function correctly. If you’re running the project locally and offline, you’ll need to make sure these scripts are available offline as well.
 
 **Contributions:**
+
 Emmanuel - jeru7, Jimmy - JimTK16, Andrei - andreimaier, Sneha - snehab1401
 
 
